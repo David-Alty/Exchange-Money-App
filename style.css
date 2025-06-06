@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
       font-family: 'Vazirmatn', sans-serif;
       background-color: #f9f9fb;
@@ -225,7 +229,6 @@ body {
   box-shadow: 0 2px 8px #0002;
   padding: 3px;
   transition: background .18s, transform .22s;
-  object-fit: cover;
 }
 
 .social-icons-horizontal a:hover img {
@@ -945,291 +948,402 @@ header h1 {
 }
  
 .contact-section {
-  position: relative;
-  background: url() center center/cover no-repeat;
-  min-height: 340px;
+  background: linear-gradient(135deg, #e3f0ff 0%, #f9f9fb 100%);
+  min-height: 380px;
   padding: 0;
   margin-top: 2.5rem;
   display: flex;
   align-items: stretch;
   justify-content: center;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px #004e8f11;
 }
+
 .contact-overlay {
-  background: rgba(0,78,143,0.60); /* Kabul ve Herat kutularındaki mavi yarı saydam ile aynı */
-  padding: 2rem 1.2rem 1.5rem 1.2rem;
-  border-radius: 12px;             /* Diğer kutularla aynı köşe yuvarlaklığı */
-  max-width: 700px;
+  background: rgba(255,255,255,0.45);
+  backdrop-filter: blur(8px) saturate(1.3);
+  padding: 2.5rem 1.5rem 2rem 1.5rem;
+  border-radius: 18px;
+  max-width: 800px;
   margin: 2.5rem auto;
   width: 100%;
-  box-shadow: 0 2px 12px #004e8f22; /* Diğer kutularla aynı gölge */
-  color: #fff;
+  box-shadow: 0 4px 32px #004e8f22;
+  color: #004e8f;
   text-align: right;
+  border: 1.5px solid #e0eafc;
 }
+
 .contact-section h2 {
-  font-size: 1.7rem;
-  margin-bottom: 1.5rem;
-  color: #fff;
+  font-size: 2.1rem;
+  margin-bottom: 2.2rem;
+  color: #004e8f;
   font-family: 'Vazirmatn', Arial, sans-serif;
   text-align: center;
   font-weight: bold;
   letter-spacing: 0.01em;
+  text-shadow: 0 2px 12px #fff8, 0 1px 0 #e0eafc;
 }
+
 .contact-addresses {
   display: flex;
-  gap: 1.5rem;
+  gap: 2.2rem;
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 1.2rem;
 }
+
 .contact-box {
-  background: rgba(255,255,255,0.13);      /* Hafif yarı saydam beyaz */
-  border-radius: 16px;                     /* Diğer kutularla aynı köşe yuvarlaklığı */
-  box-shadow: 0 2px 12px #004e8f22;        /* Diğer kutularla aynı gölge */
-  padding: 1.3rem 1.1rem 1.3rem 1.1rem;    /* Diğer kutularla aynı iç boşluk */
+  background: rgba(255,255,255,0.22);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #004e8f22;
+  padding: 1.5rem 1.2rem 1.2rem 1.2rem;
   min-width: 220px;
-  max-width: 380px;                        /* Diğer kutularla aynı genişlik */
-  flex: 1 1 320px;
-  margin: 1rem 0.7rem 1rem 0.7rem;         /* Üst-alt ve sağ-sol boşluklar */
-  color: #fff;
+  max-width: 340px;
+  flex: 1 1 280px;
+  margin: 1rem 0.7rem 1rem 0.7rem;
+  color: #004e8f;
   position: relative;
   overflow: hidden;
   font-size: 1.13rem;
   font-family: 'Vazirmatn', Arial, sans-serif;
-  border: 1.5px solid #f3e7d6;            /* Hafif renkli border */
+  border: 1.5px solid #e0eafc;
   background-clip: padding-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: box-shadow 0.25s, transform 0.22s;
 }
-.contact-box.kabul {
-  background-image: linear-gradient(rgba(0,78,143,0.60),rgba(0,78,143,0.60)), url('images/27-mazar.jpg');
+.contact-box:hover {
+  box-shadow: 0 8px 32px #ff8c0033, 0 2px 8px #004e8f11;
+  transform: translateY(-4px) scale(1.03);
+}
+
+.contact-box.kabul,
+.contact-box.herat {
+  background-image: linear-gradient(120deg, rgba(0,78,143,0.18) 0%, rgba(255,255,255,0.22) 100%), 
+    url('images/27-mazar.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 180px;
-  max-width: 320px;
-  margin: 0.7rem;
-  box-shadow: 0 2px 12px #004e8f22;
-  border-radius: 12px;
-  padding: 1.1rem 1.2rem 1rem 1.2rem;
+  max-width: 340px;
+  border-radius: 18px;
   color: #fff;
+  padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+  box-shadow: 0 4px 24px #004e8f22;
   position: relative;
   overflow: hidden;
+  /* Görseli daha belirgin yapmak için */
+  background-blend-mode: lighten;
+  transition: box-shadow 0.25s, transform 0.22s, background 0.3s;
 }
 .contact-box.herat {
-  background-image: linear-gradient(rgba(0,78,143,0.60),rgba(0,78,143,0.60)), url('images/25-herat\ .jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 180px;
-  max-width: 320px;
-  margin: 0.7rem;
-  box-shadow: 0 2px 12px #004e8f22;
-  border-radius: 12px;
-  padding: 1.1rem 1.2rem 1rem 1.2rem;
-  color: #fff;
-  position: relative;
-  overflow: hidden;
+  background-image: linear-gradient(120deg, rgba(0,78,143,0.18) 0%, rgba(255,255,255,0.22) 100%), 
+    url('images/25-herat .jpg');
 }
 
-/* Gerekirse eski .contact-bg-anim ve .contact-box.kabul > *, .contact-box.herat > * kodlarını kaldır! */
+.contact-box.kabul:hover,
+.contact-box.herat:hover {
+  box-shadow: 0 12px 36px #ff8c0033, 0 2px 8px #004e8f11;
+  transform: translateY(-6px) scale(1.04);
+  background-blend-mode: normal;
+  background-color: rgba(255,255,255,0.10);
+}
 
-.phone-row {
-  display: flex;
+/* Telefon numarası için daha düzgün ve modern görünüm */
+.contact-box .whatsapp-link {
+  display: inline-flex;
   align-items: center;
   gap: 0.7rem;
   margin-top: 0.7rem;
-  margin-bottom: 0;
-}
-
-.phone-link {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #fff;
-  background: rgba(0,78,143,0.22);
-  padding: 0.25em 0.7em;
-  border-radius: 8px;
-  text-decoration: none;
-  letter-spacing: 0.02em;
-  direction: ltr;
-}
-
-.phone-link:hover {
-  background: #25d366;
-  color: #004e8f;
-}
-
-.whatsapp-link img {
-  width: 32px;
-  height: 32px;
-  display: inline-block;
-  vertical-align: middle;
-  border-radius: 6px;
   background: #fff;
-  box-shadow: 0 2px 8px #0002;
-  transition: transform 0.18s, box-shadow 0.18s;
-}
-
-.whatsapp-link:hover img {
-  transform: scale(1.18) rotate(-8deg);
-  box-shadow: 0 4px 18px #25d36655;
-  background: #25d366;
-}
-
-.manager-box {
-  background: rgba(255, 236, 210, 0.85); /* Turuncu-beyaz uyumlu, logonun turuncusuna yakın */
-  border-radius: 12px;
-  padding: 0.8rem 1.2rem;
-  margin: 1.2rem 0 0.5rem 0;
-  box-shadow: 0 2px 12px #ff8c0033;
+  border-radius: 2.2rem;
+  padding: 0.38rem 1.25rem 0.38rem 1.1rem;
+  box-shadow: 0 2px 8px #25d36633;
+  font-weight: bold;
+  color: #25d366;
   font-size: 1.13rem;
+  text-decoration: none;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  border: 1.5px solid #25d36622;
+  letter-spacing: 0.03em;
+  font-family: 'Vazirmatn', Arial, sans-serif;
+  direction: ltr;
+  white-space: nowrap;
+}
+.contact-box .whatsapp-link img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px #25d36622;
+  transition: transform 0.18s, background 0.18s;
+}
+.contact-box .whatsapp-link:hover,
+.contact-box .whatsapp-link:focus {
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 4px 18px #25d36655;
+}
+.contact-box .whatsapp-link:hover img,
+.contact-box .whatsapp-link:focus img {
+  background: #fff;
+  transform: scale(1.13) rotate(-8deg);
+}
+
+/* Telefon numarası için özel stil */
+.contact-box .whatsapp-link .phone-number {
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-family: 'Vazirmatn', Arial, sans-serif;
+  color: inherit;
+  direction: ltr;
+  margin-right: 0.2em;
+}
+
+/* Yönetici kutusu */
+.manager-box {
+  background: linear-gradient(100deg, #fffbe7 60%, #ffe2c2 100%);
+  border-radius: 18px;
+  padding: 1.3rem 1.4rem 1.1rem 1.4rem;
+  margin: 1.5rem 0 0.7rem 0;
+  box-shadow: 0 6px 28px #ff8c0033, 0 2px 8px #004e8f11;
+  font-size: 1.18rem;
   color: #004e8f;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.9rem;
   align-items: flex-start;
+  border: 2.5px solid #ffb36b;
+  position: relative;
+  overflow: hidden;
 }
+
+.manager-box::before {
+  content: "";
+  position: absolute;
+  left: -40px; top: -40px;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, #ff8c0033 0%, transparent 80%);
+  z-index: 0;
+}
+
+.manager-box strong {
+  color: #ff8c00;
+  font-weight: 900;
+  font-size: 1.13rem;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 12px #ff8c0033, 0 1px 0 #fff8;
+  z-index: 1;
+}
+
 .manager-contact-row {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 1.1rem;
   margin-top: 0.2rem;
   flex-wrap: wrap;
+  z-index: 1;
 }
+
 .manager-phone {
-  font-size: 1.18rem;
-  font-weight: bold;
-  color: #ff8c00;
-  background: #fff;
-  padding: 0.22em 0.7em;
-  border-radius: 8px;
+  font-size: 1.22rem;
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(90deg, #25d366 0%, #43e97b 100%);
+  padding: 0.28em 1.2em;
+  border-radius: 2.2rem;
   text-decoration: none;
   direction: ltr;
   margin-right: 0.2rem;
-  box-shadow: 0 1px 6px #ff8c0033;
-  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 12px #25d36655;
+  border: none;
+  letter-spacing: 0.04em;
+  transition: background 0.22s, color 0.22s, box-shadow 0.22s, transform 0.18s;
+  border: 2px solid #fff;
 }
 .manager-phone:hover {
-  background: #ff8c00;
+  background: linear-gradient(90deg, #ff8c00 0%, #ffb36b 100%);
   color: #fff;
+  box-shadow: 0 4px 18px #ff8c0055;
+  transform: scale(1.07);
+  border: 2px solid #ff8c00;
+}
+
+.manager-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #25d366;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  margin-right: 0.3rem;
+  box-shadow: 0 2px 12px #25d36655;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+  border: 2px solid #fff;
+  position: relative;
+  z-index: 2;
 }
 .manager-whatsapp img {
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  vertical-align: middle;
-  border-radius: 6px;
-  background: #fff;
-  box-shadow: 0 2px 8px #0002;
-  transition: transform 0.18s, box-shadow 0.18s;
+  width: 26px;
+  height: 26px;
+  background: none;
+  border-radius: 50%;
+  transition: transform 0.18s;
 }
-.manager-whatsapp:hover img {
-  transform: scale(1.15) rotate(-8deg);
-  box-shadow: 0 4px 18px #25d36655;
+.manager-whatsapp:hover,
+.manager-whatsapp:focus {
+  background: #ff8c00;
+  box-shadow: 0 4px 18px #ff8c0055;
+  transform: scale(1.13) rotate(-8deg);
+  border: 2px solid #ff8c00;
+}
+.manager-whatsapp:hover img,
+.manager-whatsapp:focus img {
+  transform: scale(1.13) rotate(-8deg);
+}
+
+/* Yazıları daha belirgin ve kontrastlı yap */
+.contact-box.kabul h3,
+.contact-box.herat h3,
+.contact-box.kabul p,
+.contact-box.herat p,
+.contact-box .phone-link,
+.contact-box .whatsapp-link .phone-number {
+  text-shadow: 0 2px 12px #004e8f77, 0 1px 0 #fff8;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+
+.contact-box.kabul h3,
+.contact-box.herat h3 {
+  font-size: 1.32rem;
+}
+
+.contact-box.kabul p,
+.contact-box.herat p {
+  font-size: 1.13rem;
+  background: rgba(0,0,0,0.18);
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1.1rem;
+  font-weight: 600;
+}
+
+.contact-box .phone-link,
+.contact-box .whatsapp-link {
+  font-size: 1.16rem;
+  font-weight: 800;
+  box-shadow: 0 4px 18px #25d36633;
+}
+
+.contact-box .whatsapp-link img,
+.contact-box .phone-link img {
+  filter: drop-shadow(0 2px 8px #25d36655);
+}
+
+/* --- Manager Box Daha Göz Alıcı --- */
+.manager-box {
+  background: linear-gradient(100deg, #fffbe7 60%, #ffe2c2 100%);
+  border-radius: 18px;
+  padding: 1.3rem 1.4rem 1.1rem 1.4rem;
+  margin: 1.5rem 0 0.7rem 0;
+  box-shadow: 0 6px 28px #ff8c0033, 0 2px 8px #004e8f11;
+  font-size: 1.18rem;
+  color: #004e8f;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  align-items: flex-start;
+  border: 2.5px solid #ffb36b;
+  position: relative;
+  overflow: hidden;
+}
+
+.manager-box::before {
+  content: "";
+  position: absolute;
+  left: -40px; top: -40px;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, #ff8c0033 0%, transparent 80%);
+  z-index: 0;
+}
+
+.manager-box strong {
+  color: #ff8c00;
+  font-weight: 900;
+  font-size: 1.13rem;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 12px #ff8c0033, 0 1px 0 #fff8;
+  z-index: 1;
+}
+
+.manager-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin-top: 0.2rem;
+  flex-wrap: wrap;
+  z-index: 1;
+}
+
+.manager-phone {
+  font-size: 1.22rem;
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(90deg, #25d366 0%, #43e97b 100%);
+  padding: 0.28em 1.2em;
+  border-radius: 2.2rem;
+  text-decoration: none;
+  direction: ltr;
+  margin-right: 0.2rem;
+  box-shadow: 0 2px 12px #25d36655;
+  border: none;
+  letter-spacing: 0.04em;
+  transition: background 0.22s, color 0.22s, box-shadow 0.22s, transform 0.18s;
+  border: 2px solid #fff;
+}
+.manager-phone:hover {
+  background: linear-gradient(90deg, #ff8c00 0%, #ffb36b 100%);
+  color: #fff;
+  box-shadow: 0 4px 18px #ff8c0055;
+  transform: scale(1.07);
+  border: 2px solid #ff8c00;
+}
+
+.manager-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: #25d366;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  margin-right: 0.3rem;
+  box-shadow: 0 2px 12px #25d36655;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+  border: 2px solid #fff;
+  position: relative;
+  z-index: 2;
 }
-@media (max-width: 600px) {
-  .manager-contact-row {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-  }
-  .manager-phone {
-    font-size: 1.05rem;
-    padding: 0.18em 0.5em;
-  }
-  .manager-whatsapp img {
-    width: 26px;
-    height: 26px;
-  }
+.manager-whatsapp img {
+  width: 26px;
+  height: 26px;
+  background: none;
+  border-radius: 50%;
+  transition: transform 0.18s;
 }
-
-/* Varsayılan olarak nav gizli */
-.main-nav {
-  display: none;
+.manager-whatsapp:hover,
+.manager-whatsapp:focus {
+  background: #ff8c00;
+  box-shadow: 0 4px 18px #ff8c0055;
+  transform: scale(1.13) rotate(-8deg);
+  border: 2px solid #ff8c00;
 }
-
-/* Büyük ekranlarda yatay menü */
-@media (min-width: 900px) {
-  .side-menu, .menu-btn, .overlay {
-    display: none !important;
-  }
-  .main-nav {
-    display: flex;
-    justify-content: center;
-    gap: 2.2rem;
-    margin-top: 1.2rem;
-    margin-bottom: 0.7rem;
-    z-index: 10;
-    position: relative;
-  }
-  .main-nav a {
-    color: #004e8f;
-    background: #fff;
-    text-decoration: none;
-    font-size: 1.13rem;
-    font-family: 'Vazirmatn', Arial, sans-serif;
-    font-weight: bold;
-    padding: 0.7rem 1.2rem;
-    border-radius: 18px; /* Sade ve hafif oval */
-    transition: 
-      background 0.35s cubic-bezier(.4,1.4,.8,1),
-      color 0.25s,
-      border 0.28s,
-      box-shadow 0.28s,
-      transform 0.28s,
-      border-radius 0.38s cubic-bezier(.4,1.4,.8,1);
-    box-shadow: 0 2px 8px #004e8f11;
-    border: 2.5px solid transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 48px;
-    min-height: 48px;
-    text-align: center;
-  }
-  .main-nav a:hover, .main-nav a:focus {
-    background: #ff8c00;
-    color: #fff;
-    border: 2.5px solid #004e8f;
-    box-shadow: 0 4px 16px #ff8c0033;
-    transform: scale(1.12);
-    border-radius: 50%; /* Hover'da tam yuvarlak */
-    transition-delay: 0.07s;
-  }
+.manager-whatsapp:hover img,
+.manager-whatsapp:focus img {
+  transform: scale(1.13) rotate(-8deg);
 }
-
-/* Büyük ekrana geçişte menü animasyonu için */
-@media (min-width: 900px) {
-  .main-nav a {
-    opacity: 0;
-    transform: translateY(-18px) scale(0.95);
-    transition:
-      opacity 0.45s cubic-bezier(.4,1.4,.8,1),
-      transform 0.45s cubic-bezier(.4,1.4,.8,1),
-      background 0.35s cubic-bezier(.4,1.4,.8,1),
-      color 0.25s,
-      border 0.28s,
-      box-shadow 0.28s,
-      border-radius 0.38s cubic-bezier(.4,1.4,.8,1);
-  }
-  .main-nav {
-    /* Menü açılırken animasyonlu göster */
-    animation: navFadeIn 0.7s cubic-bezier(.4,1.4,.8,1);
-  }
-  .main-nav a {
-    animation: navLinkIn 0.7s cubic-bezier(.4,1.4,.8,1) forwards;
-    animation-delay: calc(var(--i, 1) * 0.08s + 0.1s);
-  }
-}
-@keyframes navFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-@keyframes navLinkIn {
-  from { opacity: 0; transform: translateY(-18px) scale(0.95);}
-  to   { opacity: 1; transform: translateY(0) scale(1);}
-}
-
-/* Her menü linkine sıra için index ver */
-.main-nav a:nth-child(1) { --i: 1; }
-.main-nav a:nth-child(2) { --i: 2; }
-.main-nav a:nth-child(3) { --i: 3; }
-.main-nav a:nth-child(4) { --i: 4; }
-.main-nav a:nth-child(5) { --i: 5; }

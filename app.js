@@ -346,3 +346,15 @@ document.querySelectorAll('.side-menu a').forEach(link => {
     }
   });
 });
+
+// Büyük ekranda yatay menüde smooth scroll
+document.querySelectorAll('.main-nav a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href').slice(1);
+    const target = document.getElementById(targetId);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
