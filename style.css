@@ -1,6 +1,6 @@
 body {
       font-family: 'Vazirmatn', sans-serif;
-      background-color: #fdfcfb;
+      background-color: #f9f9fb;
       margin: 0;
       direction: rtl;
     }
@@ -13,18 +13,25 @@ body {
 
     /* Hamburger Menu Styles */
     .menu-btn {
-      background: none;
-      border: none;
-      outline: none;
+      background: #004e8f;      /* Koyu mavi arka plan */
+      border-radius: 50%;
+      padding: 6px;
+      box-shadow: none;         /* Border ve gölge kaldırıldı */
+      border: none;             /* Border kaldırıldı */
       cursor: pointer;
       position: absolute;
       top: 1rem;
       right: 1rem;
       z-index: 2001;
+      transition: background 0.2s;
     }
     .menu-btn img {
       width: 32px;
       height: 32px;
+      filter: none;             /* Renk filtresi kaldırıldı */
+    }
+    .menu-btn:hover {
+      background: #ff8c00;
     }
     .side-menu {
       position: fixed;
@@ -452,19 +459,35 @@ body {
   padding: 0;
   cursor: pointer;
   z-index: 11;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: box-shadow 0.2s, transform 0.2s, opacity 0.25s;
   box-shadow: 0 2px 8px #ff8c0033;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0.35; /* Zayıf görünüm */
+  filter: blur(0.5px);
 }
-.gallery-modal-btn:hover svg circle {
+.gallery-modal-btn.pause {
+  opacity: 0.22; /* Duraklatma butonu daha da zayıf */
+}
+.gallery-modal-btn:hover,
+.gallery-modal-btn:focus {
+  opacity: 1 !important;
+  filter: none;
+  background: #fff;
+  box-shadow: 0 4px 16px #ff8c0033;
+}
+.gallery-modal-btn:hover svg circle,
+.gallery-modal-btn:focus svg circle {
   fill: #ff8c00;
   stroke: #fff;
 }
 .gallery-modal-btn:hover svg polyline,
 .gallery-modal-btn:hover svg rect,
-.gallery-modal-btn:hover svg polygon {
+.gallery-modal-btn:hover svg polygon,
+.gallery-modal-btn:focus svg polyline,
+.gallery-modal-btn:focus svg rect,
+.gallery-modal-btn:focus svg polygon {
   stroke: #fff;
   fill: #fff;
 }
@@ -481,5 +504,638 @@ body {
     height: 22vw;
     min-height: 60px;
     min-width: 60px;
+  }
+}
+
+.main-page-text {
+  font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif;
+  font-size: 1.13rem;
+  text-align: justify;         /* Justify hizalama */
+  line-height: 2.1;
+  background: #fffdfa;
+  padding: 1.3rem 1.1rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 12px #ff8c0022;
+  color: #3d2c13;
+  margin: 1.2rem auto 1.5rem auto;
+  max-width: 600px;
+  letter-spacing: 0.01em;
+  border: 1.5px solid #f3e7d6; /* Hafif renkli border */
+}
+
+.other-services-section {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px #ff8c0022;
+  margin: 2rem 0 1.5rem 0;
+  padding: 2rem 1rem 1.5rem 1rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.other-services-section h2 {
+  color: #004e8f;
+  text-align: center;
+  margin-bottom: 2.2rem;
+  font-size: 2.1rem;
+  font-family: 'Vazirmatn', Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.01em;
+}
+.other-services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.service-box {
+  display: block;
+  margin-bottom: 0;
+  direction: rtl;
+}
+.service-content {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: right;
+}
+.service-content h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: #004e8f;
+  font-size: 1.35rem;
+  font-family: 'Vazirmatn', Arial, sans-serif;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 0.01em;
+}
+.service-box h3 {
+  color: #004e8f;
+  font-size: 1.35rem;
+  margin: 0 0 0.5rem 0;
+  font-family: 'Vazirmatn', Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.01em;
+}
+.service-box p {
+  color: #222;
+  font-size: 1.08rem;
+  text-align: justify;
+  line-height: 2.1;
+  margin: 0;
+  font-family: 'Vazirmatn', Arial, sans-serif;
+  font-weight: 400;
+  border: 1.5px solid #f3e7d6;      /* Hafif renkli border */
+  background: #fffdfa;               /* Çok hafif arka plan */
+  border-radius: 10px;
+  padding: 1rem 1.1rem 1rem 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.2rem;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s;
+}
+.service-box p:hover {
+  box-shadow: 0 2px 12px #ff8c0022;
+}
+.service-icon-col {
+  flex: 0 0 70px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  margin-right: 1.2rem;
+}
+.service-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  min-height: 38px;
+}
+.service-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+@media (max-width: 700px) {
+  .other-services-section {
+    padding: 1.2rem 0.3rem 1rem 0.3rem;
+  }
+  .other-services-list {
+    gap: 1.2rem;
+  }
+  .service-box {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+    gap: 0.7rem;
+  }
+  .service-content h3 {
+    justify-content: center;
+    font-size: 1.13rem;
+  }
+  .service-icon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+  }
+  .service-icon, .service-icon svg {
+    width: 44px;
+    height: 44px;
+  }
+  .service-content {
+    width: 100%;
+  }
+  .service-box h3, .service-box p {
+    text-align: center;
+  }
+}
+
+.double-photo-section {
+  max-width: 800px;
+  margin: 2.5rem auto 2rem auto;
+  padding: 0 1rem;
+}
+.double-photo-grid {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+.photo-box {
+  flex: 1 1 320px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #ff8c0022;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  max-width: 380px;
+}
+.photo-box img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;   /* Fotoğrafın tamamı görünür, kırpılmaz */
+  aspect-ratio: 4/3;     /* Oran sabit kalır, ama kırpma olmaz */
+  background: #f9f9fb;   /* Arka plan açık renk, boşluklarda */
+  transition: transform 0.3s;
+  border-radius: 16px; /* veya istediğin kadar */
+}
+.photo-box img:hover {
+  transform: scale(1.04) rotate(-1deg);
+}
+@media (max-width: 700px) {
+  .double-photo-grid {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .photo-box {
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+
+.afg-flag-inline {
+  width: 28px;
+  height: 18px;
+  vertical-align: middle;
+  margin-left: 8px;
+  border-radius: 3px;
+  object-fit: cover;
+  border: 1px solid #222;
+}
+
+.fixed-flags {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 3000;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.afg-flag {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;         /* Tam dairesel */
+  object-fit: cover;
+  box-shadow: 0 2px 16px #ff8c0055, 0 0 0 3px #fff;
+  border: 2.5px solid #ff8c00;
+  transition: transform 0.25s cubic-bezier(.4,1.4,.8,1), box-shadow 0.25s;
+  background: #fff;
+}
+.afg-flag:hover {
+  transform: scale(1.13) rotate(-4deg);
+  box-shadow: 0 4px 32px #ff8c00aa, 0 0 0 4px #fff;
+}
+.site-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;         /* Tam dairesel */
+  object-fit: cover;
+  box-shadow: 0 2px 16px #ff8c0055, 0 0 0 3px #fff;
+  border: 2.5px solid #ff8c00;
+  transition: transform 0.25s cubic-bezier(.4,1.4,.8,1), box-shadow 0.25s;
+  background: #fff;
+}
+.site-logo:hover {
+  transform: scale(1.13) rotate(-4deg);
+  box-shadow: 0 4px 32px #ff8c00aa, 0 0 0 4px #fff;
+}
+.header-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 0.7rem;
+  flex-direction: row-reverse; /* RTL için sağdan sola */
+  position: relative;
+}
+
+.home-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 16px #ff8c0055;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.home-icon img {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+.home-icon:hover {
+  background: #ff8c00;
+  box-shadow: 0 4px 24px #ff8c00aa;
+  transform: translateY(-50%) scale(1.12);
+}
+
+.afg-flag,
+.site-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 16px #ff8c0055;
+  background: #fff;
+  border: none;
+}
+
+@media (max-width: 600px) {
+  .afg-flag,
+  .site-logo {
+    width: 36px;
+    height: 36px;
+  }
+  .home-icon {
+    width: 34px;
+    height: 34px;
+  }
+  .home-icon img {
+    width: 22px;
+    height: 22px;
+  }
+  .header-logos {
+    gap: 10px;
+  }
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  background: #004e8f; /* Mavi arka plan */
+  box-shadow: 0 2px 12px #ff8c0022;
+  padding-bottom: 0.3rem;
+}
+header h1 {
+  color: #fff; /* Başlık rengi beyaz */
+}
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.1rem;
+    padding: 0 0.2rem;
+  }
+}
+
+.exchange-photo-section {
+  margin: 2rem auto;
+  max-width: 800px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px #ff8c0022;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+.exchange-photo-section h2 {
+  color: #004e8f;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Vazirmatn', Arial, sans-serif;
+}
+.exchange-photo-grid {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.exchange-photo-box {
+  flex: 1 1 220px;
+  max-width: 320px;
+  background: #fffdfa;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #ff8c0022;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.exchange-photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #f9f9fb;
+}
+@media (max-width: 700px) {
+  .exchange-photo-grid {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.exchange-photo-slider {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto 2rem auto;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.exchange-photo-slider img {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 18px;
+  background: #f9f9fb;
+  box-shadow: 0 2px 16px #ff8c0033;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s, transform 0.7s;
+  z-index: 1;
+}
+.exchange-photo-slider img.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 2;
+}
+.exchange-photo-slider img.effect-fade {
+  animation: fadeIn 0.7s;
+}
+.exchange-photo-slider img.effect-zoom {
+  animation: zoomIn 0.7s;
+}
+.exchange-photo-slider img.effect-slide {
+  animation: slideIn 0.7s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes zoomIn {
+  from { transform: scale(1.18); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+@keyframes slideIn {
+  from { transform: translateX(60px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+.exchange-photo-slider img.paused {
+  transform: scale(1.13);
+  box-shadow: 0 6px 32px #ff8c00aa;
+  z-index: 3;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+@media (max-width: 700px) {
+  .exchange-photo-slider {
+    max-width: 98vw;
+    aspect-ratio: 4/3;
+  }
+}
+ 
+.contact-section {
+  position: relative;
+  background: url() center center/cover no-repeat;
+  min-height: 340px;
+  padding: 0;
+  margin-top: 2.5rem;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+.contact-overlay {
+  background: rgba(0,78,143,0.60); /* Kabul ve Herat kutularındaki mavi yarı saydam ile aynı */
+  padding: 2rem 1.2rem 1.5rem 1.2rem;
+  border-radius: 12px;             /* Diğer kutularla aynı köşe yuvarlaklığı */
+  max-width: 700px;
+  margin: 2.5rem auto;
+  width: 100%;
+  box-shadow: 0 2px 12px #004e8f22; /* Diğer kutularla aynı gölge */
+  color: #fff;
+  text-align: right;
+}
+.contact-section h2 {
+  font-size: 1.7rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  font-family: 'Vazirmatn', Arial, sans-serif;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 0.01em;
+}
+.contact-addresses {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+.contact-box {
+  background: rgba(255,255,255,0.13);      /* Hafif yarı saydam beyaz */
+  border-radius: 16px;                     /* Diğer kutularla aynı köşe yuvarlaklığı */
+  box-shadow: 0 2px 12px #004e8f22;        /* Diğer kutularla aynı gölge */
+  padding: 1.3rem 1.1rem 1.3rem 1.1rem;    /* Diğer kutularla aynı iç boşluk */
+  min-width: 220px;
+  max-width: 380px;                        /* Diğer kutularla aynı genişlik */
+  flex: 1 1 320px;
+  margin: 1rem 0.7rem 1rem 0.7rem;         /* Üst-alt ve sağ-sol boşluklar */
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  font-size: 1.13rem;
+  font-family: 'Vazirmatn', Arial, sans-serif;
+  border: 1.5px solid #f3e7d6;            /* Hafif renkli border */
+  background-clip: padding-box;
+}
+.contact-box.kabul {
+  background-image: linear-gradient(rgba(0,78,143,0.60),rgba(0,78,143,0.60)), url('images/27-mazar.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 180px;
+  max-width: 320px;
+  margin: 0.7rem;
+  box-shadow: 0 2px 12px #004e8f22;
+  border-radius: 12px;
+  padding: 1.1rem 1.2rem 1rem 1.2rem;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.contact-box.herat {
+  background-image: linear-gradient(rgba(0,78,143,0.60),rgba(0,78,143,0.60)), url('images/25-herat\ .jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 180px;
+  max-width: 320px;
+  margin: 0.7rem;
+  box-shadow: 0 2px 12px #004e8f22;
+  border-radius: 12px;
+  padding: 1.1rem 1.2rem 1rem 1.2rem;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gerekirse eski .contact-bg-anim ve .contact-box.kabul > *, .contact-box.herat > * kodlarını kaldır! */
+
+.phone-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.7rem;
+  margin-bottom: 0;
+}
+
+.phone-link {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(0,78,143,0.22);
+  padding: 0.25em 0.7em;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  direction: ltr;
+}
+
+.phone-link:hover {
+  background: #25d366;
+  color: #004e8f;
+}
+
+.whatsapp-link img {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 2px 8px #0002;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.whatsapp-link:hover img {
+  transform: scale(1.18) rotate(-8deg);
+  box-shadow: 0 4px 18px #25d36655;
+  background: #25d366;
+}
+
+.manager-box {
+  background: rgba(255, 236, 210, 0.85); /* Turuncu-beyaz uyumlu, logonun turuncusuna yakın */
+  border-radius: 12px;
+  padding: 0.8rem 1.2rem;
+  margin: 1.2rem 0 0.5rem 0;
+  box-shadow: 0 2px 12px #ff8c0033;
+  font-size: 1.13rem;
+  color: #004e8f;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+.manager-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.2rem;
+  flex-wrap: wrap;
+}
+.manager-phone {
+  font-size: 1.18rem;
+  font-weight: bold;
+  color: #ff8c00;
+  background: #fff;
+  padding: 0.22em 0.7em;
+  border-radius: 8px;
+  text-decoration: none;
+  direction: ltr;
+  margin-right: 0.2rem;
+  box-shadow: 0 1px 6px #ff8c0033;
+  transition: background 0.2s, color 0.2s;
+}
+.manager-phone:hover {
+  background: #ff8c00;
+  color: #fff;
+}
+.manager-whatsapp img {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 2px 8px #0002;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+.manager-whatsapp:hover img {
+  transform: scale(1.15) rotate(-8deg);
+  box-shadow: 0 4px 18px #25d36655;
+  background: #25d366;
+}
+@media (max-width: 600px) {
+  .manager-contact-row {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+  .manager-phone {
+    font-size: 1.05rem;
+    padding: 0.18em 0.5em;
+  }
+  .manager-whatsapp img {
+    width: 26px;
+    height: 26px;
   }
 }

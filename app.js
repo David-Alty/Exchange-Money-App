@@ -17,9 +17,9 @@ document.querySelectorAll('.side-menu a').forEach(link => {
     const href = this.getAttribute('href');
     if(href.startsWith('#')) {
       e.preventDefault();
+      document.querySelector(href).scrollIntoView({behavior: "smooth"});
       sideMenu.classList.remove('open');
       overlay.classList.remove('show');
-      document.querySelector(href).scrollIntoView({behavior: 'smooth'});
     }
   });
 });
@@ -250,5 +250,115 @@ window.addEventListener('DOMContentLoaded', function() {
   nextBtn.onclick = (e) => { e.stopPropagation(); next(); };
   prevBtn.onclick = (e) => { e.stopPropagation(); prev(); };
   pauseBtn.onclick = (e) => { e.stopPropagation(); togglePause(); };
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const exchangeLink = document.querySelector('a[href="#exchange"]');
+  const exchangeSection = document.getElementById('exchange');
+
+  if (exchangeLink && exchangeSection) {
+    exchangeLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      // Diğer açık bölümleri gizle (isteğe bağlı)
+      document.querySelectorAll('section').forEach(sec => {
+        if (sec !== exchangeSection) sec.style.display = 'none';
+      });
+      // Bölümü göster
+      exchangeSection.style.display = 'block';
+      // Sayfayı bölüme kaydır
+      exchangeSection.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+});
+// Exchange photo slider with effects
+document.addEventListener('DOMContentLoaded', function() {
+  const slider = document.querySelector('.exchange-photo-slider');
+  if (!slider) return;
+  const imgs = Array.from(slider.querySelectorAll('img'));
+  const effects = ['effect-fade', 'effect-zoom', 'effect-slide'];
+  let current = 0;
+  let timer = null;
+  let paused = false;
+  let effectIdx = 0;
+
+  function show(idx, effect) {
+    imgs.forEach(img => {
+      img.classList.remove('active', ...effects, 'paused');
+    });
+    current = (idx + imgs.length) % imgs.length;
+    imgs[current].classList.add('active', effect);
+    if (paused) imgs[current].classList.add('paused');
+  }
+
+  function next() {
+    effectIdx = (effectIdx + 1) % effects.length;
+    show(current + 1, effects[effectIdx]);
+  }
+
+  function startAuto() {
+    clearInterval(timer);
+    timer = setInterval(() => {
+      if (!paused) next();
+    }, 5600);
+  }
+
+  // Başlangıçta ilk resmi göster
+  show(0, effects[0]);
+  startAuto();
+
+  // Tıklayınca durdur ve büyüt
+  imgs.forEach(img => {
+    img.addEventListener('click', function() {
+      paused = !paused;
+      imgs.forEach(i => i.classList.remove('paused'));
+      if (paused) {
+        this.classList.add('paused');
+        clearInterval(timer);
+      } else {
+        startAuto();
+      }
+    });
+  });
+
+  // Responsive için resize'da tekrar göster
+  window.addEventListener('resize', () => show(current, effects[effectIdx]));
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Kabul için arka planlar
+  const kabulBox = document.querySelector('.contact-box.kabul');
+  const kabulImages = [
+    "images/27-mazar.jpg",   // Uzantı eklendi!
+    "images/26-kabul.jpg"
+  ];
+  // Herat için arka planlar
+  const heratBox = document.querySelector('.contact-box.herat');
+  const heratImages = [
+    "images/25-herat.jpg",
+    "images/29-herat.jpg"
+  ];
+  function createBgDivs(box, images) {
+    images.forEach((img, i) => {
+      const div = document.createElement('div');
+      div.className = 'contact-bg-anim' + (i === 0 ? ' active fade' : '');
+      div.style.backgroundImage = `linear-gradient(rgba(0,78,143,0.60), rgba(0,78,143,0.60)), url('${img}')`;
+      box.prepend(div);
+    });
+  }
+  if (kabulBox && kabulImages.length > 0) createBgDivs(kabulBox, kabulImages);
+  if (heratBox && heratImages.length > 0) createBgDivs(heratBox, heratImages);
+
+  function startBgAnim(box, effectList = ['fade', 'zoom'], interval = 5000) {
+    const bgDivs = box.querySelectorAll('.contact-bg-anim');
+    let idx = 0, eff = 0;
+    setInterval(() => {
+      bgDivs.forEach(div => div.classList.remove('active', ...effectList));
+      idx = (idx + 1) % bgDivs.length;
+      eff = (eff + 1) % effectList.length;
+      bgDivs[idx].classList.add('active', effectList[eff]);
+    }, interval);
+  }
+  if (kabulBox) startBgAnim(kabulBox, ['fade', 'zoom'], 5000);
+  if (heratBox) startBgAnim(heratBox, ['zoom', 'fade'], 5000);
 });
 

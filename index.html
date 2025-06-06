@@ -10,19 +10,26 @@
 </head>
 <body>
   <header>
-    <h1>شرکت صرافی و خدمات پولی پروان</h1>
-    <button class="menu-btn" id="openMenuBtn">
-      <img src="images/menu.svg" alt="منو">
-    </button>
-  </header>
+  <div class="header-logos">
+    <img src="images/flag.png" alt="بیرق افغانستان" class="afg-flag">
+    <img src="images/1-logo.jpg" alt="لوگوی شرکت" class="site-logo">
+    <a href="index.html" class="home-icon" aria-label="خانه">
+      <img src="images/home.png" alt="خانه">
+    </a>
+  </div>
+  <h1>شرکت صرافی و خدمات پولی پروان</h1>
+  <button class="menu-btn" id="openMenuBtn">
+    <img src="images/menu.svg" alt="منو">
+  </button>
+</header>
   <div class="side-menu" id="sideMenu">
     <button class="menu-btn" id="closeMenuBtn" style="right:unset;left:1rem;">
       <img src="images/close.svg" alt="بستن">
     </button>
     <a href="#home">خانه (نرخ ارز)</a>
-    <a href="#send">ارسال حواله</a>
-    <a href="#services">خدمات ما</a>
-    <a href="#exchange">نرخ ارز</a>
+    <a href="#ارسال-حواله">ارسال حواله</a>
+    <a href="#سایر-خدمات-ما">سایر خدمات ما</a>
+    <a href="#exchange">نکات مالی</a>
     <a href="#gallery">گالری</a>
     <a href="#contact">تماس با ما</a>
   </div>
@@ -37,6 +44,10 @@
   <main>
     <!-- ...بخش‌های سایت مثل قبل اینجا قرار دارد... --><section id="ارسال-حواله">
   <h2>ارسال حواله</h2>
+  </div>
+  <p id="main-page" class="main-page-text">
+  صرافی پروان با افتخار، حوالات شما را در کوتاه‌ترین زمان ممکن به تمام ولایات افغانستان و هر نقطۀ جهان می‌رساند. با سال‌ها تجربه، اعتماد مردم و خدمات پیوسته، ما پلی هستیم میان شما و عزیزانتان، در هر کجا که باشند. کافی‌ست با ما تماس بگیرید؛ باقی راه را با خیال راحت به ما بسپارید.
+</p>
   <div class="gallery-grid">
     <img src="images/2-main page.jpg" alt="Reklam 1">
     <img src="images/3-banner.jpg" alt="Reklam 2">
@@ -47,8 +58,9 @@
     <img src="images/8-herat-parwan.jpg" alt="Reklam 7">
     <img src="images/9-ads.jpg" alt="Reklam 8">
     <img src="images/10-iran-turk.jpg" alt="Reklam 9">
-    <img src="images/12-services-america.jpg" alt="Reklam 10">
-    <img src="images/13-ads-global.jpg" alt="Reklam 11">
+    <img src="images/11-advertise .jpg" alt="Reklam 10">
+    <img src="images/12-services-america.jpg" alt="Reklam 11">
+    <img src="images/13-ads-global.jpg" alt="Reklam 12">
     <!-- Diğer fotoğraflar... -->
   </div>
   <div class="gallery-modal" id="galleryModal">
@@ -64,9 +76,115 @@
   </button>
   <span class="close-modal" id="closeModal">&times;</span>
   <img id="modalImg" src="" alt="Büyük Görsel">
-</div>
-  <p id="main-page">صرافی پروان با افتخار، حوالات شما را در کوتاه‌ترین زمان ممکن به تمام ولایات افغانستان و هر نقطۀ جهان می‌رساند. با سال‌ها تجربه، اعتماد مردم و خدمات پیوسته، ما پلی هستیم میان شما و عزیزانتان، در هر کجا که باشند. کافی‌ست با ما تماس بگیرید؛ باقی راه را با خیال راحت به ما بسپارید.</p>
+
 </section>
+<section id="سایر-خدمات-ما" class="other-services-section">
+  
+  <h2>سایر خدمات ما</h2>
+  <section class="double-photo-section">
+  <div class="double-photo-grid">
+    <div class="photo-box">
+      <img src="images/14-banking .jpg" alt="عکس اول">
+    </div>
+    <div class="photo-box">
+      <img src="images/15-unversity services.jpg" alt="عکس دوم">
+    </div>
+  </div>
+</section>
+  <div class="other-services-list">
+    <div class="service-box">
+      <div class="service-content">
+        <h3>
+          <span class="service-icon">
+            <img src="images/university.png" alt="پرداخت فیس دانشگاه‌ها">
+          </span>
+          پرداخت فیس دانشگاه‌ها
+        </h3>
+        <p>
+          پرداخت آنلاین فیس تحصیلی به اروپا و امریکا. ما فیس دانشگاه‌های معتبر اروپا و امریکا را به‌گونه‌ی آنلاین، سریع و مطمئن پرداخت می‌کنیم. کافی‌ست مشخصات را بسپارید، باقی کار با ماست.
+        </p>
+      </div>
+    </div>
+    <div class="service-box">
+      <div class="service-content">
+        <h3>
+          <span class="service-icon">
+            <img src="images/account.png" alt="امانت‌داری مالی">
+          </span>
+          امانت‌داری مالی
+        </h3>
+        <p>
+          نگهداری پول، به امانت و اطمینان. اگر نیاز دارید پول‌تان را برای مدتی کوتاه یا دراز نگهداری کنید، صرافی پروان مکان امن شماست. با ما، سرمایۀ‌تان در امان است.
+        </p>
+      </div>
+    </div>
+    <div class="service-box">
+      <div class="service-content">
+        <h3>
+          <span class="service-icon">
+            <img src="images/finance.png" alt="ایجاد حساب مالی">
+          </span>
+          ایجاد حساب مالی
+        </h3>
+        <p>
+          ساخت حساب مالی برای مشتریان گرامی. ما برای مشتریان عزیز، حساب‌های اختصاصی و تنظیم‌شده بر بنیاد نیازهای مالی‌شان ایجاد می‌کنیم؛ برای حواله، تجارت یا دریافت آسان‌تر پول.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="exchange" class="exchange-photo-section">
+  <h2>نکات مالی</h2>
+  <div class="exchange-photo-slider">
+    <img src="images/16-finaces info.jpg" alt="نکته مالی ۱" class="active">
+    <img src="images/17-finance genral info .jpg" alt="نکته مالی ۲">
+    <img src="images/18-finace information .jpg" alt="نکته مالی ۲">
+    <img src="images/19-finace information .jpg" alt="نکته مالی ۲">
+    <img src="images/20-finace information .jpg" alt="نکته مالی ۲">
+    <img src="images/21-finace information .jpg" alt="نکته مالی ۲">
+    <img src="images/23-finace information .jpg" alt="نکته مالی ۲">
+    <!-- Daha fazla img ekleyebilirsin -->
+  </div>
+</section>
+<section id="contact" class="contact-section">
+  <div class="contact-overlay">
+    <h2>آدرس و تماس</h2>
+    <div class="contact-addresses">
+      <div class="contact-box kabul">
+        <h3>دفتر کابل</h3>
+        <p>افغانستان کابل: سرای شهزاده منزل اول کوچه تومان دکان نمبر ۴۹</p>
+        <p class="phone-row">
+          <a class="phone-link" href="tel:+93793118876">+93 79 311 8876</a>
+          <a class="whatsapp-link" href="https://wa.me/93793118876" target="_blank" title="WhatsApp">
+            <img src="images/whatsapp.svg" alt="WhatsApp" />
+          </a>
+        </p>
+      </div>
+      <div class="contact-box herat">
+        <h3>دفتر هرات</h3>
+        <p>افغانستان هرات: رازی مارکت رخ سرک دکان نمبر ۴۱/۴۳</p>
+        <p class="phone-row">
+          <a class="phone-link" href="tel:+93700686722">+93 70 068 6722</a>
+          <a class="whatsapp-link" href="https://wa.me/93700686722" target="_blank" title="WhatsApp">
+            <img src="images/whatsapp.svg" alt="WhatsApp" />
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="contact-managers">
+      <div class="manager-box">
+        <strong>مدیر عمومی دفتر هرات:</strong>
+        <div class="manager-contact-row">
+          <a class="manager-phone" href="tel:+93774562597">+93 77 456 2597</a>
+          <a class="manager-whatsapp" href="https://wa.me/93774562597" target="_blank" title="WhatsApp">
+            <img src="images/whatsapp.svg" alt="WhatsApp" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
   </main>
   <footer>
