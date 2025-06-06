@@ -11,18 +11,7 @@ closeBtn.onclick = overlay.onclick = () => {
   overlay.classList.remove('show');
 };
 
-// Smooth scroll for menu links
-document.querySelectorAll('.side-menu a').forEach(link => {
-  link.addEventListener('click', function(e) {
-    const href = this.getAttribute('href');
-    if(href.startsWith('#')) {
-      e.preventDefault();
-      document.querySelector(href).scrollIntoView({behavior: "smooth"});
-      sideMenu.classList.remove('open');
-      overlay.classList.remove('show');
-    }
-  });
-});
+
 
 // Fade-in animation for sections
 function revealSectionsOnScroll() {
@@ -252,24 +241,7 @@ window.addEventListener('DOMContentLoaded', function() {
   pauseBtn.onclick = (e) => { e.stopPropagation(); togglePause(); };
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-  const exchangeLink = document.querySelector('a[href="#exchange"]');
-  const exchangeSection = document.getElementById('exchange');
 
-  if (exchangeLink && exchangeSection) {
-    exchangeLink.addEventListener('click', function(e) {
-      e.preventDefault();
-      // Diğer açık bölümleri gizle (isteğe bağlı)
-      document.querySelectorAll('section').forEach(sec => {
-        if (sec !== exchangeSection) sec.style.display = 'none';
-      });
-      // Bölümü göster
-      exchangeSection.style.display = 'block';
-      // Sayfayı bölüme kaydır
-      exchangeSection.scrollIntoView({ behavior: 'smooth' });
-    });
-  }
-});
 // Exchange photo slider with effects
 document.addEventListener('DOMContentLoaded', function() {
   const slider = document.querySelector('.exchange-photo-slider');
@@ -362,3 +334,15 @@ document.addEventListener('DOMContentLoaded', function() {
   if (heratBox) startBgAnim(heratBox, ['zoom', 'fade'], 5000);
 });
 
+// Smooth scroll for menu links
+document.querySelectorAll('.side-menu a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if(href.startsWith('#')) {
+      e.preventDefault();
+      document.querySelector(href).scrollIntoView({behavior: "smooth"});
+      sideMenu.classList.remove('open');
+      overlay.classList.remove('show');
+    }
+  });
+});

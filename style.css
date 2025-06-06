@@ -1139,3 +1139,97 @@ header h1 {
     height: 26px;
   }
 }
+
+/* Varsayılan olarak nav gizli */
+.main-nav {
+  display: none;
+}
+
+/* Büyük ekranlarda yatay menü */
+@media (min-width: 900px) {
+  .side-menu, .menu-btn, .overlay {
+    display: none !important;
+  }
+  .main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 2.2rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.7rem;
+    z-index: 10;
+    position: relative;
+  }
+  .main-nav a {
+    color: #004e8f;
+    background: #fff;
+    text-decoration: none;
+    font-size: 1.13rem;
+    font-family: 'Vazirmatn', Arial, sans-serif;
+    font-weight: bold;
+    padding: 0.7rem 1.2rem;
+    border-radius: 18px; /* Sade ve hafif oval */
+    transition: 
+      background 0.35s cubic-bezier(.4,1.4,.8,1),
+      color 0.25s,
+      border 0.28s,
+      box-shadow 0.28s,
+      transform 0.28s,
+      border-radius 0.38s cubic-bezier(.4,1.4,.8,1);
+    box-shadow: 0 2px 8px #004e8f11;
+    border: 2.5px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    min-height: 48px;
+    text-align: center;
+  }
+  .main-nav a:hover, .main-nav a:focus {
+    background: #ff8c00;
+    color: #fff;
+    border: 2.5px solid #004e8f;
+    box-shadow: 0 4px 16px #ff8c0033;
+    transform: scale(1.12);
+    border-radius: 50%; /* Hover'da tam yuvarlak */
+    transition-delay: 0.07s;
+  }
+}
+
+/* Büyük ekrana geçişte menü animasyonu için */
+@media (min-width: 900px) {
+  .main-nav a {
+    opacity: 0;
+    transform: translateY(-18px) scale(0.95);
+    transition:
+      opacity 0.45s cubic-bezier(.4,1.4,.8,1),
+      transform 0.45s cubic-bezier(.4,1.4,.8,1),
+      background 0.35s cubic-bezier(.4,1.4,.8,1),
+      color 0.25s,
+      border 0.28s,
+      box-shadow 0.28s,
+      border-radius 0.38s cubic-bezier(.4,1.4,.8,1);
+  }
+  .main-nav {
+    /* Menü açılırken animasyonlu göster */
+    animation: navFadeIn 0.7s cubic-bezier(.4,1.4,.8,1);
+  }
+  .main-nav a {
+    animation: navLinkIn 0.7s cubic-bezier(.4,1.4,.8,1) forwards;
+    animation-delay: calc(var(--i, 1) * 0.08s + 0.1s);
+  }
+}
+@keyframes navFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes navLinkIn {
+  from { opacity: 0; transform: translateY(-18px) scale(0.95);}
+  to   { opacity: 1; transform: translateY(0) scale(1);}
+}
+
+/* Her menü linkine sıra için index ver */
+.main-nav a:nth-child(1) { --i: 1; }
+.main-nav a:nth-child(2) { --i: 2; }
+.main-nav a:nth-child(3) { --i: 3; }
+.main-nav a:nth-child(4) { --i: 4; }
+.main-nav a:nth-child(5) { --i: 5; }
