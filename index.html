@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Vazirmatn&display=swap">
   <link rel="stylesheet" href="style.css">
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <head>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+ 
+</head>
 </head>
 <body>
   <header>
@@ -50,8 +54,23 @@
 </div>
   <main>
     <!-- ...بخش‌های سایت مثل قبل اینجا قرار دارد... --><section id="ارسال-حواله">
-  <h2>ارسال حواله</h2>
+
+  <div class="card">
+    <div class="title">صبح بخیر!</div>
+    <div class="date-line" id="dayName"></div>
+    <div class="divider"></div>
+    <div class="date-line" id="miladi"></div>
+    <div class="divider"></div>
+    <div class="date-line" id="shamsi"></div>
+    <div class="divider"></div>
+    <div class="date-line" id="qamari"></div>
+    <div class="footer">روزتان پر از برکت و رحمت الهی</div>
   </div>
+
+
+  </div>
+    <h2>ارسال حواله</h2>
+
   <p id="main-page" class="main-page-text">
   صرافی پروان با افتخار، حوالات شما را در کوتاه‌ترین زمان ممکن به تمام ولایات افغانستان و هر نقطۀ جهان می‌رساند. با سال‌ها تجربه، اعتماد مردم و خدمات پیوسته، ما پلی هستیم میان شما و عزیزانتان، در هر کجا که باشند. کافی‌ست با ما تماس بگیرید؛ باقی راه را با خیال راحت به ما بسپارید.
 </p>
@@ -160,20 +179,22 @@
       <div class="contact-box kabul">
         <h3>دفتر کابل</h3>
         <p>افغانستان کابل: سرای شهزاده منزل اول کوچه تومان دکان نمبر ۴۹</p>
-        <a href="https://wa.me/93793118876" class="whatsapp-link" target="_blank">
-          <img src="images/whatsapp.svg" alt="واتساپ">
-          <span class="phone-number">+93 79 311 8876</span>
-        </a>
+        <div class="phone-row">
+          <a class="whatsapp-link" href="https://wa.me/93793118876" target="_blank">
+            <img src="images/whatsapp.svg" alt="واتساپ">
+            <span class="phone-number">+93 79 311 8876</span>
+          </a>
+        </div>
       </div>
       <div class="contact-box herat">
         <h3>دفتر هرات</h3>
         <p>افغانستان هرات: رازی مارکت رخ سرک دکان نمبر ۴۱/۴۳</p>
-        <p class="phone-row">
-          <a class="phone-link" href="tel:+93700686722">+93 70 068 6722</a>
-          <a class="whatsapp-link" href="https://wa.me/93700686722" target="_blank" title="WhatsApp">
-            <img src="images/whatsapp.svg" alt="WhatsApp" />
+        <div class="phone-row">
+          <a class="phone-link" href="tel:+93700686722">
+            <img src="images/whatsapp.svg" alt="تماس">
+            +93 70 068 6722
           </a>
-        </p>
+        </div>
       </div>
     </div>
     <div class="contact-managers">
@@ -190,11 +211,11 @@
   </div>
 </section>
 
-
   </main>
   <footer>
     <p>© تمامی حقوق محفوظ است | شرکت صرافی پروان</p>
   </footer>
+    <script src="https://unpkg.com/jalaali-js/dist/jalaali.min.js"></script>
  <script src="app.js"></script>
 </body>
 </html>

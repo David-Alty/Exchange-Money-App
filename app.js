@@ -358,3 +358,44 @@ document.querySelectorAll('.main-nav a[href^="#"]').forEach(link => {
     }
   });
 });
+
+
+// Saat dilimine göre selamla
+document.addEventListener('DOMContentLoaded', function() {
+  const titleDiv = document.querySelector('.card .title');
+  if (titleDiv) {
+    const now = new Date();
+    const hour = now.getHours();
+    let greeting = "صبح بخیر!";
+    if (hour >= 12 && hour < 17) {
+      greeting = "ظهر بخیر!";
+    } else if (hour >= 17 && hour < 20) {
+      greeting = "عصر بخیر!";
+    } else if (hour >= 20 || hour < 5) {
+      greeting = "شب بخیر!";
+    }
+    titleDiv.textContent = greeting;
+  }
+
+  const today = new Date();
+  const weekDaysFa = ['یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه'];
+  document.getElementById('dayName').textContent = 'روز: ' + weekDaysFa[today.getDay()];
+
+  // Miladi
+  document.getElementById('miladi').textContent = `میلادی: ${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`;
+
+  // Shamsi
+  const jDate = jalaali.toJalaali(today);
+  document.getElementById('shamsi').textContent = `هجری شمسی: ${jDate.jy}/${jDate.jm}/${jDate.jd}`;
+
+  // Hijri (Qamari)
+  function gregorianToHijri(gDate) {
+    const g2h = new Intl.DateTimeFormat('ar-TN-u-ca-islamic', {
+      day: 'numeric', month: 'numeric', year: 'numeric'
+    }).format(gDate);
+    return g2h.replace(/\s?هـ$/, ''); // Remove "هـ"
+  }
+  document.getElementById('qamari').textContent = `هجری قمری: ${gregorianToHijri(today)}`;
+});
+
+
