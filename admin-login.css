@@ -1,0 +1,83 @@
+body {
+  background: linear-gradient(120deg, #e3f0ff 0%, #f9f9fb 100%);
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Vazirmatn', Arial, sans-serif;
+}
+.admin-login-box {
+  background: rgba(255,255,255,0.98);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px #004e8f22;
+  padding: 2.5rem 2rem 2rem 2rem;
+  max-width: 340px;
+  width: 100%;
+  text-align: center;
+  border: 2.5px solid #0a6ebd;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.2s;
+}
+.admin-login-box h2 {
+  color: #0a3e8f;
+  margin-bottom: 0.5rem;
+  font-size: 1.45rem;
+  font-weight: bold;
+  letter-spacing: 0.01em;
+}
+.admin-login-box input[type="password"] {
+  width: 90%;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  border: 1.5px solid #0a6ebd;
+  font-size: 1.13rem;
+  margin-bottom: 0.7rem;
+  text-align: center;
+  direction: ltr;
+  background: #f7fbff;
+  outline: none;
+  transition: border 0.2s;
+}
+.admin-login-box input[type="password"]:focus {
+  border: 1.5px solid #ff8c00;
+  background: #fff;
+}
+.admin-login-box button {
+  background: linear-gradient(90deg, #0a6ebd 0%, #ff8c00 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.7rem 2.2rem;
+  font-size: 1.13rem;
+  font-family: inherit;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 8px #0a6ebd22;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.admin-login-box button:hover {
+  background: linear-gradient(90deg, #ff8c00 0%, #0a6ebd 100%);
+  box-shadow: 0 4px 18px #ff8c0033;
+}
+.admin-login-box .error {
+  color: #d32f2f;
+  font-size: 1rem;
+  min-height: 1.5em;
+  margin-top: 0.2rem;
+  transition: color 0.2s;
+}
+@media (max-width: 500px) {
+  .admin-login-box {
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+    max-width: 98vw;
+    border-radius: 1.1rem;
+  }
+  .admin-login-box h2 {
+    font-size: 1.1rem;
+  }
+}

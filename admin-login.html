@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>ورود مدیریت</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts: Vazirmatn & Noto Sans Arabic (daha sade ve okunaklı) -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin-login.css">
+  <style>
+    body {
+      font-family: 'Noto Sans Arabic', 'Vazirmatn', Arial, sans-serif;
+    }
+    .admin-login-box h2 {
+      font-family: 'Noto Sans Arabic', 'Vazirmatn', Arial, sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0a3e8f;
+      letter-spacing: 0.01em;
+      margin-bottom: 1.1rem;
+      text-shadow: 0 2px 12px #0a6ebd22, 0 1px 0 #fff8;
+    }
+    .admin-login-box input[type="password"] {
+      font-family: 'Noto Sans Arabic', 'Vazirmatn', Arial, sans-serif;
+    }
+    .admin-login-box button {
+      font-family: 'Noto Sans Arabic', 'Vazirmatn', Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <form class="admin-login-box" id="adminLoginForm" autocomplete="off">
+    <h2>ورود مدیریت</h2>
+    <input type="password" id="adminPassword" placeholder="رمز عبور مدیریت" required>
+    <button type="submit">ورود</button>
+    <div class="error" id="loginError"></div>
+  </form>
+  <script src="admin.js"></script>
+</body>
+</html>

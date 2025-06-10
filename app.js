@@ -398,4 +398,35 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('qamari').textContent = `هجری قمری: ${gregorianToHijri(today)}`;
 });
 
+// Kart arka planını localStorage'dan uygula
+document.addEventListener('DOMContentLoaded', function() {
+  const customBg = localStorage.getItem('customCardBg');
+  if (customBg) {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .card::before {
+        background: linear-gradient(0deg, #fff8 60%, #fff9 100%), url('${customBg}') center center/cover no-repeat !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+});
+
+// Kart arka planını sunucudan uygula (herkes için)
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('/card-bg-url')
+    .then(r => r.ok ? r.text() : null)
+    .then(url => {
+      if (url && url.startsWith('http')) {
+        const style = document.createElement('style');
+        style.innerHTML = `
+          .card::before {
+            background: linear-gradient(0deg, #fff8 60%, #fff9 100%), url('${url}') center center/cover no-repeat !important;
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    });
+});
+
 

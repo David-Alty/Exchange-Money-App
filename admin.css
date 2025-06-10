@@ -1,0 +1,61 @@
+body {
+      background: linear-gradient(0deg, #fff8 60%, #fff9 100%), url('images/27-mazar.jpg') center center/cover no-repeat;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Vazirmatn', 'Noto Naskh Arabic', 'Noto Sans Arabic', 'Tahoma', Arial, sans-serif;
+    }
+    .admin-login-box {
+      background: rgba(255,255,255,0.92);
+      border-radius: 18px;
+      box-shadow: 0 4px 32px #004e8f22;
+      padding: 2.5rem 2rem 2rem 2rem;
+      max-width: 340px;
+      width: 100%;
+      text-align: center;
+      font-family: 'Vazirmatn', 'Noto Naskh Arabic', 'Noto Sans Arabic', 'Tahoma', Arial, sans-serif;
+      border: 2.5px solid #0a6ebd;
+    }
+    .admin-login-box h2 {
+      font-family: 'Noto Naskh Arabic', 'Vazirmatn', 'Noto Sans Arabic', Arial, sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0a3e8f;
+      letter-spacing: 0.01em;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 2px 12px #0a6ebd22, 0 1px 0 #fff8;
+    }
+    .admin-login-box input[type="password"] {
+      width: 90%;
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: 1.5px solid #0a6ebd;
+      font-size: 1.1rem;
+      margin-bottom: 1.2rem;
+      text-align: center;
+      direction: ltr;
+      font-family: 'Vazirmatn', 'Noto Naskh Arabic', 'Noto Sans Arabic', Arial, sans-serif;
+    }
+    .admin-login-box button {
+      background: #0a6ebd;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 2.2rem;
+      font-size: 1.1rem;
+      font-family: 'Noto Naskh Arabic', 'Vazirmatn', 'Noto Sans Arabic', Arial, sans-serif;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .admin-login-box button:hover {
+      background: #ff8c00;
+    }
+    .admin-login-box .error {
+      color: #d32f2f;
+      margin-top: 1rem;
+      font-size: 1rem;
+      min-height: 1.5em;
+    }

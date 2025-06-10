@@ -1353,7 +1353,22 @@ header h1 {
   margin: 2.5rem auto 2rem auto;
   text-align: center;
   position: relative;
-  font-family: 'Vazirmatn', Arial, sans-serif;
+  /* Arka plan görseli için ekleme */
+  background: #fff;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(0deg, #fff8 60%, #fff9 100%), url('images/27-mazar.jpg') center center/cover no-repeat;
+  opacity: 0.80;
+  border-radius: 18px;
+  pointer-events: none;
+}
+.card > * {
+  position: relative;
+  z-index: 1;
 }
 .card .title {
   color: #0a3e8f;
@@ -1370,13 +1385,50 @@ header h1 {
   text-align: center;
 }
 .card .divider {
-  width: 60%;
-  height: 1px;
-  margin: 0.7rem auto;
-  background: linear-gradient(90deg, #fff 0%, #ffb36b 50%, #fff 100%);
+  width: 80%;
+  height: 2px;
+  margin: 1.1rem auto;
+  background: none;
   border: none;
   display: block;
-  opacity: 0.7;
+  position: relative;
+  opacity: 1;
+  overflow: visible;
+  padding: 0;
+}
+.card .divider::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0; top: 0;
+  border-radius: 2px;
+  /* Ortada sabit kalın, uçlara doğru incelen özel degrade */
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    #ffb36b 12%,
+    #ff9800 50%,
+    #ff9800 78%,
+    #ffb36b 88%,
+    transparent 100%
+  );
+  z-index: 1;
+}
+.card .divider::after {
+  content: "";
+  display: block;
+  width: 56%;
+  height: 4px;
+  position: absolute;
+  left: 22%;
+  top: -1px;
+  border-radius: 2px;
+  background: #ff9800;
+  opacity: 0.85;
+  z-index: 2;
+  /* Ortada sabit kalın turuncu çizgi */
 }
 .card .footer {
   color: #ff8c00;
