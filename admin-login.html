@@ -36,5 +36,20 @@
     <div class="error" id="loginError"></div>
   </form>
   <script src="admin.js"></script>
+  <script>
+    // Yönetici panelini ayrı sekmede aç
+    document.getElementById('adminLoginForm').onsubmit = function(e) {
+      e.preventDefault();
+      const pass = document.getElementById('adminPassword').value;
+      const errorDiv = document.getElementById('loginError');
+      if (pass === "parwan2024") {
+        errorDiv.textContent = "";
+        sessionStorage.setItem('admin-auth', 'ok');
+        window.open("admin-panel.html", "_blank");
+      } else {
+        errorDiv.textContent = "رمز عبور اشتباه است!";
+      }
+    };
+  </script>
 </body>
 </html>

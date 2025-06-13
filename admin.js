@@ -10,7 +10,7 @@ if (loginForm) {
     if (pass === ADMIN_PASSWORD) {
       errorDiv.textContent = "";
       sessionStorage.setItem('admin-auth', 'ok');
-      window.location.href = "admin-panel.html";
+      window.open("admin-panel.html", "_blank");
     } else {
       errorDiv.textContent = "رمز عبور اشتباه است!";
     }

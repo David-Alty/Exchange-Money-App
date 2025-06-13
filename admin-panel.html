@@ -108,7 +108,54 @@
       <span>پیش‌نمایش پس‌زمینه کارت تاریخ</span>
     </div>
     <button class="save-btn" id="saveBtn" type="button">ذخیره</button>
-    
+    <div id="bgSaveMsg" style="color:#0a6ebd;margin-top:0.7rem;min-height:1.5em;font-size:1.02em;"></div>
+    <hr style="margin:2.5rem 0 1.5rem 0;">
+    <h2 style="color:#0a3e8f;font-size:1.25rem;margin-bottom:1.2rem;">مدیریت نرخ تبادله کابل</h2>
+    <form id="exchangeForm" style="display:flex;flex-direction:column;gap:0.7rem;align-items:center;">
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;flex-direction:row-reverse;">
+        <select id="flagSelect" style="width:48px;height:38px;border-radius:5px;border:1.5px solid #ccc;background:#fff;text-align:center;order:1;">
+          <option value="" selected disabled>پرچم</option>
+          <option value="images/flags/us.png">🇺🇸</option>
+          <option value="images/flags/eu.png">🇪🇺</option>
+          <option value="images/flags/uk.png">🇬🇧</option>
+          <option value="images/flags/uad.png">🇦🇪</option>
+          <option value="images/flags/pak.png">🇵🇰</option>
+          <option value="images/flags/ir.png">🇮🇷</option>
+          <option value="images/flags/tr.png">🇹🇷</option>
+        </select>
+        <select id="currency" style="width:110px;order:2;">
+          <option value="" selected disabled>واحد پولی</option>
+          <option value="دالر آمریکایی">دالر آمریکایی</option>
+          <option value="یورو">یورو</option>
+          <option value="پوند">پوند</option>
+          <option value="درهم">درهم</option>
+          <option value="کلدار">کلدار</option>
+          <option value="تومان بانکی">تومان بانکی</option>
+          <option value="تومان چک">تومان چک</option>
+          <option value="لیر ترکی">لیر ترکی</option>
+        </select>
+        <input type="text" placeholder="خرید" id="buy" style="width:70px;order:3;">
+        <input type="text" placeholder="فروش" id="sell" style="width:70px;order:4;">
+        <button type="button" id="addRowBtn" style="padding:0.4rem 1.2rem;background:#0a6ebd;color:#fff;border-radius:8px;border:none;order:5;">افزودن</button>
+      </div>
+      <table id="exchangeTable" style="margin-top:1.2rem;width:100%;max-width:420px;border-collapse:collapse;">
+        <thead>
+          <tr style="background:#e3f0ff;">
+            <th>پرچم</th>
+            <th>واحد پولی</th>
+            <th>خرید</th>
+            <th>فروش</th>
+            <th>حذف</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Satırlar buraya eklenecek -->
+        </tbody>
+      </table>
+      <button type="button" id="saveExchangeBtn" style="margin-top:1.2rem;padding:0.6rem 2.2rem;background:#ff8c00;color:#fff;border-radius:8px;border:none;font-weight:bold;">ذخیره نرخ‌ها</button>
+      <div id="exchangeMsg" style="color:#0a6ebd;margin-top:0.7rem;min-height:1.5em;"></div>
+    </form>
+    <a href="index.html" style="display:inline-block;margin-bottom:1.2rem;color:#0a6ebd;font-weight:bold;font-size:1.08rem;text-decoration:none;background:#e3f0ff;padding:0.5rem 1.5rem;border-radius:12px;box-shadow:0 2px 8px #0a6ebd22;transition:background 0.2s;">بازگشت به صفحه اصلی</a>
   </div>
   <script>
     // Varsayılan görsel
@@ -116,6 +163,7 @@
     const previewDiv = document.getElementById('previewCardBg');
     const bgInput = document.getElementById('bgInput');
     const saveBtn = document.getElementById('saveBtn');
+    const bgSaveMsg = document.getElementById('bgSaveMsg');
 
     // Önizleme ve yükleme
     bgInput.addEventListener('change', function() {
@@ -139,11 +187,72 @@
     saveBtn.addEventListener('click', function() {
       if (cardBgUrl) {
         localStorage.setItem('customCardBg', cardBgUrl);
-        alert('Arka plan görseli bu oturum için ayarlandı. Ana sayfayı yenileyin.');
+        bgSaveMsg.textContent = "عکس پس‌زمینه کارت تاریخ برای این نشست ذخیره شد. لطفاً صفحه اصلی را تازه کنید تا تغییرات را ببینید.";
+        setTimeout(()=>{bgSaveMsg.textContent="";}, 7000);
       }
     });
 
-    // Sunucuya yükleme işlemi (Farsça mesajlar و güzel div ile)
+    // Döviz tablosu yönetimi
+    const exchangeForm = document.getElementById('exchangeForm');
+    if (exchangeForm) {
+      let rows = [];
+      const currency = document.getElementById('currency');
+      const buy = document.getElementById('buy');
+      const sell = document.getElementById('sell');
+      const flagSelect = document.getElementById('flagSelect');
+      const table = document.getElementById('exchangeTable').querySelector('tbody');
+      const addRowBtn = document.getElementById('addRowBtn');
+      const saveBtn = document.getElementById('saveExchangeBtn');
+      const msg = document.getElementById('exchangeMsg');
+
+      function loadRows() {
+        rows = [];
+        const saved = localStorage.getItem('exchangeRates');
+        if (saved) {
+          try { rows = JSON.parse(saved); } catch {}
+        }
+      }
+      function renderTable() {
+        table.innerHTML = '';
+        rows.forEach((r, i) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><img src="${r.flag || ''}" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid #ccc;background:#fff;"></td>
+            <td>${r.currency}</td>
+            <td>${r.buy}</td>
+            <td>${r.sell}</td>
+            <td><button type="button" data-i="${i}" style="color:#d32f2f;background:none;border:none;font-size:1.2rem;cursor:pointer;">✖</button></td>
+          `;
+          table.appendChild(tr);
+        });
+      }
+      addRowBtn.onclick = function() {
+        if (!currency.value.trim() || !buy.value.trim() || !sell.value.trim() || !flagSelect.value) {
+          msg.textContent = "لطفاً همه فیلدها و پرچم را وارد کنید.";
+          return;
+        }
+        rows.push({flag: flagSelect.value, currency: currency.value, buy: buy.value, sell: sell.value});
+        currency.value = buy.value = sell.value = '';
+        flagSelect.selectedIndex = 0;
+        renderTable();
+        msg.textContent = "";
+      };
+      table.onclick = function(e) {
+        if (e.target.tagName === "BUTTON") {
+          const i = +e.target.getAttribute('data-i');
+          rows.splice(i, 1);
+          renderTable();
+        }
+      };
+      saveBtn.onclick = function() {
+        localStorage.setItem('exchangeRates', JSON.stringify(rows));
+        msg.textContent = "نرخ‌ها ذخیره شد. در صفحه اصلی نمایش داده خواهد شد.";
+        setTimeout(()=>{msg.textContent="";}, 3000);
+      };
+      loadRows();
+      renderTable();
+    }
+    // Sunucuya yükleme işlemi (Farsça mesajlar و زیبا div ile)
     document.getElementById('bgUploadForm').onsubmit = async function(e) {
       e.preventDefault();
       const form = e.target;

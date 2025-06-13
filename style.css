@@ -1453,3 +1453,25 @@ header h1 {
     font-size: 0.98rem;
   }
 }
+
+#exchangeRatesTable td {
+  vertical-align: middle;
+  /* Satırda bayrak ve metin hizalı olsun */
+  padding: 0.5em 0.3em;
+}
+#exchangeRatesTable td div,
+#exchangeRatesTable th div {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  align-items: center;
+  gap: 0.5em;
+}
+#exchangeRatesTable td img {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  justify-self: end;
+}
+#exchangeRatesTable td span {
+  justify-self: start;
+}
