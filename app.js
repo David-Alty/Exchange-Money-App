@@ -430,3 +430,31 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+ document.addEventListener('DOMContentLoaded', function() {
+    const table = document.getElementById('exchangeRatesTable');
+    if (!table) return;
+    const tbody = table.querySelector('tbody');
+    tbody.innerHTML = '';
+    let rows = [];
+    try {
+      rows = JSON.parse(localStorage.getItem('exchangeRates') || '[]');
+    } catch {}
+    if (rows.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#888;">هیچ نرخ ثبت نشده است.</td></tr>';
+    } else {
+      rows.forEach(r => {
+        tbody.innerHTML += `
+          <tr>
+            <td>
+              <div>
+                <img src="${r.flag || ''}" alt="">
+                <span>${r.currency}</span>
+              </div>
+            </td>
+            <td>${r.buy}</td>
+            <td>${r.sell}</td>
+          </tr>
+        `;
+      });
+    }
+  });

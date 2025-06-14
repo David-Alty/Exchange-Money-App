@@ -211,19 +211,19 @@
     </div>
   </div>
 </section>
-<section id="exchange-rates" style="margin:2.5rem auto 1.5rem auto;max-width:520px;">
-  <h2 style="color:#0a3e8f;font-size:1.35rem;margin-bottom:1.2rem;">نرخ تبادله اسعار کابل</h2>
-  <table id="exchangeRatesTable" style="width:100%;border-collapse:separate;border-spacing:0 0.2em;background:none;">
+<section id="exchange-rates">
+  <h2>نرخ تبادله اسعار کابل</h2>
+  <table id="exchangeRatesTable">
     <thead>
-      <tr style="background:#2196f3;color:#fff;">
-        <th style="border-radius:1.2em 0 0 1.2em;padding:0.5em 0.3em 0.5em 0.2em;text-align:right;font-size:1.08em;">
-          <div style="display:flex;align-items:center;justify-content:flex-end;gap:0.5em;">
-            <span style="font-weight:700;">واحد پولی</span>
-            <span style="width:32px;display:inline-block;"></span>
+      <tr>
+        <th>
+          <div>
+            <span>واحد پولی</span>
+            <span></span>
           </div>
         </th>
-        <th style="padding:0.5em 0.3em;">خرید</th>
-        <th style="border-radius:0 1.2em 1.2em 0;padding:0.5em 0.3em;">فروش</th>
+        <th>خرید</th>
+        <th >فروش</th>
       </tr>
     </thead>
     <tbody>
@@ -238,36 +238,5 @@
   </footer>
     <script src="https://unpkg.com/jalaali-js/dist/jalaali.min.js"></script>
  <script src="app.js"></script>
- <script>
-  // Döviz kurları tablosunu göster
-  document.addEventListener('DOMContentLoaded', function() {
-    const table = document.getElementById('exchangeRatesTable');
-    if (!table) return;
-    const tbody = table.querySelector('tbody');
-    tbody.innerHTML = '';
-    let rows = [];
-    try {
-      rows = JSON.parse(localStorage.getItem('exchangeRates') || '[]');
-    } catch {}
-    if (rows.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#888;">هیچ نرخ ثبت نشده است.</td></tr>';
-    } else {
-      rows.forEach(r => {
-        tbody.innerHTML += `
-          <tr style="background:#f7fbff;border-radius:1.2em;">
-            <td style="text-align:right;padding:0.5em 0.3em 0.5em 0.2em;">
-              <div style="display:grid;grid-template-columns:32px 1fr;align-items:center;gap:0.5em;">
-                <img src="${r.flag || ''}" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid #fff;box-shadow:0 2px 8px #2196f322;justify-self:end;">
-                <span style="font-size:1.09em;font-weight:700;color:#0a3e8f;justify-self:start;">${r.currency}</span>
-              </div>
-            </td>
-            <td style="font-weight:700;font-size:1.08em;color:#1976d2;background:#e3f0ff;border-radius:0.7em;">${r.buy}</td>
-            <td style="font-weight:700;font-size:1.08em;color:#1976d2;background:#e3f0ff;border-radius:0.7em;">${r.sell}</td>
-          </tr>
-        `;
-      });
-    }
-  });
-</script>
 </body>
 </html>

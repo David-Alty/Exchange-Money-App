@@ -1439,39 +1439,79 @@ header h1 {
   text-align: center;
 }
 
-/* Responsive */
-@media (max-width: 500px) {
-  .card {
-    padding: 1.1rem 0.4rem 1rem 0.4rem;
-    max-width: 98vw;
-    border-radius: 1.1rem;
-  }
-  .card .title {
-    font-size: 1.15rem;
-  }
-  .card .date-line {
-    font-size: 0.98rem;
-  }
+/* Basit ve okunaklı döviz tablosu stilleri */
+#exchangeRatesTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Vazirmatn", sans-serif;
+  margin: 0 auto;
+  background: #fff;
+}
+
+#exchangeRatesTable thead tr {
+  background: #1976d2;
+}
+
+#exchangeRatesTable thead th {
+  color: #fff;
+  font-size: 1em;
+  font-weight: 700;
+  padding: 0.7em 0.3em;
+  text-align: center;
+  border: none;
+}
+
+#exchangeRatesTable tbody tr {
+  background: #f7fbff;
+  border-bottom: 1px solid #e3e3e3;
+  transition: background 0.2s;
+}
+
+#exchangeRatesTable tbody tr:hover {
+  background: #e3f0ff;
 }
 
 #exchangeRatesTable td {
+  font-size: 1em;
+  color: #222;
+  padding: 0.6em 0.3em;
+  text-align: center;
+  border: none;
   vertical-align: middle;
-  /* Satırda bayrak ve metin hizalı olsun */
-  padding: 0.5em 0.3em;
 }
-#exchangeRatesTable td div,
-#exchangeRatesTable th div {
-  display: grid;
-  grid-template-columns: 32px 1fr;
+
+#exchangeRatesTable td:first-child {
+  display: flex;
   align-items: center;
   gap: 0.5em;
+  justify-content: right;
+  text-align: right;
+  background: #d4d9d7; /* sadece bu sütunun arka planı */
+  border: none;
 }
-#exchangeRatesTable td img {
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0;
-  justify-self: end;
+
+#exchangeRatesTable td:first-child img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #e3e3e3;
+  margin-left: 0.4em;
 }
-#exchangeRatesTable td span {
-  justify-self: start;
+
+#exchangeRatesTable td:first-child span {
+  font-weight: 600;
+  color: #1976d2;
+  font-size: 1em;
+}
+
+@media (max-width: 600px) {
+  #exchangeRatesTable th, #exchangeRatesTable td {
+    font-size: 0.95em;
+    padding: 0.4em 0.1em;
+  }
+  #exchangeRatesTable td:first-child img {
+    width: 22px;
+    height: 22px;
+  }
 }
