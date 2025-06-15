@@ -537,21 +537,33 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-  const kabulInfoDiv = document.createElement('div');
-  const kabulInfo = localStorage.getItem('kabulTableInfo') || '';
-  if (kabulInfo) {
+  // For Kabul exchange rates info
+  const kabulInfo = localStorage.getItem('kabulTableInfo');
+  if (kabulInfo && kabulInfo.trim()) {
+    const kabulInfoDiv = document.createElement('div');
     kabulInfoDiv.textContent = kabulInfo;
-    kabulInfoDiv.style.cssText = 'margin-top:1rem;padding:0.5rem;border:1px solid #ccc;border-radius:5px;background:#f9f9fb;color:#004080;';
-    document.querySelector('#exchange-rates').appendChild(kabulInfoDiv);
+    kabulInfoDiv.style.cssText = 'margin-top:1rem;padding:0.8rem;border:1px solid #ccc;border-radius:5px;background:#f9f9fb;color:#004080;font-size:1.1rem;line-height:1.8;text-align:right;';
+    const kabulSection = document.querySelector('#exchange-rates');
+    if (kabulSection) {
+      const kabulTable = kabulSection.querySelector('table');
+      if (kabulTable) {
+        kabulTable.parentNode.insertBefore(kabulInfoDiv, kabulTable.nextSibling);
+      }
+    }
   }
-});
 
-document.addEventListener('DOMContentLoaded', function() {
-  const heratInfoDiv = document.createElement('div');
-  const heratInfo = localStorage.getItem('heratTableInfo') || '';
-  if (heratInfo) {
+  // For Herat exchange rates info
+  const heratInfo = localStorage.getItem('heratTableInfo');
+  if (heratInfo && heratInfo.trim()) {
+    const heratInfoDiv = document.createElement('div');
     heratInfoDiv.textContent = heratInfo;
-    heratInfoDiv.style.cssText = 'margin-top:1rem;padding:0.5rem;border:1px solid #ccc;border-radius:5px;background:#f9f9fb;color:#004080;';
-    document.querySelector('#herat-exchange-rates').appendChild(heratInfoDiv);
+    heratInfoDiv.style.cssText = 'margin-top:1rem;padding:0.8rem;border:1px solid #ccc;border-radius:5px;background:#f9f9fb;color:#004080;font-size:1.1rem;line-height:1.8;text-align:right;';
+    const heratSection = document.querySelector('#herat-exchange-rates');
+    if (heratSection) {
+      const heratTable = heratSection.querySelector('table');
+      if (heratTable) {
+        heratTable.parentNode.insertBefore(heratInfoDiv, heratTable.nextSibling);
+      }
+    }
   }
 });

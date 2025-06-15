@@ -263,8 +263,12 @@ if (window.location.pathname.endsWith('admin-panel.html')) {
     // Save Kabul table info
     saveKabulInfoBtn.onclick = function() {
       const info = kabulInfoInput.value.trim();
-      localStorage.setItem('kabulTableInfo', info);
-      showMessage(saveKabulInfoBtn, 'اطلاعات جدول کابل ذخیره شد');
+      if (info) {
+        localStorage.setItem('kabulTableInfo', info);
+        showMessage(saveKabulInfoBtn, 'اطلاعات جدول کابل ذخیره شد');
+        // Force update in other tabs/windows
+        window.dispatchEvent(new Event('storage'));
+      }
     };
 
     // Clear Kabul table info
@@ -277,8 +281,12 @@ if (window.location.pathname.endsWith('admin-panel.html')) {
     // Save Herat table info  
     saveHeratInfoBtn.onclick = function() {
       const info = heratInfoInput.value.trim();
-      localStorage.setItem('heratTableInfo', info);
-      showMessage(saveHeratInfoBtn, 'اطلاعات جدول هرات ذخیره شد');
+      if (info) {
+        localStorage.setItem('heratTableInfo', info);
+        showMessage(saveHeratInfoBtn, 'اطلاعات جدول هرات ذخیره شد');
+        // Force update in other tabs/windows
+        window.dispatchEvent(new Event('storage'));
+      }
     };
 
     // Clear Herat table info
@@ -289,3 +297,4 @@ if (window.location.pathname.endsWith('admin-panel.html')) {
     };
   });
 }
+
