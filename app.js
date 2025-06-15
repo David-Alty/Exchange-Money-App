@@ -535,3 +535,23 @@ document.addEventListener('DOMContentLoaded', function() {
     updateKabulTable();
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const kabulInfoDiv = document.createElement('div');
+  const kabulInfo = localStorage.getItem('kabulTableInfo') || '';
+  if (kabulInfo) {
+    kabulInfoDiv.textContent = kabulInfo;
+    kabulInfoDiv.style.cssText = 'margin-top:1rem;padding:0.5rem;border:1px solid #ccc;border-radius:5px;background:#f9f9fb;color:#004080;';
+    document.querySelector('#exchange-rates').appendChild(kabulInfoDiv);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const heratInfoDiv = document.createElement('div');
+  const heratInfo = localStorage.getItem('heratTableInfo') || '';
+  if (heratInfo) {
+    heratInfoDiv.textContent = heratInfo;
+    heratInfoDiv.style.cssText = 'margin-top:1rem;padding:0.5rem;border:1px solid #ccc;border-radius:5px;background:#f9f9fb;color:#004080;';
+    document.querySelector('#herat-exchange-rates').appendChild(heratInfoDiv);
+  }
+});

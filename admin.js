@@ -236,3 +236,44 @@ if (window.location.pathname.endsWith('admin-panel.html')) {
     };
   });
 }
+
+// --- Kabul tablosu bilgilerini kaydetme ---
+if (window.location.pathname.endsWith('admin-panel.html')) {
+  document.addEventListener('DOMContentLoaded', function() {
+    const kabulInfoInput = document.getElementById('kabulTableInfo');
+    const saveKabulInfoBtn = document.getElementById('saveKabulInfoBtn');
+    const clearKabulInfoBtn = document.getElementById('clearKabulInfoBtn');
+
+    const heratInfoInput = document.getElementById('heratTableInfo');
+    const saveHeratInfoBtn = document.getElementById('saveHeratInfoBtn');
+    const clearHeratInfoBtn = document.getElementById('clearHeratInfoBtn');
+
+    // Load existing info from localStorage
+    kabulInfoInput.value = localStorage.getItem('kabulTableInfo') || '';
+    heratInfoInput.value = localStorage.getItem('heratTableInfo') || '';
+
+    // Save Kabul table info
+    saveKabulInfoBtn.onclick = function() {
+      const info = kabulInfoInput.value.trim();
+      localStorage.setItem('kabulTableInfo', info);
+    };
+
+    // Clear Kabul table info
+    clearKabulInfoBtn.onclick = function() {
+      kabulInfoInput.value = '';
+      localStorage.removeItem('kabulTableInfo');
+    };
+
+    // Save Herat table info
+    saveHeratInfoBtn.onclick = function() {
+      const info = heratInfoInput.value.trim();
+      localStorage.setItem('heratTableInfo', info);
+    };
+
+    // Clear Herat table info
+    clearHeratInfoBtn.onclick = function() {
+      heratInfoInput.value = '';
+      localStorage.removeItem('heratTableInfo');
+    };
+  });
+}
