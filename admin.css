@@ -59,17 +59,32 @@ body {
       font-size: 1rem;
       min-height: 1.5em;
     }
-#addHeratRowBtn:hover{
+#addHeratRowBtn:hover,
+#addHeratRowBtn:focus {
   background: #ff8c00 !important;
   color: #fff !important;
   box-shadow: 0 2px 12px #ff8c0055;
   outline: none;
   transform: scale(1.06);
 }
-#saveHeratExchangeBtn:hover{
+#addHeratRowBtn:active {
+  background: #ff8c00 !important;
+  color: #fff !important;
+  box-shadow: 0 1px 4px #ff8c0033;
+  outline: none;
+}
+
+#saveHeratExchangeBtn:hover,
+#saveHeratExchangeBtn:focus {
   background: #1976d2 !important;
   color: #fff !important;
   box-shadow: 0 2px 12px #1976d255;
   outline: none;
   transform: scale(1.06);
+}
+#saveHeratExchangeBtn:active {
+  background: #ff8c00 !important;
+  color: #fff !important;
+  box-shadow: 0 1px 4px #ff8c0033;
+  outline: none;
 }

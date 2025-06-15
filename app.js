@@ -446,8 +446,8 @@ document.addEventListener('DOMContentLoaded', function() {
       tbody.innerHTML += `
         <tr>
           <td>
-            <div>
-              <img src="${r.flag || ''}" alt="">
+            <div style="display:flex;align-items:center;gap:0.5em;justify-content:right">
+              <img src="${r.flag || ''}" alt="" style="width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid #e3e3e3;">
               <span>${r.currency}</span>
             </div>
           </td>
@@ -487,4 +487,51 @@ document.addEventListener('DOMContentLoaded', function() {
       `;
     });
   }
+});
+
+// Kabul döviz tablosu
+document.addEventListener('DOMContentLoaded', function() {
+  function updateKabulTable() {
+    const table = document.getElementById('exchangeRatesTable');
+    if (!table) return;
+    const tbody = table.querySelector('tbody');
+    tbody.innerHTML = '';
+    let rows = [];
+    try {
+      rows = JSON.parse(localStorage.getItem('exchangeRates') || '[]');
+    } catch {}
+    if (rows.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#888;">هیچ نرخ ثبت نشده است.</td></tr>';
+    } else {
+      rows.forEach(r => {
+        tbody.innerHTML += `
+          <tr>
+            <td>
+              <div style="display:flex;align-items:center;gap:0.5em;justify-content:right">
+                <img src="${r.flag || ''}" alt="" style="width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid #e3e3e3;">
+                <span>${r.currency}</span>
+              </div>
+            </td>
+            <td>${r.buy}</td>
+            <td>${r.sell}</td>
+          </tr>
+        `;
+      });
+    }
+  }
+
+  // Initial load
+  updateKabulTable();
+
+  // Listen for changes
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'exchangeRates') {
+      updateKabulTable();
+    }
+  });
+
+  // Also listen for custom event
+  window.addEventListener('exchangeRatesUpdated', function() {
+    updateKabulTable();
+  });
 });

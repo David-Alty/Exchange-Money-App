@@ -29,22 +29,37 @@ if (window.location.pathname.endsWith('admin-panel.html')) {
 // Admin panelindeysek tabloya butonları ekle
 if (window.location.pathname.endsWith('admin-panel.html')) {
   document.addEventListener('DOMContentLoaded', function() {
-    // Tabloya "تنظیم" (düzenle) butonu ekle
-    const table = document.querySelector('table');
-    const tbody = table ? table.querySelector('tbody') : null;
-    if (!tbody) return;
+    const kabulTableElem = document.getElementById('exchangeRatesTable');
+    const kabulTbody = kabulTableElem ? kabulTableElem.querySelector('tbody') : null;
+    if (!kabulTbody) return;
 
-    // Her satırda "حذف" ve "تنظیم" butonlarını güncelle
-    function renderTable() {
-      let rows = [];
+    function loadKabulRates() {
       try {
-        rows = JSON.parse(localStorage.getItem('exchangeRates') || '[]');
-      } catch {}
-      tbody.innerHTML = '';
+        return JSON.parse(localStorage.getItem('exchangeRates') || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function saveKabulRates(rows) {
+      localStorage.setItem('exchangeRates', JSON.stringify(rows));
+      // Force update in other tabs/windows
+      window.dispatchEvent(new Event('storage'));
+      // Force update in current tab
+      renderKabulTable();
+    }
+
+    function renderKabulTable() {
+      const rows = loadKabulRates();
+      kabulTbody.innerHTML = '';
+      
       rows.forEach((r, i) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td><img src="${r.flag || ''}" alt="" style="width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid #e3e3e3;"> <span>${r.currency}</span></td>
+          <td>
+            <img src="${r.flag || ''}" alt="" style="width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid #e3e3e3;">
+            <span>${r.currency}</span>
+          </td>
           <td>${r.buy}</td>
           <td>${r.sell}</td>
           <td>
@@ -52,41 +67,50 @@ if (window.location.pathname.endsWith('admin-panel.html')) {
             <button class="delete-rate-btn" data-index="${i}" style="background:#d32f2f;color:#fff;border:none;border-radius:6px;padding:0.2em 0.8em;cursor:pointer;">حذف</button>
           </td>
         `;
-        tbody.appendChild(tr);
+        kabulTbody.appendChild(tr);
       });
 
-      // Silme işlemi
-      tbody.querySelectorAll('.delete-rate-btn').forEach(btn => {
+      // Silme butonu işlemleri
+      kabulTbody.querySelectorAll('.delete-rate-btn').forEach(btn => {
         btn.onclick = function() {
           const idx = +this.dataset.index;
           if (confirm('این نرخ حذف شود؟')) {
+            const rows = loadKabulRates();
             rows.splice(idx, 1);
-            localStorage.setItem('exchangeRates', JSON.stringify(rows));
-            renderTable();
+            saveKabulRates(rows);
           }
         };
       });
 
-      // Düzenleme işlemi
-      tbody.querySelectorAll('.edit-rate-btn').forEach(btn => {
+      // Düzenleme butonu işlemleri  
+      kabulTbody.querySelectorAll('.edit-rate-btn').forEach(btn => {
         btn.onclick = function() {
           const idx = +this.dataset.index;
+          const rows = loadKabulRates();
           const row = rows[idx];
-          // Basit prompt ile düzenleme (gelişmiş form için ayrı kod gerekir)
+
           const newCurrency = prompt('واحد پولی:', row.currency);
           if (newCurrency === null) return;
           const newBuy = prompt('خرید:', row.buy);
           if (newBuy === null) return;
           const newSell = prompt('فروش:', row.sell);
           if (newSell === null) return;
+
           rows[idx] = { ...row, currency: newCurrency, buy: newBuy, sell: newSell };
-          localStorage.setItem('exchangeRates', JSON.stringify(rows));
-          renderTable();
+          saveKabulRates(rows);
         };
       });
     }
 
-    renderTable();
+    // İlk yükleme
+    renderKabulTable();
+
+    // Diğer sekmelerde değişiklik olursa güncelle
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'exchangeRates') {
+        renderKabulTable();
+      }
+    });
   });
 }
 
