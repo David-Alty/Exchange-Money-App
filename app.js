@@ -461,32 +461,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Herat döviz tablosu
 document.addEventListener('DOMContentLoaded', function() {
-  const table = document.getElementById('heratExchangeRatesTable');
-  if (!table) return;
-  const tbody = table.querySelector('tbody');
-  tbody.innerHTML = '';
-  let rows = [];
-  try {
-    rows = JSON.parse(localStorage.getItem('heratExchangeRates') || '[]');
-  } catch {}
-  if (rows.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#888;">هیچ نرخ ثبت نشده است.</td></tr>';
-  } else {
-    rows.forEach(r => {
-      tbody.innerHTML += `
-        <tr>
-          <td>
-            <div>
-              <img src="${r.flag || ''}" alt="">
-              <span>${r.currency}</span>
-            </div>
-          </td>
-          <td>${r.buy}</td>
-          <td>${r.sell}</td>
-        </tr>
-      `;
-    });
+  function updateHeratTable() {
+    const table = document.getElementById('heratExchangeRatesTable');
+    if (!table) return;
+    const tbody = table.querySelector('tbody');
+    tbody.innerHTML = '';
+    let rows = [];
+    try {
+      rows = JSON.parse(localStorage.getItem('heratExchangeRates') || '[]');
+    } catch {}
+    if (rows.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:#888;">هیچ نرخ ثبت نشده است.</td></tr>';
+    } else {
+      rows.forEach(r => {
+        tbody.innerHTML += `
+          <tr>
+            <td>
+              <div style="display:flex;align-items:center;gap:0.5em;justify-content:right">
+                <img src="${r.flag || ''}" alt="" style="width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid #e3e3e3;">
+                <span>${r.currency}</span>
+              </div>
+            </td>
+            <td>${r.buy}</td>
+            <td>${r.sell}</td>
+          </tr>
+        `;
+      });
+    }
   }
+
+  // Initial load for Herat table
+  updateHeratTable();
+
+  // Update tables when storage changes
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'exchangeRates') {
+      updateKabulTable();
+    }
+    if (e.key === 'heratExchangeRates') {
+      updateHeratTable();
+    }
+  });
+
+  // Also listen for custom events
+  window.addEventListener('exchangeRatesUpdated', function() {
+    updateKabulTable();
+    updateHeratTable();
+  });
 });
 
 // Kabul döviz tablosu
@@ -566,4 +587,65 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   }
+});
+
+// Update both Kabul and Herat tables when storage changes
+document.addEventListener('DOMContentLoaded', function() {
+  function updateTablesInfo() {
+    // For Kabul table info
+    const kabulInfo = localStorage.getItem('kabulTableInfo');
+    const kabulSection = document.querySelector('#exchange-rates');
+    if (kabulSection) {
+      // Remove existing info div if any
+      const existingKabulInfo = kabulSection.querySelector('.table-info');
+      if (existingKabulInfo) {
+        existingKabulInfo.remove();
+      }
+      
+      // Add new info if exists
+      if (kabulInfo && kabulInfo.trim()) {
+        const kabulInfoDiv = document.createElement('div');
+        kabulInfoDiv.className = 'table-info';
+        kabulInfoDiv.textContent = kabulInfo;
+        kabulInfoDiv.style.cssText = 'margin-top:1rem;padding:0.8rem;border:1px solid #ccc;border-radius:5px;background:#f9f9fb;color:#004080;font-size:1.1rem;line-height:1.8;text-align:right;';
+        const kabulTable = kabulSection.querySelector('table');
+        if (kabulTable) {
+          kabulTable.parentNode.insertBefore(kabulInfoDiv, kabulTable.nextSibling);
+        }
+      }
+    }
+
+    // For Herat table info
+    const heratInfo = localStorage.getItem('heratTableInfo');
+    const heratSection = document.querySelector('#herat-exchange-rates');
+    if (heratSection) {
+      // Remove existing info div if any
+      const existingHeratInfo = heratSection.querySelector('.table-info');
+      if (existingHeratInfo) {
+        existingHeratInfo.remove();
+      }
+      
+      // Add new info if exists
+      if (heratInfo && heratInfo.trim()) {
+        const heratInfoDiv = document.createElement('div');
+        heratInfoDiv.className = 'table-info';
+        heratInfoDiv.textContent = heratInfo;
+        heratInfoDiv.style.cssText = 'margin-top:1rem;padding:0.8rem;border:1px solid #ccc;border-radius:5px;background:#f9f9fb;color:#004080;font-size:1.1rem;line-height:1.8;text-align:right;';
+        const heratTable = heratSection.querySelector('table');
+        if (heratTable) {
+          heratTable.parentNode.insertBefore(heratInfoDiv, heratTable.nextSibling);
+        }
+      }
+    }
+  }
+
+  // Initial update
+  updateTablesInfo();
+
+  // Listen for storage changes
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'kabulTableInfo' || e.key === 'heratTableInfo') {
+      updateTablesInfo();
+    }
+  });
 });
