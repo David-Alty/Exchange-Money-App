@@ -248,6 +248,14 @@ if (window.location.pathname.endsWith('admin-panel.html')) {
     const saveHeratInfoBtn = document.getElementById('saveHeratInfoBtn');
     const clearHeratInfoBtn = document.getElementById('clearHeratInfoBtn');
 
+    function showMessage(btn, text) {
+      const msg = document.createElement('div');
+      msg.textContent = text;
+      msg.style.cssText = 'color:#388e3c;font-size:0.9rem;margin-top:0.5rem;';
+      btn.parentNode.appendChild(msg);
+      setTimeout(() => msg.remove(), 3000);
+    }
+
     // Load existing info from localStorage
     kabulInfoInput.value = localStorage.getItem('kabulTableInfo') || '';
     heratInfoInput.value = localStorage.getItem('heratTableInfo') || '';
@@ -256,24 +264,28 @@ if (window.location.pathname.endsWith('admin-panel.html')) {
     saveKabulInfoBtn.onclick = function() {
       const info = kabulInfoInput.value.trim();
       localStorage.setItem('kabulTableInfo', info);
+      showMessage(saveKabulInfoBtn, 'اطلاعات جدول کابل ذخیره شد');
     };
 
     // Clear Kabul table info
     clearKabulInfoBtn.onclick = function() {
       kabulInfoInput.value = '';
       localStorage.removeItem('kabulTableInfo');
+      showMessage(clearKabulInfoBtn, 'اطلاعات جدول کابل پاک شد');
     };
 
-    // Save Herat table info
+    // Save Herat table info  
     saveHeratInfoBtn.onclick = function() {
       const info = heratInfoInput.value.trim();
       localStorage.setItem('heratTableInfo', info);
+      showMessage(saveHeratInfoBtn, 'اطلاعات جدول هرات ذخیره شد');
     };
 
     // Clear Herat table info
     clearHeratInfoBtn.onclick = function() {
       heratInfoInput.value = '';
       localStorage.removeItem('heratTableInfo');
+      showMessage(clearHeratInfoBtn, 'اطلاعات جدول هرات پاک شد');
     };
   });
 }
