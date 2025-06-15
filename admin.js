@@ -95,7 +95,6 @@ if (window.location.pathname.endsWith('admin-panel.html')) {
 // --- Herat tablosu yönetimi ---
 if (window.location.pathname.endsWith('admin-panel.html')) {
   document.addEventListener('DOMContentLoaded', function() {
-    // Kabul tablosu zaten yukarıda
     // Herat tablosu:
     const heratForm = document.getElementById('heratExchangeForm');
     if (!heratForm) return;
@@ -104,10 +103,14 @@ if (window.location.pathname.endsWith('admin-panel.html')) {
     const buy = document.getElementById('heratBuy');
     const sell = document.getElementById('heratSell');
     const flagSelect = document.getElementById('heratFlagSelect');
-    const table = document.getElementById('heratExchangeTable').querySelector('tbody');
+    const table = document.getElementById('heratExchangeTable') 
+      ? document.getElementById('heratExchangeTable').querySelector('tbody')
+      : null;
     const addRowBtn = document.getElementById('addHeratRowBtn');
     const saveBtn = document.getElementById('saveHeratExchangeBtn');
     const msg = document.getElementById('heratExchangeMsg');
+
+    if (!table) return; // Eğer tablo yoksa devam etme
 
     function loadRows() {
       rows = [];
