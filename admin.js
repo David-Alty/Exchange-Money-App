@@ -89,3 +89,123 @@ if (window.location.pathname.endsWith('admin-panel.html')) {
     renderTable();
   });
 }
+
+// --- Kabul tablosu zaten mevcut ---
+
+// --- Herat tablosu yönetimi ---
+if (window.location.pathname.endsWith('admin-panel.html')) {
+  document.addEventListener('DOMContentLoaded', function() {
+    // Kabul tablosu zaten yukarıda
+    // Herat tablosu:
+    const heratForm = document.getElementById('heratExchangeForm');
+    if (!heratForm) return;
+    let rows = [];
+    const currency = document.getElementById('heratCurrency');
+    const buy = document.getElementById('heratBuy');
+    const sell = document.getElementById('heratSell');
+    const flagSelect = document.getElementById('heratFlagSelect');
+    const table = document.getElementById('heratExchangeTable').querySelector('tbody');
+    const addRowBtn = document.getElementById('addHeratRowBtn');
+    const saveBtn = document.getElementById('saveHeratExchangeBtn');
+    const msg = document.getElementById('heratExchangeMsg');
+
+    function loadRows() {
+      rows = [];
+      const saved = localStorage.getItem('heratExchangeRates');
+      if (saved) {
+        try { rows = JSON.parse(saved); } catch {}
+      }
+    }
+    function renderTable() {
+      table.innerHTML = '';
+      rows.forEach((r, i) => {
+        const tr = document.createElement('tr');
+        if (r._editing) {
+          tr.innerHTML = `
+            <td><img src="${r.flag || ''}" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid #ccc;background:#fff;"></td>
+            <td><input type="text" value="${r.currency}" style="width:90px"></td>
+            <td><input type="number" value="${r.buy}" style="width:60px"></td>
+            <td><input type="number" value="${r.sell}" style="width:60px"></td>
+            <td>
+              <button type="button" data-i="${i}" class="save-edit-btn" style="color:#388e3c;background:none;border:none;font-size:1.1rem;cursor:pointer;transition:background 0.18s;">ذخیره</button>
+              <button type="button" data-i="${i}" class="cancel-edit-btn" style="color:#d32f2f;background:none;border:none;font-size:1.1rem;cursor:pointer;transition:background 0.18s;">لغو</button>
+            </td>
+          `;
+        } else {
+          tr.innerHTML = `
+            <td><img src="${r.flag || ''}" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid #ccc;background:#fff;"></td>
+            <td>${r.currency}</td>
+            <td>${r.buy}</td>
+            <td>${r.sell}</td>
+            <td>
+              <button type="button" data-i="${i}" class="edit-row-btn" style="color:#1976d2;background:none;border:none;font-size:1.1rem;cursor:pointer;transition:background 0.18s;">تنظیم</button>
+              <button type="button" data-i="${i}" class="delete-row-btn" style="color:#d32f2f;background:none;border:none;font-size:1.2rem;cursor:pointer;transition:background 0.18s;">✖</button>
+            </td>
+          `;
+        }
+        table.appendChild(tr);
+      });
+    }
+    function saveRows() {
+      // Remove _editing flags before save
+      const cleanRows = rows.map(r => {
+        const { _editing, ...rest } = r;
+        return rest;
+      });
+      localStorage.setItem('heratExchangeRates', JSON.stringify(cleanRows));
+    }
+    // Initial load
+    loadRows();
+    renderTable();
+
+    // Add row
+    addRowBtn.onclick = function() {
+      if (!currency.value.trim() || !buy.value.trim() || !sell.value.trim() || !flagSelect.value) {
+        msg.textContent = "لطفاً همه فیلدها و پرچم را وارد کنید.";
+        return;
+      }
+      rows.push({flag: flagSelect.value, currency: currency.value, buy: buy.value, sell: sell.value});
+      currency.value = buy.value = sell.value = '';
+      flagSelect.selectedIndex = 0;
+      renderTable();
+      msg.textContent = "";
+    };
+
+    // Table events
+    table.onclick = function(e) {
+      const i = +e.target.getAttribute('data-i');
+      if (e.target.classList.contains('delete-row-btn')) {
+        rows.splice(i, 1);
+        renderTable();
+      }
+      if (e.target.classList.contains('edit-row-btn')) {
+        rows.forEach(r => delete r._editing);
+        rows[i]._editing = true;
+        renderTable();
+      }
+      if (e.target.classList.contains('cancel-edit-btn')) {
+        delete rows[i]._editing;
+        renderTable();
+      }
+      if (e.target.classList.contains('save-edit-btn')) {
+        const tr = e.target.closest('tr');
+        const inputs = tr.querySelectorAll('input');
+        rows[i].currency = inputs[0].value;
+        rows[i].buy = inputs[1].value;
+        rows[i].sell = inputs[2].value;
+        delete rows[i]._editing;
+        renderTable();
+        saveRows();
+        msg.textContent = "تغییرات ذخیره شد.";
+        setTimeout(()=>{msg.textContent="";}, 2000);
+      }
+    };
+
+    // Save all
+    saveBtn.onclick = function() {
+      saveRows();
+      msg.textContent = "نرخ‌های هرات ذخیره شد. در صفحه اصلی نمایش داده خواهد شد.";
+      setTimeout(()=>{msg.textContent="";}, 3000);
+    };
+  });
+}
