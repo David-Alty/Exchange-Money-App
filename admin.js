@@ -180,8 +180,6 @@ if (window.location.pathname.endsWith('admin-panel.html')) {
         return rest;
       });
       localStorage.setItem('heratExchangeRates', JSON.stringify(cleanRows));
-      // Force update in other tabs/windows
-      window.dispatchEvent(new Event('storage'));
     }
     // Initial load
     loadRows();
@@ -190,7 +188,7 @@ if (window.location.pathname.endsWith('admin-panel.html')) {
     // Add row
     addRowBtn.onclick = function() {
       if (!currency.value.trim() || !buy.value.trim() || !sell.value.trim() || !flagSelect.value) {
-        msg.textContent = "lütfen tüm alanları ve bayrağı doldurun.";
+        msg.textContent = "لطفاً همه فیلدها و پرچم را وارد کنید.";
         return;
       }
       rows.push({flag: flagSelect.value, currency: currency.value, buy: buy.value, sell: sell.value});

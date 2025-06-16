@@ -561,16 +561,37 @@ body {
   min-width: 0;
   text-align: right;
 }
+.service-box h3,
 .service-content h3 {
   display: flex;
   align-items: center;
   gap: 0.7rem;
-  color: #004e8f;
+  color: #fff;
   font-size: 1.35rem;
   font-family: 'Vazirmatn', Arial, sans-serif;
   font-weight: bold;
   margin: 0 0 0.5rem 0;
   letter-spacing: 0.01em;
+  background: #ff8c00;
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(255,140,0,0.2);
+  transition: all 0.3s ease;
+}
+.service-box h3:hover,
+.service-content h3:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(255,140,0,0.3);
+  background: #ffa033;
+}
+.service-icon {
+  background: #fff;
+  padding: 8px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 .service-box h3 {
   color: #004e8f;
@@ -581,24 +602,24 @@ body {
   letter-spacing: 0.01em;
 }
 .service-box p {
-  color: #222;
+  color: #fff;
   font-size: 1.08rem;
   text-align: justify;
   line-height: 2.1;
   margin: 0;
   font-family: 'Vazirmatn', Arial, sans-serif;
   font-weight: 400;
-  border: 1.5px solid #f3e7d6;      /* Hafif renkli border */
-  background: #fffdfa;               /* Çok hafif arka plan */
+  background: #004e8f;
   border-radius: 10px;
   padding: 1rem 1.1rem 1rem 1rem;
   margin-top: 0.5rem;
   margin-bottom: 1.2rem;
   box-sizing: border-box;
-  transition: box-shadow 0.2s;
+  transition: all 0.3s ease;
 }
 .service-box p:hover {
-  box-shadow: 0 2px 12px #ff8c0022;
+  box-shadow: 0 4px 16px rgba(0,78,143,0.3);
+  transform: translateY(-2px);
 }
 .service-icon-col {
   flex: 0 0 70px;
@@ -822,9 +843,13 @@ header {
   position: sticky;
   top: 0;
   z-index: 2000;
-  background: #004e8f; /* Mavi arka plan */
+  background: #004e8f;
   box-shadow: 0 2px 12px #ff8c0022;
   padding-bottom: 0.3rem;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
 }
 header h1 {
   color: #fff; /* Başlık rengi beyaz */
@@ -1342,6 +1367,46 @@ header h1 {
   margin-right: 0.2em;
 }
 
+.contact-box.manager {
+  background-image: linear-gradient(120deg, rgba(0,78,143,0.18) 0%, rgba(255,255,255,0.22) 100%),
+    url('images/call.png'); /* Manager box background image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  position: relative;
+  background-blend-mode: lighten;
+  transition: box-shadow 0.25s, transform 0.22s, background 0.3s;
+}
+
+.contact-box.manager::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(120deg, rgba(0,0,0,0.38) 60%, rgba(0,0,0,0.22) 100%);
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+.contact-box.manager > * {
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .gallery-grid img {
+    max-width: 100%;
+    height: 22vw;
+    min-height: 60px;
+    min-width: 60px;
+  }
+}
+
 /* Tarih kartı görseldeki gibi */
 .card {
   background: #fff;
@@ -1611,4 +1676,104 @@ header h1 {
 #heratExchangeRatesTable th:nth-child(3) {
   background: #ff8c00 !important;
   color: #fff !important;
+}
+
+#prg {
+  background-color: #004e8f;
+  color: white;
+  text-align: justify;
+}
+
+footer {
+  background: #004e8f;
+  color: #fff;
+  padding: 3rem 1rem;
+  margin-top: 4rem;
+  border-radius: 10px 10px 0 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  text-align: right;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-section h3 {
+  color: #ff8c00;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-family: 'Vazirmatn', Arial, sans-serif;
+  position: relative;
+  padding-bottom: 0.5rem;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.footer-section h3::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background: #ff8c00;
+}
+
+.footer-section p {
+  color: #fff;
+  line-height: 1.8;
+  margin-bottom: 0.5rem;
+}
+
+.footer-contact a {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s;
+  padding: 0.3rem;
+  border-radius: 6px;
+  background-color: #ff8c00;
+}
+
+.footer-contact a:hover {
+  color: #ff8c00;
+  background: rgba(255,255,255,0.1);
+}
+
+.footer-contact img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+}
+
+.footer-bottom {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.7);
+}
+
+@media (max-width: 600px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .footer-section h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+  }
 }
