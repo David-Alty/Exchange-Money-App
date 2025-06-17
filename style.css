@@ -1138,7 +1138,6 @@ header h1:hover {
   padding: 0.4em 0.7em;
   border-radius: 8px;
   margin-bottom: 0.5em;
-  /* Özellikle p için */
   display: inline-block;
   max-width: 100%;
   word-break: break-word;
@@ -1431,6 +1430,20 @@ header h1:hover {
 .contact-box.manager > * {
   position: relative;
   z-index: 2;
+}
+
+.contact-box.manager h3,
+.contact-box.manager p {
+  color: #fff;
+  text-shadow: 0 2px 8px #000a, 0 1px 0 #222b;
+  font-weight: bold;
+  background: rgba(0,0,0,0.22);
+  padding: 0.4em 0.7em;
+  border-radius: 8px;
+  margin-bottom: 0.5em;
+  display: inline-block;
+  max-width: 100%;
+  word-break: break-word;
 }
 
 @media (max-width: 600px) {
@@ -1795,6 +1808,21 @@ footer {
   margin-left: 0.5rem;
 }
 
+.footer-icon {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  margin-left: 8px;
+  opacity: 0.9;
+}
+
+.footer-contact p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.8rem;
+}
+
 .footer-bottom {
   margin-top: 2rem;
   padding-top: 1rem;
@@ -1894,4 +1922,52 @@ footer {
   .menu-btn {
     display: block; /* Show burger on mobile */
   }
+}
+
+.contact-box.parwan {
+  background-image: linear-gradient(120deg, rgba(0,78,143,0.18) 0%, rgba(255,255,255,0.22) 100%),
+    url('images/parwan.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  position: relative;
+  background-blend-mode: lighten;
+  transition: box-shadow 0.25s, transform 0.22s, background 0.3s;
+}
+
+.contact-box.parwan::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(120deg, rgba(0,0,0,0.38) 60%, rgba(0,0,0,0.22) 100%);
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+.contact-box.parwan > * {
+  position: relative;
+  z-index: 2;
+}
+
+.contact-box.parwan h3,
+.contact-box.parwan p {
+  color: #fff;
+  text-shadow: 0 2px 8px #000a, 0 1px 0 #222b;
+  font-weight: bold;
+  background: rgba(0,0,0,0.22);
+  padding: 0.4em 0.7em;
+  border-radius: 8px;
+  margin-bottom: 0.5em;
+  display: inline-block;
+  max-width: 100%;
+  word-break: break-word;
+}
+
+.contact-box.parwan:hover {
+  box-shadow: 0 12px 36px #ff8c0033, 0 2px 8px #004e8f11;
+  transform: translateY(-6px) scale(1.04);
+  background-blend-mode: normal;
+  background-color: rgba(255,255,255,0.10);
 }
