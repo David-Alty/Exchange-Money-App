@@ -1821,6 +1821,17 @@ footer {
   align-items: center;
   gap: 8px;
   margin-bottom: 0.8rem;
+  background-color: #ff8c00;
+  color: #fff;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.footer-contact p:hover {
+  background-color: #ffa033;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255,140,0,0.2);
 }
 
 .footer-bottom {
