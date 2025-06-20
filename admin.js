@@ -17,12 +17,7 @@ if (loginForm) {
   };
 }
 
-// admin-panel.html'ye şifresiz erişimi engelle
-if (window.location.pathname.endsWith('admin-panel.html')) {
-  if (sessionStorage.getItem('admin-auth') !== 'ok') {
-    window.location.replace("admin-login.html");
-  }
-}
+
 
 // --- EKLE: Tümünü Sil ve Düzenle (Ayarla) butonları için kod ---
 
