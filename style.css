@@ -1982,3 +1982,31 @@ footer {
   background-blend-mode: normal;
   background-color: rgba(255,255,255,0.10);
 }
+
+/* E-posta ikonu stili */
+.footer-contact img[alt="ایمیل"],
+.footer-contact img[alt="تلفن"],
+.footer-contact img[alt="تلفن مدیریت"] {
+  border-radius: 10px;
+}
+
+/* Yeni stil değişiklikleri */
+.footer-contact a, .footer-contact p {
+  direction: ltr;
+  unicode-bidi: plaintext;
+  justify-content: flex-start;
+  text-align: right;
+  font-family: 'Vazirmatn', Arial, sans-serif;
+  font-size: 1.08rem;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-direction: row-reverse; /* icon sağda, yazı solda */
+}
+
+.footer-contact img {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+

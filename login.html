@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>ورود مدیریت</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #e3f0ff 0%, #f9f9fb 100%);
+    }
+    .login-container {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 32px #004e8f22;
+      padding: 2.5rem 2rem 2rem 2rem;
+      max-width: 340px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .login-title {
+      color: #004e8f;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.01em;
+      text-align: center;
+    }
+    .login-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .input-group {
+      position: relative;
+      width: 100%;
+    }
+    .input-group input[type="password"] {
+      width: 100%;
+      padding: 0.9rem 2.8rem 0.9rem 1rem;
+      border-radius: 10px;
+      border: 1.5px solid #e0eafc;
+      font-size: 1.13rem;
+      font-family: 'Vazirmatn', Arial, sans-serif;
+      background: #f9f9fb;
+      color: #004e8f;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .input-group input[type="password"]:focus {
+      border: 1.5px solid #ff8c00;
+    }
+    .input-group .icon {
+      position: absolute;
+      right: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.5rem;
+      height: 1.5rem;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    .login-btn {
+      width: 100%;
+      background: #ff8c00;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 0.9rem 0;
+      font-size: 1.13rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 12px #ff8c0033;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .login-btn:hover {
+      background: #ffa033;
+      box-shadow: 0 4px 18px #ff8c0033;
+    }
+    .login-error {
+      color: #d32f2f;
+      font-size: 1rem;
+      text-align: center;
+      margin-top: 0.5rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-title">ورود مدیریت</div>
+    <form class="login-form admin-login" autocomplete="off">
+      <div class="input-group">
+        <input type="password" id="admin-password" placeholder="رمز عبور" required autocomplete="current-password">
+        <img src="images/password-svgrepo-com.svg" alt="رمز عبور" class="icon">
+      </div>
+      <button type="submit" class="login-btn">ورود</button>
+      <div class="login-error" id="loginError">رمز عبور اشتباه است</div>
+    </form>
+  </div>
+  <script>
+    // Şifre: yaser94551!!
+    const ADMIN_PASSWORD = 'yaser94551!!';
+    document.querySelector('.admin-login').onsubmit = function(e) {
+      e.preventDefault();
+      const password = document.getElementById('admin-password').value;
+      if (password === ADMIN_PASSWORD) {
+        localStorage.setItem('adminAuth', 'true');
+        window.location.href = 'admin-panel.html'; // Doğru yönlendirme
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+      }
+    };
+    document.getElementById('admin-password').oninput = function() {
+      document.getElementById('loginError').style.display = 'none';
+    };
+  </script>
+</body>
+</html>
