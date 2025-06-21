@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نکات مالی | شرکت صرافی پروان</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Vazirmatn&display=swap">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="header-logos">
+        <img src="images/flag.png" alt="بیرق افغانستان" class="afg-flag">
+        <img src="images/1-logo.jpg" alt="لوگوی شرکت" class="site-logo">
+        <a href="index.html" class="home-icon" aria-label="خانه">
+          <img src="images/home-page-svgrepo-com.svg" alt="خانه">
+        </a>
+      </div>
+      <h1>شرکت صرافی و خدمات پولی پروان</h1>
+      <button class="menu-btn" id="openMenuBtn">
+        <img src="images/menu.svg" alt="منو">
+      </button>
+      <nav class="main-nav">
+        <a href="exchange-tables.html">نرخ ارز ها</a>
+        <a href="remittance.html">ارسال حواله</a>
+        <a href="other-services.html">سایر خدمات ما</a>
+        <a href="finance-tips.html">نکات مالی</a>
+        <a href="contact.html">تماس با ما</a>
+        <a href="password.php" id="admin-link">مدیریت</a>
+      </nav>
+    </div>
+  </header>
+  <div class="side-menu" id="sideMenu">
+    <button class="menu-btn" id="closeMenuBtn" style="right:unset;left:1rem;">
+      <img src="images/close.svg" alt="بستن">
+    </button>
+    <a href="exchange-tables.html">نرخ ارز ها</a>
+    <a href="remittance.html">ارسال حواله</a>
+    <a href="other-services.html">سایر خدمات ما</a>
+    <a href="finance-tips.html">نکات مالی</a>
+    <a href="contact.html">تماس با ما</a>
+    <a href="password.php" id="admin-link-side">مدیریت</a>
+  </div>
+  <div class="overlay" id="menuOverlay"></div>
+  <div class="social-icons-horizontal">
+    <a href="https://wa.me/93774562597" target="_blank"><img src="images/whatsapp-svgrepo-com (1).svg" alt="واتساپ"></a>
+    <a href="https://www.facebook.com/share/1BgPcrskcd/?mibextid=wwXIfr" target="_blank"><img src="images/facebook.svg" alt="فیسبوک"></a>
+    <a href="https://www.instagram.com/parwan_money_exchange?igsh=ampxaGFkYXJjODE1" target="_blank"><img src="images/instagram.svg" alt="اینستاگرام"></a>
+    <a href="https://t.me/Ya3err_1383" target="_blank"><img src="images/Telegram_logo.svg.webp" alt="تلگرام"></a>
+  </div>
+  <main>
+    <section id="exchange" class="exchange-photo-section visible">
+      <h2>نکات مالی</h2>      <div class="exchange-photo-slider">
+        <button class="slider-btn finance-prev" aria-label="Önceki">
+          <svg width="38" height="38" viewBox="0 0 28 28">
+            <circle cx="14" cy="14" r="13" fill="#fff" stroke="#ff8c00" stroke-width="2"></circle>
+            <polyline points="17,8 11,14 17,20" fill="none" stroke="#ff8c00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+          </svg>
+        </button>
+        <button class="slider-btn finance-next" aria-label="Sonraki">
+          <svg width="38" height="38" viewBox="0 0 28 28">
+            <circle cx="14" cy="14" r="13" fill="#fff" stroke="#ff8c00" stroke-width="2"></circle>
+            <polyline points="11,8 17,14 11,20" fill="none" stroke="#ff8c00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+          </svg>
+        </button>
+        <img src="images/16-finaces info.jpg" alt="نکته مالی ۱" class="active">
+        <img src="images/17-finance genral info .jpg" alt="نکته مالی ۲">
+        <img src="images/18-finace information .jpg" alt="نکته مالی ۳">
+        <img src="images/19-finace information .jpg" alt="نکته مالی ۴">
+        <img src="images/20-finace information .jpg" alt="نکته مالی ۵">
+        <img src="images/21-finace information .jpg" alt="نکته مالی ۶">
+        <img src="images/23-finace information .jpg" alt="نکته مالی ۷">
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+  <script>
+    // Slider efektli geçiş ve zoom için
+    document.addEventListener('DOMContentLoaded', function() {
+      const slider = document.querySelector('.exchange-photo-slider');
+      if (!slider) return;
+      const imgs = Array.from(slider.querySelectorAll('img'));
+      const prevBtn = slider.querySelector('.slider-btn.prev');
+      const nextBtn = slider.querySelector('.slider-btn.next');
+      const effects = ['effect-fade', 'effect-zoom', 'effect-slide'];
+      let current = 0;
+      let timer = null;
+      let paused = false;
+      let effectIdx = 0;
+
+      function clearEffects() {
+        imgs.forEach(img => img.classList.remove('effect-fade', 'effect-zoom', 'effect-slide', 'zoomed'));
+      }
+      function show(idx, effect) {
+        clearEffects();
+        imgs[current].classList.remove('active');
+        current = (idx + imgs.length) % imgs.length;
+        imgs[current].classList.add('active', effect);
+      }
+      function next() {
+        effectIdx = (effectIdx + 1) % effects.length;
+        show(current + 1, effects[effectIdx]);
+      }
+      function prev() {
+        effectIdx = (effectIdx + 1) % effects.length;
+        show(current - 1, effects[effectIdx]);
+      }
+      function startAuto() {
+        clearInterval(timer);
+        timer = setInterval(() => {
+          if (!paused) next();
+        }, 10000);
+      }
+      // Başlangıçta ilk resmi göster
+      show(0, effects[0]);
+      startAuto();
+      nextBtn.onclick = function() {
+        next();
+        paused = true;
+        clearInterval(timer);
+      };
+      prevBtn.onclick = function() {
+        prev();
+        paused = true;
+        clearInterval(timer);
+      };
+      imgs.forEach(img => {
+        img.addEventListener('click', function() {
+          if (this.classList.contains('zoomed')) {
+            this.classList.remove('zoomed');
+          } else {
+            imgs.forEach(i => i.classList.remove('zoomed'));
+            this.classList.add('zoomed');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

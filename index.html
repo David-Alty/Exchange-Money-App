@@ -29,10 +29,10 @@
     <nav class="main-nav">
       <a href="exchange-tables.html">نرخ ارز ها</a>
       <a href="remittance.html">ارسال حواله</a>
-      <a href="#سایر-خدمات-ما">سایر خدمات ما</a>
-      <a href="#exchange">نکات مالی</a>
-      <a href="#contact">تماس با ما</a>
-      <a href="login.html" id="admin-link">مدیریت</a>
+      <a href="other-services.html">سایر خدمات ما</a>
+      <a href="finance-tips.html">نکات مالی</a>
+      <a href="contact.html">تماس با ما</a>
+      <a href="password.php" id="admin-link">مدیریت</a>
     </nav>
   </div>
 </header>
@@ -42,10 +42,10 @@
     </button>
     <a href="exchange-tables.html">نرخ ارز ها</a>
     <a href="remittance.html">ارسال حواله</a>
-    <a href="#سایر-خدمات-ما">سایر خدمات ما</a>
-    <a href="#exchange">نکات مالی</a>
-    <a href="#contact">تماس با ما</a>
-    <a href="login.html" id="admin-link-side">مدیریت</a>
+    <a href="other-services.html">سایر خدمات ما</a>
+    <a href="finance-tips.html">نکات مالی</a>
+    <a href="contact.html">تماس با ما</a>
+    <a href="password.php" id="admin-link-side">مدیریت</a>
   </div>
   <div class="overlay" id="menuOverlay"></div>
   <!-- Social icons fixed -->
@@ -124,10 +124,10 @@
     <img src="images/5-alman-iran-afg.jpg" alt="Reklam 4">
     <img src="images/6-iran-afg.jpg" alt="Reklam 5">
     <img src="images/7-afg-america.jpg" alt="Reklam 6">
-    <img src="images/8-herat-parwan.jpg" alt="Reklam 7">
+    <img src="images/8-herat-parwan.jpg" alt="Reklام 7">
     <img src="images/9-ads.jpg" alt="Reklam 8">
     <img src="images/10-iran-turk.jpg" alt="Reklام 9">
-    <img src="images/11-advertise .jpg" alt="Reklam 10">
+    <img src="images/11-advertise .jpg" alt="Reklام 10">
     <img src="images/12-services-america.jpg" alt="Reklام 11">
     <img src="images/13-ads-global.jpg" alt="Reklام 12">
     <!-- Diğer fotoğraflar... -->
@@ -202,19 +202,102 @@
     </div>
   </div>
 </section>
-<section id="exchange" class="exchange-photo-section">
+<section id="exchange" class="exchange-photo-section visible">
   <h2>نکات مالی</h2>
-  <div class="exchange-photo-slider">
+  <div class="exchange-photo-slider" style="position:relative;">
+    <button class="slider-btn finance-prev" aria-label="Önceki" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);z-index:2;display:flex;align-items:center;justify-content:center;background:none;border:none;">
+      <svg width="38" height="38" viewBox="0 0 28 28">
+        <circle cx="14" cy="14" r="13" fill="#fff" stroke="#ff8c00" stroke-width="2"></circle>
+        <polyline points="17,8 11,14 17,20" fill="none" stroke="#ff8c00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+      </svg>
+    </button>
+    <button class="slider-btn finance-pause" aria-label="Duraklat/Başlat" style="position:absolute;left:50%;top:12%;transform:translate(-50%, -50%);z-index:2;display:flex;align-items:center;justify-content:center;background:none;border:none;opacity:1 !important;">
+      <svg class="pause-icon" width="38" height="38" viewBox="0 0 28 28">
+        <circle cx="14" cy="14" r="13" fill="#fff" stroke="#ff8c00" stroke-width="2"></circle>
+        <rect x="9" y="8" width="3" height="12" rx="1.2" fill="#ff8c00"></rect>
+        <rect x="16" y="8" width="3" height="12" rx="1.2" fill="#ff8c00"></rect>
+      </svg>
+    </button>
+    <button class="slider-btn finance-next" aria-label="Sonraki" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);z-index:2;display:flex;align-items:center;justify-content:center;background:none;border:none;opacity:1 !important;">
+      <svg width="38" height="38" viewBox="0 0 28 28">
+        <circle cx="14" cy="14" r="13" fill="#fff" stroke="#ff8c00" stroke-width="2"></circle>
+        <polyline points="11,8 17,14 11,20" fill="none" stroke="#ff8c00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+      </svg>
+    </button>
     <img src="images/16-finaces info.jpg" alt="نکته مالی ۱" class="active">
     <img src="images/17-finance genral info .jpg" alt="نکته مالی ۲">
-    <img src="images/18-finace information .jpg" alt="نکته مالی ۲">
-    <img src="images/19-finace information .jpg" alt="نکته مالی ۲">
-    <img src="images/20-finace information .jpg" alt="نکته مالی ۲">
-    <img src="images/21-finace information .jpg" alt="نکته مالی ۲">
-    <img src="images/23-finace information .jpg" alt="نکته مالی ۲">
-    <!-- Daha fazla img ekleyebilirsin -->
+    <img src="images/18-finace information .jpg" alt="نکته مالی ۳">
+    <img src="images/19-finace information .jpg" alt="نکته مالی ۴">
+    <img src="images/20-finace information .jpg" alt="نکته مالی ۵">
+    <img src="images/21-finace information .jpg" alt="نکته مالی ۶">
+    <img src="images/23-finace information .jpg" alt="نکته مالی ۷">
   </div>
 </section>
+<script>
+// Slider efektli geçiş و zoom için
+(function() {
+  const slider = document.querySelector('.exchange-photo-slider');
+  if (!slider) return;
+  const imgs = Array.from(slider.querySelectorAll('img'));
+  const prevBtn = slider.querySelector('.finance-prev');
+  const nextBtn = slider.querySelector('.finance-next');
+  const pauseBtn = slider.querySelector('.finance-pause');
+  const effects = ['effect-fade', 'effect-zoom', 'effect-slide'];
+  let current = 0;
+  let timer = null;
+  let paused = false;
+  let effectIdx = 0;
+
+  function clearEffects() {
+    imgs.forEach(img => img.classList.remove('effect-fade', 'effect-zoom', 'effect-slide', 'zoomed'));
+  }
+  function show(idx, effect) {
+    clearEffects();
+    imgs[current].classList.remove('active');
+    current = (idx + imgs.length) % imgs.length;
+    imgs[current].classList.add('active', effect);
+  }
+  function next() {
+    effectIdx = (effectIdx + 1) % effects.length;
+    show(current + 1, effects[effectIdx]);
+  }
+  function prev() {
+    effectIdx = (effectIdx + 1) % effects.length;
+    show(current - 1, effects[effectIdx]);
+  }
+  function startAuto() {
+    clearInterval(timer);
+    timer = setInterval(() => {
+      if (!paused) next();
+    }, 10000);
+  }
+  
+  show(0, effects[0]);
+  startAuto();
+  
+  nextBtn.onclick = function() {
+    next();
+  };
+  prevBtn.onclick = function() {
+    prev();
+  };
+  pauseBtn.onclick = function() {
+    paused = !paused;
+    pauseBtn.querySelector('.pause-icon').style.display = paused ? 'none' : 'block';
+  };
+  
+  imgs.forEach(img => {
+    img.addEventListener('click', function() {
+      if (this.classList.contains('zoomed')) {
+        this.classList.remove('zoomed');
+      } else {
+        imgs.forEach(i => i.classList.remove('zoomed'));
+        this.classList.add('zoomed');
+      }
+    });
+  });
+})();
+</script>
 <section id="contact" class="contact-section">
   <div class="contact-overlay">
     <h2>آدرس و تماس</h2>

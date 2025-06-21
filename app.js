@@ -714,3 +714,53 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// Finans Slider Fonksiyonları
+function initFinanceSlider() {
+  const slider = document.querySelector('.exchange-photo-slider');
+  if (!slider) return;
+
+  const imgs = Array.from(slider.querySelectorAll('img'));
+  const prevBtn = slider.querySelector('.finance-prev');
+  const nextBtn = slider.querySelector('.finance-next');
+  let current = 0;
+  let timer = null;
+
+  function show(idx) {
+    imgs[current].classList.remove('active');
+    current = (idx + imgs.length) % imgs.length;
+    imgs[current].classList.add('active');
+  }
+
+  function next() {
+    show(current + 1);
+  }
+
+  function prev() {
+    show(current - 1);
+  }
+
+  function startAutoPlay() {
+    timer = setInterval(next, 10000); // 10 saniye
+  }
+
+  prevBtn?.addEventListener('click', () => {
+    prev();
+    clearInterval(timer);
+    startAutoPlay();
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    next();
+    clearInterval(timer);
+    startAutoPlay();
+  });
+
+  show(0);
+  startAutoPlay();
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  initFinanceSlider();
+});
+
