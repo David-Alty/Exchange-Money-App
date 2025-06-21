@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Vazirmatn&display=swap">
+
+  <title>ارسال حواله</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="header-logos">
+        <img src="images/flag.png" alt="بیرق افغانستان" class="afg-flag">
+        <img src="images/1-logo.jpg" alt="لوگوی شرکت" class="site-logo">
+        <a href="index.html" class="home-icon" aria-label="خانه">
+          <img src="images/home.png" alt="خانه">
+        </a>
+      </div>
+      <h1>شرکت صرافی و خدمات پولی پروان</h1>
+      <button class="menu-btn" id="openMenuBtn">
+        <img src="images/menu.svg" alt="منو">
+      </button>
+      <nav class="main-nav">
+        <a href="exchange-tables.html">نرخ ارز ها</a>
+        <a href="remittance.html">ارسال حواله</a>
+        <a href="#سایر-خدمات-ما">سایر خدمات ما</a>
+        <a href="#exchange">نکات مالی</a>
+        <a href="#contact">تماس با ما</a>
+        <a href="password.php" id="admin-link">مدیریت</a>
+      </nav>
+    </div>
+  </header>
+  <div class="side-menu" id="sideMenu">
+    <button class="menu-btn" id="closeMenuBtn" style="right:unset;left:1rem;">
+      <img src="images/close.svg" alt="بستن">
+    </button>
+    <a href="exchange-tables.html">نرخ ارز ها</a>
+    <a href="remittance.html">ارسال حواله</a>
+    <a href="#سایر-خدمات-ما">سایر خدمات ما</a>
+    <a href="#exchange">نکات مالی</a>
+    <a href="#contact">تماس با ما</a>
+    <a href="password.php" id="admin-link-side">مدیریت</a>
+  </div>
+  <div class="overlay" id="menuOverlay"></div>
+  <div class="social-icons-horizontal">
+    <a href="https://wa.me/93774562597" target="_blank"><img src="images/whatsapp-svgrepo-com (1).svg" alt="واتساپ"></a>
+    <a href="https://www.facebook.com/share/1BgPcrskcd/?mibextid=wwXIfr" target="_blank"><img src="images/facebook.svg" alt="فیسبوک"></a>
+    <a href="https://www.instagram.com/parwan_money_exchange?igsh=ampxaGFkYXJjODE1" target="_blank"><img src="images/instagram.svg" alt="اینستاگرام"></a>
+    <a href="https://t.me/Ya3err_1383" target="_blank"><img src="images/Telegram_logo.svg.webp" alt="تلگرام"></a>
+  </div>
+  <main>
+    <section id="ارسال-حواله" style="margin-top:2.2rem;">
+      <h2 style="color:#1976d2;text-align:center;margin-bottom:1rem;">ارسال حواله</h2>
+      <p id="main-page" class="main-page-text" style="text-align:center;max-width:600px;margin:0 auto 1.5rem auto;">
+        صرافی پروان با افتخار، حوالات شما را در کوتاه‌ترین زمان ممکن به تمام ولایات افغانستان و هر نقطۀ جهان می‌رساند. با سال‌ها تجربه، اعتماد مردم و خدمات پیوسته، ما پلی هستیم میان شما و عزیزانتان، در هر کجا که باشند. کافی‌ست با ما تماس بگیرید؛ باقی راه را با خیال راحت به ما بسپارید.
+      </p>
+      <div class="gallery-grid" style="justify-content:center;">
+        <img src="images/2-main page.jpg" alt="Reklam 1">
+        <img src="images/3-banner.jpg" alt="Reklam 2">
+        <img src="images/4-turk-afg.jpg" alt="Reklam 3">
+        <img src="images/5-alman-iran-afg.jpg" alt="Reklam 4">
+        <img src="images/6-iran-afg.jpg" alt="Reklam 5">
+        <img src="images/7-afg-america.jpg" alt="Reklam 6">
+        <img src="images/8-herat-parwan.jpg" alt="Reklam 7">
+        <img src="images/9-ads.jpg" alt="Reklam 8">
+        <img src="images/10-iran-turk.jpg" alt="Reklam 9">
+        <img src="images/11-advertise .jpg" alt="Reklam 10">
+        <img src="images/12-services-america.jpg" alt="Reklam 11">
+        <img src="images/13-ads-global.jpg" alt="Reklam 12">
+      </div>
+      <div class="gallery-modal" id="galleryModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;">
+        <span class="close-modal" id="closeModal" style="position:absolute;top:30px;right:40px;font-size:2.5rem;color:#fff;cursor:pointer;z-index:10001;">&times;</span>
+        <div style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;">
+          <button class="gallery-modal-btn prev" aria-label="Önceki" style="position:absolute;left:2vw;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;z-index:10001;pointer-events:auto;">
+            <svg width="38" height="38" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#fff" stroke="#ff8c00" stroke-width="2"/><polyline points="17,8 11,14 17,20" fill="none" stroke="#ff8c00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="gallery-modal-btn pause" aria-label="Duraklat/Başlat" style="position:absolute;left:50%;top:35vw;transform:translateX(-50%);background:none;border:none;cursor:pointer;z-index:10001;pointer-events:auto;">
+            <svg class="pause-icon" width="38" height="38" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#fff" stroke="#ff8c00" stroke-width="2"/><rect x="9" y="8" width="3" height="12" rx="1.2" fill="#ff8c00"/><rect x="16" y="8" width="3" height="12" rx="1.2" fill="#ff8c00"/></svg>
+            <svg class="play-icon" width="38" height="38" viewBox="0 0 28 28" style="display:none"><circle cx="14" cy="14" r="13" fill="#fff" stroke="#ff8c00" stroke-width="2"/><polygon points="11,8 21,14 11,20" fill="#ff8c00"/></svg>
+          </button>
+          <button class="gallery-modal-btn next" aria-label="Sonraki" style="position:absolute;right:2vw;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;z-index:10001;pointer-events:auto;">
+            <svg width="38" height="38" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#fff" stroke="#ff8c00" stroke-width="2"/><polyline points="11,8 17,14 11,20" fill="none" stroke="#ff8c00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <img id="modalImg" src="" alt="Büyük Görsel" style="max-width:90vw;max-height:80vh;border-radius:18px;box-shadow:0 4px 32px #0008;transition:all 0.3s;display:block;margin:auto;">
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      const galleryImgs = Array.from(document.querySelectorAll('.gallery-grid img'));
+      const modal = document.getElementById('galleryModal');
+      const modalImg = document.getElementById('modalImg');
+      const closeModal = document.getElementById('closeModal');
+      const prevBtn = document.querySelector('.gallery-modal-btn.prev');
+      const nextBtn = document.querySelector('.gallery-modal-btn.next');
+      const pauseBtn = document.querySelector('.gallery-modal-btn.pause');
+      const pauseIcon = pauseBtn.querySelector('.pause-icon');
+      const playIcon = pauseBtn.querySelector('.play-icon');
+      let current = 0;
+      let timer = null;
+      let paused = false;
+      const effects = ['fade', 'zoom-in', 'slide-left', 'slide-right'];
+
+      function showModal(idx, effect) {
+        current = (idx + galleryImgs.length) % galleryImgs.length;
+        modalImg.className = '';
+        if (effect) {
+          modalImg.classList.add(effect);
+          setTimeout(() => {
+            modalImg.className = '';
+            modalImg.src = galleryImgs[current].src;
+          }, 200);
+          setTimeout(() => {
+            modalImg.classList.add('show');
+          }, 220);
+        } else {
+          modalImg.src = galleryImgs[current].src;
+        }
+        modal.style.display = 'flex';
+        startAuto();
+        updatePauseIcon();
+      }
+      function closeModalFunc() {
+        modal.style.display = 'none';
+        stopAuto();
+      }
+      function next(effect) { showModal(current + 1, effect || randomEffect()); }
+      function prev(effect) { showModal(current - 1, effect || randomEffect()); }
+      function startAuto() {
+        stopAuto();
+        if (!paused) {
+          timer = setInterval(() => next(), 10000);
+        }
+      }
+      function stopAuto() { clearInterval(timer); }
+      function togglePause() {
+        paused = !paused;
+        updatePauseIcon();
+        if (paused) stopAuto();
+        else startAuto();
+      }
+      function updatePauseIcon() {
+        if (pauseIcon && playIcon) {
+          pauseIcon.style.display = paused ? "none" : "inline";
+          playIcon.style.display = paused ? "inline" : "none";
+        }
+      }
+      function randomEffect() {
+        return effects[Math.floor(Math.random() * effects.length)];
+      }
+      galleryImgs.forEach((img, i) => {
+        img.style.setProperty('--i', i);
+        img.addEventListener('click', () => showModal(i, randomEffect()));
+      });
+      closeModal.onclick = closeModalFunc;
+      modal.onclick = function(e) { if(e.target === modal) closeModalFunc(); };
+      nextBtn.onclick = (e) => { e.stopPropagation(); next(); };
+      prevBtn.onclick = (e) => { e.stopPropagation(); prev(); };
+      pauseBtn.onclick = (e) => { e.stopPropagation(); togglePause(); };
+    });
+  </script>
+</body>
+</html>

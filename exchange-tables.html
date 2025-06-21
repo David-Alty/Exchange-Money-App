@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Vazirmatn&display=swap">
+
+  <title>نرخ ارزها</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="header-logos">
+        <img src="images/flag.png" alt="بیرق افغانستان" class="afg-flag">
+        <img src="images/1-logo.jpg" alt="لوگوی شرکت" class="site-logo">
+        <a href="index.html" class="home-icon" aria-label="خانه">
+          <img src="images/home.png" alt="خانه">
+        </a>
+      </div>
+      <h1>شرکت صرافی و خدمات پولی پروان</h1>
+      <button class="menu-btn" id="openMenuBtn">
+        <img src="images/menu.svg" alt="منو">
+      </button>
+      <nav class="main-nav">
+        <a href="exchange-tables.html">نرخ ارز ها</a>
+        <a href="remittance.html">ارسال حواله</a>
+        <a href="#سایر-خدمات-ما">سایر خدمات ما</a>
+        <a href="#exchange">نکات مالی</a>
+        <a href="#contact">تماس با ما</a>
+        <a href="password.php" id="admin-link">مدیریت</a>
+      </nav>
+    </div>
+  </header>
+  <div class="side-menu" id="sideMenu">
+    <button class="menu-btn" id="closeMenuBtn" style="right:unset;left:1rem;">
+      <img src="images/close.svg" alt="بستن">
+    </button>
+    <a href="exchange-tables.html">نرخ ارز ها</a>
+    <a href="remittance.html">ارسال حواله</a>
+    <a href="#سایر-خدمات-ما">سایر خدمات ما</a>
+    <a href="#exchange">نکات مالی</a>
+    <a href="#contact">تماس با ما</a>
+    <a href="password.php" id="admin-link-side">مدیریت</a>
+  </div>
+  <div class="overlay" id="menuOverlay"></div>
+  <div class="social-icons-horizontal">
+    <a href="https://wa.me/93774562597" target="_blank"><img src="images/whatsapp-svgrepo-com (1).svg" alt="واتساپ"></a>
+    <a href="https://www.facebook.com/share/1BgPcrskcd/?mibextid=wwXIfr" target="_blank"><img src="images/facebook.svg" alt="فیسبوک"></a>
+    <a href="https://www.instagram.com/parwan_money_exchange?igsh=ampxaGFkYXJjODE1" target="_blank"><img src="images/instagram.svg" alt="اینستاگرام"></a>
+    <a href="https://t.me/Ya3err_1383" target="_blank"><img src="images/Telegram_logo.svg.webp" alt="تلگرام"></a>
+  </div>
+  <main>
+    <section id="exchange-rates">
+      <h2>نرخ تبادله اسعار کابل</h2>
+      <table id="exchangeRatesTable">
+        <thead>
+          <tr>
+            <th>واحد پولی</th>
+            <th>خرید</th>
+            <th>فروش</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Satırlar JS ile eklenecek -->
+        </tbody>
+      </table>
+    </section>
+    <section id="herat-exchange-rates" style="margin-top:2.2rem;">
+      <h2>نرخ تبادله اسعار هرات</h2>
+      <table id="heratExchangeRatesTable">
+        <thead>
+          <tr>
+            <th>واحد پولی</th>
+            <th>خرید</th>
+            <th>فروش</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Satırlar JS ile eklenecek -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

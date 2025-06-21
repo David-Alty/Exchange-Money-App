@@ -135,7 +135,7 @@ window.addEventListener('DOMContentLoaded', function() {
     clearInterval(timer);
     timer = setInterval(() => {
       if (!paused) nextSlide();
-    }, 3000);
+    }, 10000);
   }
   function restartAuto() {
     if (!paused) autoSlide();
@@ -208,7 +208,7 @@ window.addEventListener('DOMContentLoaded', function() {
   function startAuto() {
     stopAuto();
     if (!paused) {
-      timer = setInterval(() => next(), 2500);
+      timer = setInterval(() => next(), 10000);
     }
   }
   function stopAuto() {
@@ -244,7 +244,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 // Exchange photo slider with effects
 document.addEventListener('DOMContentLoaded', function() {
-  const slider = document.querySelector('.exchange-photo-slider');
+  const slider = document.querySelector('.slider');
   if (!slider) return;
   const imgs = Array.from(slider.querySelectorAll('img'));
   const effects = ['effect-fade', 'effect-zoom', 'effect-slide'];
@@ -252,6 +252,30 @@ document.addEventListener('DOMContentLoaded', function() {
   let timer = null;
   let paused = false;
   let effectIdx = 0;
+
+  // Duraklat/oynat butonunu slider'ın üst ortasına ekle (sabit)
+  let pauseBtn = slider.querySelector('.slider-btn.pause');
+  if (!pauseBtn) {
+    pauseBtn = document.createElement('button');
+    pauseBtn.className = 'slider-btn pause';
+    pauseBtn.setAttribute('aria-label', 'Duraklat/Başlat');
+    pauseBtn.style.position = 'absolute';
+    pauseBtn.style.left = '50%';
+    pauseBtn.style.top = '2vw';
+    pauseBtn.style.transform = 'translateX(-50%)';
+    pauseBtn.style.background = 'none';
+    pauseBtn.style.border = 'none';
+    pauseBtn.style.cursor = 'pointer';
+    pauseBtn.style.zIndex = '10';
+    pauseBtn.innerHTML = `
+      <svg class="pause-icon" width="38" height="38" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#fff" stroke="#ff8c00" stroke-width="2"/><rect x="9" y="8" width="3" height="12" rx="1.2" fill="#ff8c00"/><rect x="16" y="8" width="3" height="12" rx="1.2" fill="#ff8c00"/></svg>
+      <svg class="play-icon" width="38" height="38" viewBox="0 0 28 28" style="display:none"><circle cx="14" cy="14" r="13" fill="#fff" stroke="#ff8c00" stroke-width="2"/><polygon points="11,8 21,14 11,20" fill="#ff8c00"/></svg>
+    `;
+    slider.style.position = 'relative';
+    slider.appendChild(pauseBtn);
+  }
+  const pauseIcon = pauseBtn.querySelector('.pause-icon');
+  const playIcon = pauseBtn.querySelector('.play-icon');
 
   function show(idx, effect) {
     imgs.forEach(img => {
@@ -271,12 +295,26 @@ document.addEventListener('DOMContentLoaded', function() {
     clearInterval(timer);
     timer = setInterval(() => {
       if (!paused) next();
-    }, 5600);
+    }, 10000);
   }
 
   // Başlangıçta ilk resmi göster
   show(0, effects[0]);
   startAuto();
+
+  // Duraklat/oynat butonu işlevi
+  pauseBtn.onclick = function() {
+    paused = !paused;
+    if (paused) {
+      pauseIcon.style.display = 'none';
+      playIcon.style.display = 'inline';
+      clearInterval(timer);
+    } else {
+      pauseIcon.style.display = 'inline';
+      playIcon.style.display = 'none';
+      startAuto();
+    }
+  };
 
   // Tıklayınca durdur ve büyüt
   imgs.forEach(img => {
