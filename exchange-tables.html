@@ -51,6 +51,15 @@
     <a href="https://t.me/Ya3err_1383" target="_blank"><img src="images/Telegram_logo.svg.webp" alt="تلگرام"></a>
   </div>
   <main>
+    <div style="text-align:right; margin-bottom:1.5rem ;  ">
+      <label class="title-selector" for="tableSelector">انتخاب جدول نرخ:</label>
+      <select id="tableSelector">
+        <option value="exchange-rates">نرخ تبادله اسعار کابل</option>
+        <option value="herat-exchange-rates">نرخ تبادله اسعار هرات</option>
+        <option value="afg-bank">نرخ های افغانی د افغانستان بانک</option>
+        <option value="other-currencies">دیگر اسعار</option>
+      </select>
+    </div>
     <section id="exchange-rates">
       <h2>نرخ تبادله اسعار کابل</h2>
       <table id="exchangeRatesTable">
@@ -69,6 +78,36 @@
     <section id="herat-exchange-rates" style="margin-top:2.2rem;">
       <h2>نرخ تبادله اسعار هرات</h2>
       <table id="heratExchangeRatesTable">
+        <thead>
+          <tr>
+            <th>واحد پولی</th>
+            <th>خرید</th>
+            <th>فروش</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Satırlar JS ile eklenecek -->
+        </tbody>
+      </table>
+    </section>
+     <section id="afg-bank" style="margin-top:2.2rem;">
+      <h2>نرخ های افغانی د افغانستان بانک</h2>
+      <table id="afgBankExchangeRatesTable">
+        <thead>
+          <tr>
+            <th>واحد پولی</th>
+            <th>خرید</th>
+            <th>فروش</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Satırlar JS ile eklenecek -->
+        </tbody>
+      </table>
+    </section>
+     <section id="other-currencies" style="margin-top:2.2rem;">
+      <h2>دیگر اسعار</h2>
+      <table id="otherCurrenciesTable">
         <thead>
           <tr>
             <th>واحد پولی</th>

@@ -18,7 +18,6 @@ if (loginForm) {
 }
 
 
-
 // --- EKLE: Tümünü Sil ve Düzenle (Ayarla) butonları için kod ---
 
 // Admin panelindeysek tabloya butonları ekle

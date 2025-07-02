@@ -764,3 +764,65 @@ document.addEventListener('DOMContentLoaded', () => {
   initFinanceSlider();
 });
 
+// ...existing code...
+
+// --- REMOVE or COMMENT OUT these blocks ---
+// The blocks that fill #exchangeRatesTable and #heratExchangeRatesTable from localStorage
+
+// --- ADD THIS CODE at the end of app.js or after DOMContentLoaded ---
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Helper to fetch and render a table
+  async function fetchAndRenderRates(apiUrl, tableId) {
+    try {
+      const res = await fetch(apiUrl);
+      const data = await res.json();
+      const tbody = document.querySelector(`#${tableId} tbody`);
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${row.currency || ''}</td>
+          <td>${row.buy || ''}</td>
+          <td>${row.sell || ''}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    } catch (err) {
+      console.error('Error fetching rates:', err);
+    }
+  }
+
+  // Example usage for your tables
+  fetchAndRenderRates('http://localhost:3000/api/rates/khorasan-market', 'heratExchangeRatesTable');
+  fetchAndRenderRates('http://localhost:3000/api/rates/sarai-shazada', 'exchangeRatesTable' );
+  fetchAndRenderRates('http://localhost:3000/api/rates/other-currencies', 'otherCurrenciesTable');
+  fetchAndRenderRates('http://localhost:3000/api/rates/da-afg-bank', 'afgBankExchangeRatesTable');
+  // Add more for other tables if needed
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const selector = document.getElementById('tableSelector');
+  const sectionIds = [
+    'exchange-rates',
+    'herat-exchange-rates',
+    'afg-bank',
+    'other-currencies'
+  ];
+
+  selector.addEventListener('change', function() {
+    sectionIds.forEach(id => {
+      const section = document.getElementById(id);
+      if (section) {
+        section.style.display = (id === selector.value) ? '' : 'none';
+      }
+    });
+  });
+
+  // Hide all except the first on load
+  sectionIds.forEach((id, idx) => {
+    const section = document.getElementById(id);
+    if (section) section.style.display = idx === 0 ? '' : 'none';
+  });
+});

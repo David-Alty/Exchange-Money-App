@@ -1,0 +1,29 @@
+<table id="rates-table">
+  <thead>
+    <tr>
+      <th>Currency</th>
+      <th>Buy</th>
+      <th>Sell</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+fetch('http://localhost:3000/api/rates/da-afg-bank')
+  .then(response => response.json())
+  .then(data => {
+    const tbody = document.querySelector('#rates-table tbody');
+    tbody.innerHTML = '';
+    data.forEach(row => {
+      tbody.innerHTML += `<tr>
+        <td>${row.currency}</td>
+        <td>${row.buy}</td>
+        <td>${row.sell}</td>
+      </tr>`;
+    });
+  })
+  .catch(err => {
+    console.error('Failed to fetch data:', err);
+  });
+</script>
