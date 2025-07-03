@@ -25,13 +25,14 @@
       text-align: center;
       border: 2.5px solid #0a6ebd;
     }
-    
+
     .admin-panel-box h2 {
       color: #0a3e8f;
       margin-bottom: 1.5rem;
       font-size: 1.5rem;
       font-weight: bold;
     }
+
     .preview-card-bg {
       width: 100%;
       max-width: 320px;
@@ -49,6 +50,7 @@
       position: relative;
       overflow: hidden;
     }
+
     .preview-card-bg img {
       width: 100%;
       height: 100%;
@@ -111,6 +113,15 @@
     <button class="save-btn" id="saveBtn" type="button">ذخیره</button>
     <a href="index.html" id="backToMain" class="back-main-btn" style="display:inline-block;margin-bottom:1.2rem;color:#fff;font-weight:bold;font-size:1.13rem;text-decoration:none;background:linear-gradient(90deg,#1976d2 60%,#ff8c00 100%);padding:0.7rem 2.2rem;border-radius:16px;box-shadow:0 2px 12px #1976d255;transition:background 0.22s,box-shadow 0.22s,transform 0.18s;letter-spacing:0.01em;border:none;outline:none;cursor:pointer;">بازگشت به صفحه اصلی</a>
     <hr style="margin:2.5rem 0 1.5rem 0;">
+    <h3>افزودن خبر جدید</h3>
+    <form id="newsForm">
+      <input type="text" name="title" placeholder="عنوان خبر" required style="width:100%;margin-bottom:0.7em;">
+      <input type="file" name="image" id="newsImage" accept="image/*" required style="width:100%;margin-bottom:0.7em;">
+      <textarea name="description" placeholder="توضیحات خبر" required style="width:100%;margin-bottom:0.7em;"></textarea>
+      <input type="text" name="link" placeholder="لینک خبر" required style="width:100%;margin-bottom:0.7em;">
+      <button type="submit" class="save-btn">افزودن خبر</button>
+      <div id="newsMsg" class="info-msg"></div>
+    </form>
       <style>
         /* Ekstra buton hover stilleri */
         #saveExchangeBtn:hover,
@@ -185,7 +196,54 @@
         }
       });
 
-      
+      document.getElementById('newsForm').onsubmit = async function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const msg = document.getElementById('newsMsg');
+        msg.textContent = "در حال بارگذاری تصویر...";
+
+        // 1. Upload image to imgbb
+        const file = form.image.files[0];
+        let imageUrl = "";
+
+        const imgbbApiKey = "fb648d55e1c33ff975df42703b92ff33"; // <-- Replace with your key!
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+          const uploadRes = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
+            method: 'POST',
+            body: formData
+          });
+          const uploadData = await uploadRes.json();
+          if (!uploadData.success) throw new Error("Image upload failed");
+          imageUrl = uploadData.data.url;
+        } catch (err) {
+          msg.textContent = "آپلود تصویر انجام نشد.";
+          return;
+        }
+
+        msg.textContent = "در حال ارسال خبر...";
+
+        // 2. Post news to your API
+        const newsRes = await fetch('/api/news/index', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: form.title.value,
+            image: imageUrl,
+            description: form.description.value,
+            link: form.link.value
+          })
+        });
+        if (newsRes.ok) {
+          msg.textContent = "خبر با موفقیت افزوده شد!";
+          form.reset();
+        } else {
+          msg.textContent = "خطا در افزودن خبر.";
+        }
+      };
+
 </script>
 
 

@@ -770,7 +770,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // The blocks that fill #exchangeRatesTable and #heratExchangeRatesTable from localStorage
 
 // --- ADD THIS CODE at the end of app.js or after DOMContentLoaded ---
-
 document.addEventListener('DOMContentLoaded', function() {
   // Helper to fetch and render a table
   async function fetchAndRenderRates(apiUrl, tableId) {
@@ -783,7 +782,10 @@ document.addEventListener('DOMContentLoaded', function() {
       data.forEach(row => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td>${row.currency || ''}</td>
+          <td>
+            ${row.flag ? `<img src="${row.flag}" alt="" style="width:28px;height:20px;vertical-align:middle;margin-left:6px;border-radius:4px;border:1px solid #eee;">` : ''}
+            ${row.currency || ''}
+          </td>
           <td>${row.buy || ''}</td>
           <td>${row.sell || ''}</td>
         `;
@@ -794,14 +796,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Example usage for your tables
+  // Example usage for your tables (make sure table IDs and API URLs are correct)
   fetchAndRenderRates('http://localhost:3000/api/rates/khorasan-market', 'heratExchangeRatesTable');
-  fetchAndRenderRates('http://localhost:3000/api/rates/sarai-shazada', 'exchangeRatesTable' );
+  fetchAndRenderRates('http://localhost:3000/api/rates/sarai-shazada', 'exchangeRatesTable');
   fetchAndRenderRates('http://localhost:3000/api/rates/other-currencies', 'otherCurrenciesTable');
   fetchAndRenderRates('http://localhost:3000/api/rates/da-afg-bank', 'afgBankExchangeRatesTable');
-  // Add more for other tables if needed
 });
-
 document.addEventListener('DOMContentLoaded', function() {
   const selector = document.getElementById('tableSelector');
   const sectionIds = [

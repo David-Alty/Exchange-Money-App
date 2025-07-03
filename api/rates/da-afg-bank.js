@@ -14,10 +14,11 @@ export default async function handler(req, res) {
     $("table.homeRates.exchangeRatesTable.mb-4 tbody tr").each((_, row) => {
       const tds = $(row).find("td");
       if (tds.length >= 3) {
+        const flag = $(tds[0]).find("img").attr("src") || "";
         const currency = $(tds[0]).find("b").text().trim();
         const buy = $(tds[1]).find("b").text().trim();
         const sell = $(tds[2]).find("b").text().trim();
-        results.push({ currency, buy, sell });
+        results.push({ currency, buy, sell, flag });
       }
     });
     res.status(200).json(results);
