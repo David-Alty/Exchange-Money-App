@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Vazirmatn&display=swap">
+
+  <title>ارسال حواله</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="header-logos">
+        <img src="images/flag.png" alt="بیرق افغانستان" class="afg-flag">
+        <img src="images/1-logo.jpg" alt="لوگوی شرکت" class="site-logo">
+        <a href="index.html" class="home-icon" aria-label="خانه">
+          <img src="images/homePage.svg" alt="خانه">
+        </a>
+      </div>
+      <h1>شرکت صرافی و خدمات پولی پروان</h1>
+      <button class="menu-btn" id="openMenuBtn">
+        <img src="images/menu.svg" alt="منو">
+      </button>
+      <nav class="main-nav">
+        <a href="news.html" id="admin-link-side">اخبار</a>
+        <a href="exchange-tables.html">نرخ ارز ها</a>
+        <a href="remittance.html">ارسال حواله</a>
+        <a href="other-services.html">سایر خدمات ما</a>
+        <a href="finance-tips.html">نکات مالی</a>
+        <a href="contact.html">تماس با ما</a>
+        <a href="login.html" id="admin-link">مدیریت</a>
+
+      </nav>
+    </div>
+  </header>
+  <div class="side-menu" id="sideMenu">
+    <button class="menu-btn" id="closeMenuBtn" style="right:unset;left:1rem;">
+      <img src="images/close.svg" alt="بستن">
+    </button>
+    <a href="news.html" id="admin-link-side">اخبار</a>
+    <a href="exchange-tables.html">نرخ ارز ها</a>
+    <a href="remittance.html">ارسال حواله</a>
+    <a href="other-services.html">سایر خدمات ما</a>
+    <a href="finance-tips.html">نکات مالی</a>
+    <a href="contact.html">تماس با ما</a>
+    <a href="password.php" id="admin-link-side">مدیریت</a>
+
+  </div>
+  <div class="overlay" id="menuOverlay"></div>
+  <div class="social-icons-horizontal">
+    <a href="https://wa.me/93774562597" target="_blank"><img src="images/whatsapp-svgrepo-com.svg" alt="واتساپ"></a>
+    <a href="https://www.facebook.com/share/1BgPcrskcd/?mibextid=wwXIfr" target="_blank"><img src="images/facebook.svg" alt="فیسبوک"></a>
+    <a href="https://www.instagram.com/parwan_money_exchange?igsh=ampxaGFkYXJjODE1" target="_blank"><img src="images/instagram.svg" alt="اینستاگرام"></a>
+    <a href="https://t.me/Ya3err_1383" target="_blank"><img src="images/Telegram_logo.svg.webp" alt="تلگرام"></a>
+  </div>
+  <main>
+    <section id="ارسال-حواله" style="margin-top:2.2rem;">
+      <h2 style="color:#1976d2;text-align:center;margin-bottom:1rem;">اخبار</h2>
+      <div id="news-list" style="display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;"></div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+  <script>
+    // window.addEventListener('DOMContentLoaded', function() {
+    //   const galleryImgs = Array.from(document.querySelectorAll('.gallery-grid img'));
+    //   const modal = document.getElementById('galleryModal');
+    //   const modalImg = document.getElementById('modalImg');
+    //   const closeModal = document.getElementById('closeModal');
+    //   const prevBtn = document.querySelector('.gallery-modal-btn.prev');
+    //   const nextBtn = document.querySelector('.gallery-modal-btn.next');
+    //   const pauseBtn = document.querySelector('.gallery-modal-btn.pause');
+    //   const pauseIcon = pauseBtn.querySelector('.pause-icon');
+    //   const playIcon = pauseBtn.querySelector('.play-icon');
+    //   let current = 0;
+    //   let timer = null;
+    //   let paused = false;
+    //   const effects = ['fade', 'zoom-in', 'slide-left', 'slide-right'];
+
+    //   function showModal(idx, effect) {
+    //     current = (idx + galleryImgs.length) % galleryImgs.length;
+    //     modalImg.className = '';
+    //     if (effect) {
+    //       modalImg.classList.add(effect);
+    //       setTimeout(() => {
+    //         modalImg.className = '';
+    //         modalImg.src = galleryImgs[current].src;
+    //       }, 200);
+    //       setTimeout(() => {
+    //         modalImg.classList.add('show');
+    //       }, 220);
+    //     } else {
+    //       modalImg.src = galleryImgs[current].src;
+    //     }
+    //     modal.style.display = 'flex';
+    //     startAuto();
+    //     updatePauseIcon();
+    //   }
+    //   function closeModalFunc() {
+    //     modal.style.display = 'none';
+    //     stopAuto();
+    //   }
+    //   function next(effect) { showModal(current + 1, effect || randomEffect()); }
+    //   function prev(effect) { showModal(current - 1, effect || randomEffect()); }
+    //   function startAuto() {
+    //     stopAuto();
+    //     if (!paused) {
+    //       timer = setInterval(() => next(), 10000);
+    //     }
+    //   }
+    //   function stopAuto() { clearInterval(timer); }
+    //   function togglePause() {
+    //     paused = !paused;
+    //     updatePauseIcon();
+    //     if (paused) stopAuto();
+    //     else startAuto();
+    //   }
+    //   function updatePauseIcon() {
+    //     if (pauseIcon && playIcon) {
+    //       pauseIcon.style.display = paused ? "none" : "inline";
+    //       playIcon.style.display = paused ? "inline" : "none";
+    //     }
+    //   }
+    //   function randomEffect() {
+    //     return effects[Math.floor(Math.random() * effects.length)];
+    //   }
+    //   galleryImgs.forEach((img, i) => {
+    //     img.style.setProperty('--i', i);
+    //     img.addEventListener('click', () => showModal(i, randomEffect()));
+    //   });
+    //   closeModal.onclick = closeModalFunc;
+    //   modal.onclick = function(e) { if(e.target === modal) closeModalFunc(); };
+    //   nextBtn.onclick = (e) => { e.stopPropagation(); next(); };
+    //   prevBtn.onclick = (e) => { e.stopPropagation(); prev(); };
+    //   pauseBtn.onclick = (e) => { e.stopPropagation(); togglePause(); };
+    // });
+
+    window.addEventListener('DOMContentLoaded', async function() {
+      const newsList = document.getElementById('news-list');
+      if (!newsList) return;
+      newsList.innerHTML = 'در حال بارگذاری...';
+
+      try {
+        const res = await fetch('/api/news/index');
+        if (!res.ok) {
+          // If the server returns an error status
+          newsList.innerHTML = 'خطا در ارتباط با سرور. لطفاً بعداً تلاش کنید.';
+          console.error('Server error:', res.status, res.statusText);
+          return;
+        }
+        const data = await res.json();
+        if (!Array.isArray(data) || data.length === 0) {
+          newsList.innerHTML = 'هیچ خبری یافت نشد.';
+          return;
+        }
+        newsList.innerHTML = '';
+        data.forEach(news => {
+          const card = document.createElement('div');
+          card.className = 'news-card';
+          card.style = 'width:260px;background:#fff;border-radius:10px;box-shadow:0 2px 8px #1976d233;padding:1rem;cursor:pointer;transition:box-shadow .2s;';
+          card.innerHTML = `
+            <img src="${news.image}" alt="${news.title}" style="width:100%;height:150px;object-fit:cover;border-radius:8px 8px 0 0;">
+            <h3 style="font-size:1.1rem;margin:0.7em 0 0.5em 0;color:#1976d2;">${news.title}</h3>
+          `;
+          card.onclick = () => {
+            window.location.href = 'news-detail.html?id=' + news._id;
+          };
+          newsList.appendChild(card);
+        });
+      } catch (err) {
+        newsList.innerHTML = 'خطا در بارگذاری اخبار. لطفاً اتصال اینترنت خود را بررسی کنید.';
+        console.error('Fetch error:', err);
+      }
+    });
+  </script>
+</body>
+</html>

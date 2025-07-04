@@ -1,0 +1,51 @@
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+
+export default async function handler(req, res) {
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  try {
+    const { data } = await axios.get("https://sarafi.af/fa/exchange-rates/sarai-shahzada");
+    const $ = cheerio.load(data);
+    const results = [];
+    $("table.homeRates.exchangeRatesTable.mb-4 tbody tr").each((_, row) => {
+      const tds = $(row).find("td");
+      if (tds.length >= 3) {
+        const flag = $(tds[0]).find("img").attr("src") || "";
+        let currency = $(tds[0]).find("b").text().trim();
+        const buy = $(tds[1]).find("b").text().trim();
+        const sell = $(tds[2]).find("b").text().trim();
+
+        // Fix for "روپیه هند هزار" -> "هزار روپیه هند"
+        if (currency === "INR - روپیه هند هزار") {
+          currency = "INR - هزار روپیه هند";
+        }
+        if (currency === "IRR - تومان ایران هزار") {
+          currency = "IRR - هزار تومان ایران هند";
+        }
+        if (currency === "PKR - روپیه پاکستان هزار") {
+          currency = "PKR - هزار روپیه پاکستان";
+        }
+        if (currency === "JPY - ین جاپان هزار") {
+          currency = "JPY - هزار ین جاپان";
+        }
+
+        // Only push rows with all fields present and not unwanted labels
+        if (
+          currency &&
+          buy &&
+          sell &&
+          currency !== "دالر آمریکا در مقابل تومان" &&
+          currency !== "درهم امارات در مقابل تومان"
+        ) {
+          results.push({ currency, buy, sell, flag });
+        }
+      }
+    });
+    res.status(200).json(results);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch data' });
+  }
+}

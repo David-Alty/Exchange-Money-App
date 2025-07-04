@@ -25,12 +25,14 @@
       text-align: center;
       border: 2.5px solid #0a6ebd;
     }
+
     .admin-panel-box h2 {
       color: #0a3e8f;
       margin-bottom: 1.5rem;
       font-size: 1.5rem;
       font-weight: bold;
     }
+
     .preview-card-bg {
       width: 100%;
       max-width: 320px;
@@ -48,6 +50,7 @@
       position: relative;
       overflow: hidden;
     }
+
     .preview-card-bg img {
       width: 100%;
       height: 100%;
@@ -110,59 +113,45 @@
     <button class="save-btn" id="saveBtn" type="button">ذخیره</button>
     <a href="index.html" id="backToMain" class="back-main-btn" style="display:inline-block;margin-bottom:1.2rem;color:#fff;font-weight:bold;font-size:1.13rem;text-decoration:none;background:linear-gradient(90deg,#1976d2 60%,#ff8c00 100%);padding:0.7rem 2.2rem;border-radius:16px;box-shadow:0 2px 12px #1976d255;transition:background 0.22s,box-shadow 0.22s,transform 0.18s;letter-spacing:0.01em;border:none;outline:none;cursor:pointer;">بازگشت به صفحه اصلی</a>
     <hr style="margin:2.5rem 0 1.5rem 0;">
-    <h2 style="color:#0a3e8f;font-size:1.25rem;margin-bottom:1.2rem;">مدیریت نرخ تبادله کابل</h2>
-    <form id="exchangeForm" style="display:flex;flex-direction:column;gap:0.7rem;align-items:center;">
-      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;flex-direction:row-reverse;">
-        <button type="button" id="addRowBtn" style="padding:0.4rem 1.2rem;background:#0a6ebd;color:#fff;border-radius:8px;border:none;">افزودن</button>
-        <input type="number" placeholder="فروش" id="sell" style="width:70px;">
-        <input type="number" placeholder="خرید" id="buy" style="width:70px;">
-        <select id="currency" style="width:110px;">
-          <option value="" selected="" disabled="">واحد پولی</option>
-          <option value="دالر آمریکایی">دالر آمریکایی</option>
-          <option value="یورو">یورو</option>
-          <option value="پوند">پوند</option>
-          <option value="درهم">درهم</option>
-          <option value="کلدار">کلدار</option>
-          <option value="تومان بانکی">تومان بانکی</option>
-          <option value="تومان چک">تومان چک</option>
-          <option value="لیر ترکی">لیر ترکی</option>
-        </select>
-        <select id="flagSelect" style="width:48px;height:38px;border-radius:5px;border:1.5px solid #ccc;background:#fff;text-align:center;">
-          <option value="" selected="" disabled="">پرچم</option>
-          <option value="images/flags/us.png">🇺🇸</option>
-          <option value="images/flags/eu.png">🇪🇺</option>
-          <option value="images/flags/uk.png">🇬🇧</option>
-          <option value="images/flags/uad.png">🇦🇪</option>
-          <option value="images/flags/pak.png">🇵🇰</option>
-          <option value="images/flags/ir.png">🇮🇷</option>
-          <option value="images/flags/tr.png">🇹🇷</option>
-        </select>
-        
-        
-        
+    <h3>افزودن خبر جدید</h3>
+    <form id="newsForm">
+      <input type="text" name="title" placeholder="عنوان خبر" required style="width:100%;margin-bottom:0.7em;">
+      <input type="file" name="image" id="newsImage" accept="image/*" required style="width:100%;margin-bottom:0.7em;">
+      <textarea name="description" placeholder="توضیحات خبر" required style="width:100%;margin-bottom:0.7em;"></textarea>
+      <input type="text" name="link" placeholder="لینک خبر" required style="width:100%;margin-bottom:0.7em;">
+      <button type="submit" class="save-btn">افزودن خبر</button>
+      <div id="newsMsg" class="info-msg"></div>
+    </form>
+    <hr>
+    <h3>مدیریت اخبار</h3>
+    <div id="adminNewsMsg" class="info-msg"></div>
+    <table id="adminNewsTable" style="width:100%;margin-bottom:2em;border-collapse:collapse;">
+      <thead>
+        <tr style="background:#f7faff;">
+          <th>تصویر</th>
+          <th>عنوان</th>
+          <th>عملیات</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <!-- Edit Modal -->
+    <div id="editModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:#0008;z-index:1000;align-items:center;justify-content:center;">
+      <div style="background:#fff;padding:2em;border-radius:10px;max-width:400px;width:90%;">
+        <h4>ویرایش خبر</h4>
+        <form id="editNewsForm">
+          <input type="hidden" name="id">
+          <input type="text" name="title" placeholder="عنوان" required style="width:100%;margin-bottom:0.7em;">
+          <input type="url" name="image" placeholder="لینک تصویر" required style="width:100%;margin-bottom:0.7em;">
+          <textarea name="description" placeholder="توضیحات" required style="width:100%;margin-bottom:0.7em;"></textarea>
+          <input type="text" name="link" placeholder="لینک خبر" required style="width:100%;margin-bottom:0.7em;">
+          <button class="save-btn" id="saveBtn" type="button">ذخیره</button>
+          <div id="bgSaveMsg" class="info-msg"></div>
+          <button type="button" onclick="closeEditModal()" style="margin-right:1em;">انصراف</button>
+        </form>
       </div>
-      <table id="exchangeTable" style="margin-top:1.2rem;width:100%;max-width:420px;border-collapse:collapse;">
-        <thead>
-          <tr style="background:#e3f0ff;">
-            <th>پرچم</th>
-            <th>واحد پولی</th>
-            <th>خرید</th>
-            <th>فروش</th>
-            <th>حذف و تنظیم</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Satırlar buraya eklenecek -->
-        </tbody>
-      </table>
-      <div style="margin-top:1rem;">
-        <label for="kabulTableInfo" style="display:block;margin-bottom:0.5rem;">اطلاعات جدول:</label>
-        <textarea id="kabulTableInfo" rows="3" style="width:100%;border:1.5px solid #ccc;border-radius:5px;padding:0.5rem;"></textarea>
-        <button type="button" id="saveKabulInfoBtn" style="margin-top:0.5rem;padding:0.6rem 2.2rem;background:#1976d2;color:#fff;border-radius:8px;border:none;font-weight:bold;transition:background 0.18s,box-shadow 0.18s;">ذخیره اطلاعات جدول</button>
-        <button type="button" id="clearKabulInfoBtn" style="margin-top:0.5rem;padding:0.6rem 2.2rem;background:#d32f2f;color:#fff;border-radius:8px;border:none;font-weight:bold;transition:background 0.18s,box-shadow 0.18s;">پاک کردن اطلاعات جدول</button>
-      </div>
-      <button type="button" id="saveExchangeBtn" style="margin-top:1.2rem;padding:0.6rem 2.2rem;background:#ff8c00;color:#fff;border-radius:8px;border:none;font-weight:bold;transition:background 0.18s,box-shadow 0.18s;">ذخیره نرخ‌های کابل</button>
-      <a href="index.html" id="backToMain" class="back-main-btn" style="display:inline-block;margin-bottom:1.2rem;color:#fff;font-weight:bold;font-size:1.13rem;text-decoration:none;background:linear-gradient(90deg,#1976d2 60%,#ff8c00 100%);padding:0.7rem 2.2rem;border-radius:16px;box-shadow:0 2px 12px #1976d255;transition:background 0.22s,box-shadow 0.22s,transform 0.18s;letter-spacing:0.01em;border:none;outline:none;cursor:pointer;">بازگشت به صفحه اصلی</a>
+    </div>
       <style>
         /* Ekstra buton hover stilleri */
         #saveExchangeBtn:hover,
@@ -237,248 +226,139 @@
         }
       });
 
-      // Döviz tablosu yönetimi
-      const exchangeForm = document.getElementById('exchangeForm');
-      if (exchangeForm) {
-        let rows = [];
-        const currency = document.getElementById('currency');
-        const buy = document.getElementById('buy');
-        const sell = document.getElementById('sell');
-        const flagSelect = document.getElementById('flagSelect');
-        const table = document.getElementById('exchangeTable').querySelector('tbody');
-        const addRowBtn = document.getElementById('addRowBtn');
-        const saveBtn = document.getElementById('saveExchangeBtn');
-        const deleteAllBtn = document.getElementById('deleteAllRatesBtn');
-        const msg = document.getElementById('exchangeMsg');
-
-        function loadRows() {
-          rows = [];
-          const saved = localStorage.getItem('exchangeRates');
-          if (saved) {
-            try { rows = JSON.parse(saved); } catch {}
-          }
-        }
-        function renderTable() {
-          table.innerHTML = '';
-          rows.forEach((r, i) => {
-            const tr = document.createElement('tr');
-            if (r._editing) {
-              tr.innerHTML = `
-                <td><img src="${r.flag || ''}" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid #ccc;background:#fff;"></td>
-                <td><input type="text" value="${r.currency}" style="width:90px"></td>
-                <td><input type="number" value="${r.buy}" style="width:60px"></td>
-                <td><input type="number" value="${r.sell}" style="width:60px"></td>
-                <td>
-                  <button type="button" data-i="${i}" class="save-edit-btn" style="color:#388e3c;background:none;border:none;font-size:1.1rem;cursor:pointer;transition:background 0.18s;">ذخیره</button>
-                  <button type="button" data-i="${i}" class="cancel-edit-btn" style="color:#d32f2f;background:none;border:none;font-size:1.1rem;cursor:pointer;transition:background 0.18s;">لغو</button>
-                </td>
-              `;
-            } else {
-              tr.innerHTML = `
-                <td><img src="${r.flag || ''}" alt="" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid #ccc;background:#fff;"></td>
-                <td>${r.currency}</td>
-                <td>${r.buy}</td>
-                <td>${r.sell}</td>
-                <td>
-                  <button type="button" data-i="${i}" class="edit-row-btn" style="color:#1976d2;background:none;border:none;font-size:1.1rem;cursor:pointer;transition:background 0.18s;">تنظیم</button>
-                  <button type="button" data-i="${i}" class="delete-row-btn" style="color:#d32f2f;background:none;border:none;font-size:1.2rem;cursor:pointer;transition:background 0.18s;">✖</button>
-                </td>
-              `;
-            }
-            table.appendChild(tr);
-          });
-        }
-        function saveRows() {
-          // Remove _editing flags before save
-          const cleanRows = rows.map(r => {
-            const { _editing, ...rest } = r;
-            return rest;
-          });
-          localStorage.setItem('exchangeRates', JSON.stringify(cleanRows));
-        }
-        // Initial load
-        loadRows();
-        renderTable();
-
-        // Add row
-        addRowBtn.onclick = function() {
-          if (!currency.value.trim() || !buy.value.trim() || !sell.value.trim() || !flagSelect.value) {
-            msg.textContent = "لطفاً همه فیلدها و پرچم را وارد کنید.";
-            return;
-          }
-          rows.push({flag: flagSelect.value, currency: currency.value, buy: buy.value, sell: sell.value});
-          currency.value = buy.value = sell.value = '';
-          flagSelect.selectedIndex = 0;
-          renderTable();
-          msg.textContent = "";
-        };
-
-        // Table events
-        table.onclick = function(e) {
-          const i = +e.target.getAttribute('data-i');
-          if (e.target.classList.contains('delete-row-btn')) {
-            rows.splice(i, 1);
-            renderTable();
-          }
-          if (e.target.classList.contains('edit-row-btn')) {
-            rows.forEach(r => delete r._editing);
-            rows[i]._editing = true;
-            renderTable();
-          }
-          if (e.target.classList.contains('cancel-edit-btn')) {
-            delete rows[i]._editing;
-            renderTable();
-          }
-          if (e.target.classList.contains('save-edit-btn')) {
-            const tr = e.target.closest('tr');
-            const inputs = tr.querySelectorAll('input');
-            rows[i].currency = inputs[0].value;
-            rows[i].buy = inputs[1].value;
-            rows[i].sell = inputs[2].value;
-            delete rows[i]._editing;
-            renderTable();
-            saveRows();
-            msg.textContent = "تغییرات ذخیره شد.";
-            setTimeout(()=>{msg.textContent="";}, 2000);
-          }
-        };
-
-        // Save all
-        saveBtn.onclick = function() {
-          saveRows();
-          msg.textContent = "نرخ‌ها ذخیره شد. در صفحه اصلی نمایش داده خواهد شد.";
-          setTimeout(()=>{msg.textContent="";}, 3000);
-        };
-      }
-      // Sunucuya yükleme işlemi (Farsça mesajlar و زیبا div ile)
-      document.getElementById('bgUploadForm').onsubmit = async function(e) {
+      document.getElementById('newsForm').onsubmit = async function(e) {
         e.preventDefault();
         const form = e.target;
-        const msg = document.getElementById('uploadMsg');
-        const fileInput = document.getElementById('bgFile');
-        if (!fileInput.files[0]) {
-          msg.textContent = "لطفاً یک تصویر انتخاب کنید.";
-          msg.style.color = "#d32f2f";
-          setTimeout(() => { msg.textContent = ""; }, 5000);
-          return;
-        }
-        const formData = new FormData(form);
-        msg.textContent = "در حال بارگذاری...";
-        msg.style.color = "#0a3e8f";
+        const msg = document.getElementById('newsMsg');
+        msg.textContent = "در حال بارگذاری تصویر...";
+
+        // 1. Upload image to imgbb
+        const file = form.image.files[0];
+        let imageUrl = "";
+
+        const imgbbApiKey = "fb648d55e1c33ff975df42703b92ff33"; // <-- Replace with your key!
+        const formData = new FormData();
+        formData.append('image', file);
+
         try {
-          const res = await fetch('/upload-card-bg', {
+          const uploadRes = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
             method: 'POST',
             body: formData
           });
-          if (res.ok) {
-            msg.textContent = "تصویر با موفقیت ذخیره شد. همه کاربران پس‌زمینه جدید را görecek. (۵ ثانیه sonra پیام پاک می‌شود)";
-            msg.style.color = "#388e3c";
-          } else {
-            msg.textContent = "بارگذاری تصویر موفق نبود.";
-            msg.style.color = "#d32f2f";
-          }
+          const uploadData = await uploadRes.json();
+          if (!uploadData.success) throw new Error("Image upload failed");
+          imageUrl = uploadData.data.url;
         } catch (err) {
-          msg.textContent = "ارتباط با سرور برقرار نشد.";
-          msg.style.color = "#d32f2f";
+          msg.textContent = "آپلود تصویر انجام نشد.";
+          return;
         }
-        setTimeout(() => { msg.textContent = ""; }, 5000);
-      };
-    </script>
-    </form>
 
-    <!-- Yeni Herat tablosu -->
-    <h2 style="color:#0a3e8f;font-size:1.25rem;margin:2.2rem 0 1.2rem 0;">مدیریت نرخ تبادله اسعار هرات</h2>
-    <form id="heratExchangeForm" style="display:flex;flex-direction:column;gap:0.7rem;align-items:center;">
-      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;flex-direction:row-reverse;">
-        <button type="button" id="addHeratRowBtn" style="padding:0.4rem 1.2rem;background:#0a6ebd;color:#fff;border-radius:8px;border:none;transition:background 0.18s;">افزودن</button>
-         <input type="number" placeholder="فروش" id="heratSell" style="width:70px;">
-        <input type="number" placeholder="خرید" id="heratBuy" style="width:70px;">
-       
-        <select id="heratCurrency" style="width:110px;">
-          <option value="" selected="" disabled="">واحد پولی</option>
-          <option value="دالر آمریکایی">دالر آمریکایی</option>
-          <option value="یورو">یورو</option>
-          <option value="پوند">پوند</option>
-          <option value="درهم">درهم</option>
-          <option value="کلدار">کلدار</option>
-          <option value="تومان بانکی">تومان بانکی</option>
-          <option value="تومان چک">تومان چک</option>
-          <option value="لیر ترکی">لیر ترکی</option>
-        </select>
-        <select id="heratFlagSelect" style="width:48px;height:38px;border-radius:5px;border:1.5px solid #ccc;background:#fff;text-align:center;">
-          <option value="" selected="" disabled="">پرچم</option>
-          <option value="images/flags/us.png">🇺🇸</option>
-          <option value="images/flags/eu.png">🇪🇺</option>
-          <option value="images/flags/uk.png">🇬🇧</option>
-          <option value="images/flags/uad.png">🇦🇪</option>
-          <option value="images/flags/pak.png">🇵🇰</option>
-          <option value="images/flags/ir.png">🇮🇷</option>
-          <option value="images/flags/tr.png">🇹🇷</option>
-        </select>
-        
-      </div>
-      <table id="heratExchangeTable" style="margin-top:1.2rem;width:100%;max-width:420px;border-collapse:collapse;">
-        <thead>
-          <tr style="background:#e3f0ff;">
-            <th>پرچم</th>
-            <th>واحد پولی</th>
-            <th>خرید</th>
-            <th>فروش</th>
-            <th>حذف و تنظیم</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Satırlar buraya eklenecek -->
-        </tbody>
-      </table>
-      <!-- Input field for Herat table information -->
-      <div style="margin-top:1rem;">
-        <label for="heratTableInfo" style="display:block;margin-bottom:0.5rem;">اطلاعات جدول:</label>
-        <textarea id="heratTableInfo" rows="3" style="width:100%;border:1.5px solid #ccc;border-radius:5px;padding:0.5rem;"></textarea>
-        <button type="button" id="saveHeratInfoBtn" style="margin-top:0.5rem;padding:0.6rem 2.2rem;background:#1976d2;color:#fff;border-radius:8px;border:none;font-weight:bold;transition:background 0.18s,box-shadow 0.18s;">ذخیره اطلاعات جدول</button>
-        <button type="button" id="clearHeratInfoBtn" style="margin-top:0.5rem;padding:0.6rem 2.2rem;background:#d32f2f;color:#fff;border-radius:8px;border:none;font-weight:bold;transition:background 0.18s,box-shadow 0.18s;">پاک کردن اطلاعات جدول</button>
-      </div>
-      <button type="button" id="saveHeratExchangeBtn" style="margin-top:1.2rem;padding:0.6rem 2.2rem;background:#ff8c00;color:#fff;border-radius:8px;border:none;font-weight:bold;transition:background 0.18s,box-shadow 0.18s;">ذخیره نرخ‌های هرات</button>
-      <a href="index.html" class="back-main-btn" style="display:inline-block;margin-right:1.2rem;margin-bottom:1.2rem;color:#fff;font-weight:bold;font-size:1.13rem;text-decoration:none;background:linear-gradient(90deg,#1976d2 60%,#ff8c00 100%);padding:0.7rem 2.2rem;border-radius:16px;box-shadow:0 2px 12px #1976d255;transition:background 0.22s,box-shadow 0.22s,transform 0.18s;letter-spacing:0.01em;border:none;outline:none;cursor:pointer;vertical-align:middle;">بازگشت به صفحه اصلی</a>
-    </form>
-  </div>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
+        msg.textContent = "در حال ارسال خبر...";
+
+        // 2. Post news to your API
+        const newsRes = await fetch('/api/news/index', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: form.title.value,
+            image: imageUrl,
+            description: form.description.value,
+            link: form.link.value
+          })
+        });
+        if (newsRes.ok) {
+          msg.textContent = "خبر با موفقیت افزوده شد!";
+          form.reset();
+        } else {
+          msg.textContent = "خطا در افزودن خبر.";
+        }
+      };
+
+      async function loadAdminNews() {
+        const table = document.querySelector('#adminNewsTable tbody');
+        const msg = document.getElementById('adminNewsMsg');
+        table.innerHTML = '<tr><td colspan="3">در حال بارگذاری...</td></tr>';
+        try {
+          const res = await fetch('/api/news/index');
+          const data = await res.json();
+          if (!Array.isArray(data) || data.length === 0) {
+            table.innerHTML = '<tr><td colspan="3">هیچ خبری یافت نشد.</td></tr>';
+            return;
+          }
+          table.innerHTML = '';
+          data.forEach(news => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td><img src="${news.image}" alt="" style="width:60px;height:40px;object-fit:cover;border-radius:4px;"></td>
+              <td>${news.title}</td>
+              <td>
+                <button onclick="editNews('${news._id}')">ویرایش</button>
+                <button onclick="deleteNews('${news._id}')">حذف</button>
+              </td>
+            `;
+            table.appendChild(tr);
+          });
+        } catch (err) {
+          table.innerHTML = '<tr><td colspan="3">خطا در بارگذاری اخبار.</td></tr>';
+          msg.textContent = err.message;
+        }
+      }
+
+      window.editNews = function(id) {
+        fetch('/api/news/' + id)
+          .then(res => res.json())
+          .then(news => {
+            const form = document.getElementById('editNewsForm');
+            form.id.value = news._id;
+            form.title.value = news.title;
+            form.image.value = news.image;
+            form.description.value = news.description;
+            form.link.value = news.link;
+            document.getElementById('editModal').style.display = 'flex';
+          });
+      };
+
+      window.closeEditModal = function() {
+        document.getElementById('editModal').style.display = 'none';
+      };
+
+      document.getElementById('editNewsForm').onsubmit = async function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const id = form.id.value;
+        const body = {
+          title: form.title.value,
+          image: form.image.value,
+          description: form.description.value,
+          link: form.link.value
+        };
+        const res = await fetch('/api/news/' + id, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        if (res.ok) {
+          closeEditModal();
+          loadAdminNews();
+          alert('خبر با موفقیت ویرایش شد.');
+        } else {
+          alert('خطا در ویرایش خبر.');
+        }
+      };
+
+      window.deleteNews = async function(id) {
+        if (!confirm('آیا مطمئن هستید که می‌خواهید این خبر را حذف کنید؟')) return;
+        const res = await fetch('/api/news/' + id, { method: 'DELETE' });
+        if (res.ok) {
+          loadAdminNews();
+          alert('خبر حذف شد.');
+        } else {
+          alert('خطا در حذف خبر.');
+        }
+      };
+
+      loadAdminNews();
+
 </script>
 
 

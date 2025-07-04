@@ -1,5 +1,3 @@
-const ADMIN_PASSWORD = "yaser94551!!"; // Şifrenizi değiştirin
-
 // Şifre giriş formu için
 const loginForm = document.getElementById('adminLoginForm');
 if (loginForm) {
@@ -16,7 +14,6 @@ if (loginForm) {
     }
   };
 }
-
 
 
 // --- EKLE: Tümünü Sil ve Düzenle (Ayarla) butonları için kod ---

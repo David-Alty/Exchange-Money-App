@@ -764,3 +764,158 @@ document.addEventListener('DOMContentLoaded', () => {
   initFinanceSlider();
 });
 
+// ...existing code...
+
+// --- REMOVE or COMMENT OUT these blocks ---
+// The blocks that fill #exchangeRatesTable and #heratExchangeRatesTable from localStorage
+
+// --- ADD THIS CODE at the end of app.js or after DOMContentLoaded ---
+document.addEventListener('DOMContentLoaded', function() {
+  // Helper to fetch and render a table
+  async function fetchAndRenderRates(apiUrl, tableId) {
+    try {
+      const res = await fetch(apiUrl);
+      const data = await res.json();
+      const tbody = document.querySelector(`#${tableId} tbody`);
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>
+            ${row.flag ? `<img src="${row.flag}" alt="" style="width:28px;height:20px;vertical-align:middle;margin-left:6px;border-radius:4px;border:1px solid #eee;">` : ''}
+            ${row.currency || ''}
+          </td>
+          <td>${row.buy || ''}</td>
+          <td>${row.sell || ''}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    } catch (err) {
+      console.error('Error fetching rates:', err);
+    }
+  }
+
+  // Example usage for your tables (make sure table IDs and API URLs are correct)
+  fetchAndRenderRates('http://localhost:3000/api/rates/sarai-shazada', 'exchangeRatesTable');
+  fetchAndRenderRates('http://localhost:3000/api/rates/other-currencies', 'otherCurrenciesTable');
+  fetchAndRenderRates('http://localhost:3000/api/rates/da-afg-bank', 'afgBankExchangeRatesTable');
+});
+
+//this is only for herat exchange rates
+document.addEventListener('DOMContentLoaded', async () => {
+  const apiUrl = 'http://localhost:3000/api/rates/khorasan-market'; // Your API endpoint
+
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+
+    const firstRow = data.firstRow;
+    const remainingRows = data.remainingRows;
+
+    // Target the table for the first row (assuming you've added this new table in HTML)
+    const specialFirstRateTableBody = document.querySelector('#specialFirstRateTable tbody');
+    if (specialFirstRateTableBody && firstRow) {
+      specialFirstRateTableBody.innerHTML = `
+        <tr>
+          <td>
+            ${firstRow.flag ? `<img src="${firstRow.flag}" alt="" style="width:28px;height:20px;vertical-align:middle;margin-left:6px;border-radius:4px;border:1px solid #eee;">` : ''}
+            ${firstRow.currency || ''}
+          </td>
+          <td>${firstRow.buy || ''}</td>
+          <td>${firstRow.sell || ''}</td>
+        </tr>
+      `;
+    }
+
+    // Target your existing Herat table for the remaining rows
+    const heratExchangeRatesTableBody = document.querySelector('#heratExchangeRatesTable tbody');
+    if (heratExchangeRatesTableBody) {
+      heratExchangeRatesTableBody.innerHTML = ''; // Clear existing content
+      remainingRows.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>
+            ${row.flag ? `<img src="${row.flag}" alt="" style="width:28px;height:20px;vertical-align:middle;margin-left:6px;border-radius:4px;border:1px solid #eee;">` : ''}
+            ${row.currency || ''}
+          </td>
+          <td>${row.buy || ''}</td>
+          <td>${row.sell || ''}</td>
+        `;
+        heratExchangeRatesTableBody.appendChild(tr);
+      });
+    }
+
+  } catch (error) {
+    console.error("Error fetching currency data:", error);
+    // Handle error display on page
+  }
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const selector = document.getElementById('tableSelector');
+  const sectionIds = [
+    'exchange-rates',
+    'herat-exchange-rates',
+    'afg-bank',
+    'other-currencies',
+    'khorasan-usd-rates'
+  ];
+
+  selector.addEventListener('change', function() {
+    sectionIds.forEach(id => {
+      const section = document.getElementById(id);
+      if (section) {
+        section.style.display = (id === selector.value) ? '' : 'none';
+      }
+    });
+  });
+
+  // Hide all except the first on load
+  sectionIds.forEach((id, idx) => {
+    const section = document.getElementById(id);
+    if (section) section.style.display = idx === 0 ? '' : 'none';
+  });
+});
+
+function showLoading(tableId) {
+  const tbody = document.querySelector(`#${tableId} tbody`);
+  if (tbody) {
+    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;">در حال بارگذاری...</td></tr>`;
+  }
+}
+
+// Example usage for Kabul exchange rates
+async function loadKabulRates() {
+  showLoading('exchangeRatesTable');
+  try {
+    const res = await fetch('/api/exchange/kabul');
+    const data = await res.json();
+    const tbody = document.querySelector('#exchangeRatesTable tbody');
+    if (!Array.isArray(data) || data.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;">داده‌ای یافت نشد.</td></tr>`;
+      return;
+    }
+    tbody.innerHTML = '';
+    data.forEach(row => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${row.currency}</td>
+        <td>${row.buy}</td>
+        <td>${row.sell}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  } catch (err) {
+    const tbody = document.querySelector('#exchangeRatesTable tbody');
+    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;"> در بارگذاری داده‌ها.</td></tr>`;
+  }
+}
+
+// Call this function on page load or when needed
+loadKabulRates();
+
