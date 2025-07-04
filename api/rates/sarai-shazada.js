@@ -6,8 +6,15 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   try {
-    const { data } = await axios.get("https://sarafi.af/fa/exchange-rates/sarai-shahzada");
+    const { data } = await axios.get("https://sarafi.af/fa/exchange-rates/sarai-shahzada", {
+      // Add the headers object here
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36'
+      }
+    });
+
     const $ = cheerio.load(data);
     const results = [];
     $("table.homeRates.exchangeRatesTable.mb-4 tbody tr").each((_, row) => {
@@ -46,6 +53,8 @@ export default async function handler(req, res) {
     });
     res.status(200).json(results);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch data' });
+    // Log the specific error message for debugging in Vercel logs
+    console.error('Error fetching data from sarafi.af (sarai-shahzada):', err.message);
+    res.status(500).json({ error: 'Failed to fetch data from external source.' });
   }
 }
