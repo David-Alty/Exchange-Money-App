@@ -1,3 +1,5 @@
+// pages/api/exchange.js (or whatever route you're using)
+
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 
@@ -8,15 +10,19 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   try {
-    const { data } = await axios.get("https://sarafi.af/fa/exchange-rates/da-afg-bank", {
-      // Add the headers object here to mimic a browser
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36'
+    const scraperApiKey = process.env.SCRAPER_API_KEY;
+    const targetUrl = "https://sarafi.af/fa/exchange-rates/da-afg-bank";
+
+    const { data } = await axios.get("http://api.scraperapi.com", {
+      params: {
+        api_key: scraperApiKey,
+        url: targetUrl
       }
     });
 
     const $ = cheerio.load(data);
     const results = [];
+
     $("table.homeRates.exchangeRatesTable.mb-4 tbody tr").each((_, row) => {
       const tds = $(row).find("td");
       if (tds.length >= 3) {
@@ -26,15 +32,10 @@ export default async function handler(req, res) {
         const sell = $(tds[2]).find("b").text().trim();
 
         // Fix currency names
-        if (currency === "INR - روپیه هند هزار") {
-          currency = "INR - هزار روپیه هند";
-        }
-        if (currency === "IRR - تومان ایران هزار") {
-          currency = "IRR - هزار تومان ایران هند";
-        }
-        if (currency === "PKR - روپیه پاکستان هزار") {
-          currency = "PKR - هزار روپیه پاکستان";
-        }
+        if (currency === "INR - روپیه هند هزار") currency = "INR - هزار روپیه هند";
+        if (currency === "IRR - تومان ایران هزار") currency = "IRR - هزار تومان ایران هند";
+        if (currency === "PKR - روپیه پاکستان هزار") currency = "PKR - هزار روپیه پاکستان";
+
         if (
           currency &&
           buy &&
@@ -46,10 +47,10 @@ export default async function handler(req, res) {
         }
       }
     });
+
     res.status(200).json(results);
   } catch (err) {
-    // Log the specific error message for debugging in Vercel logs
-    console.error('Error fetching data from sarafi.af (da-afg-bank):', err.message);
-    res.status(500).json({ error: 'Failed to fetch data from external source.' });
+    console.error('Error scraping data:', err.message);
+    res.status(500).json({ error: 'Scraping failed.' });
   }
 }
