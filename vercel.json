@@ -2,26 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/rates/*.js",  
+      "src": "api-test.js",  
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "api/rates/sarai-shazada",
-      "dest": "api/rates/sarai-shazada.js"
+      "src": "/api/test",    
+      "dest": "api-test.js"  
     },
     {
-      "src": "api/rates/other-currencies",
-      "dest": "api/rates/other-currencies.js"
-    },
-    {
-      "src": "api/rates/da-afg-bank",
-      "dest": "api/rates/da-afg-bank.js"
-    },
-    {
-      "src": "api/rates/khorasan-market",
-      "dest": "api/rates/khorasan-market.js"
+      "src": "/(.*)",
+      "dest": "/public/$1"
     }
   ]
 }
