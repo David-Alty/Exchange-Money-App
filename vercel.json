@@ -8,24 +8,20 @@
   ],
   "routes": [
     {
-      "src": "/api/rates/sarai-shazada",
-      "dest": "/api/rates/sarai-shazada.js"
+      "src": "api/rates/sarai-shazada",
+      "dest": "api/rates/sarai-shazada.js"
     },
     {
-      "src": "/api/rates/other-currencies",
-      "dest": "/api/rates/other-currencies.js"
+      "src": "api/rates/other-currencies",
+      "dest": "api/rates/other-currencies.js"
     },
     {
-      "src": "/api/rates/da-afg-bank",
-      "dest": "/api/rates/da-afg-bank.js"
+      "src": "api/rates/da-afg-bank",
+      "dest": "api/rates/da-afg-bank.js"
     },
     {
-      "src": "/api/rates/khorasan-market",
-      "dest": "/api/rates/khorasan-market.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/public/$1"
+      "src": "api/rates/khorasan-market",
+      "dest": "api/rates/khorasan-market.js"
     }
   ]
 }
