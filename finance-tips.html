@@ -6,6 +6,7 @@
   <title>نکات مالی | شرکت صرافی پروان</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Vazirmatn&display=swap">
+      
 </head>
 <body>
   <header>
@@ -47,7 +48,7 @@
   </div>
   <div class="overlay" id="menuOverlay"></div>
   <div class="social-icons-horizontal">
-    <a href="https://wa.me/93774562597" target="_blank"><img src="images/whatsapp-svgrepo-com (1).svg" alt="واتساپ"></a>
+    <a href="https://wa.me/93774562597" target="_blank"><img src="images/whatsapp-svgrepo-com.svg" alt="واتساپ"></a>
     <a href="https://www.facebook.com/share/1BgPcrskcd/?mibextid=wwXIfr" target="_blank"><img src="images/facebook.svg" alt="فیسبوک"></a>
     <a href="https://www.instagram.com/parwan_money_exchange?igsh=ampxaGFkYXJjODE1" target="_blank"><img src="images/instagram.svg" alt="اینستاگرام"></a>
     <a href="https://t.me/Ya3err_1383" target="_blank"><img src="images/Telegram_logo.svg.webp" alt="تلگرام"></a>
@@ -67,13 +68,13 @@
             <polyline points="11,8 17,14 11,20" fill="none" stroke="#ff8c00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
           </svg>
         </button>
-        <img src="images/16-finaces info.jpg" alt="نکته مالی ۱" class="active">
-        <img src="images/17-finance genral info .jpg" alt="نکته مالی ۲">
-        <img src="images/18-finace information .jpg" alt="نکته مالی ۳">
-        <img src="images/19-finace information .jpg" alt="نکته مالی ۴">
-        <img src="images/20-finace information .jpg" alt="نکته مالی ۵">
-        <img src="images/21-finace information .jpg" alt="نکته مالی ۶">
-        <img src="images/23-finace information .jpg" alt="نکته مالی ۷">
+        <img src="images/16-finaces-info.jpg" alt="نکته مالی ۱" class="active">
+        <img src="images/17-financegenralinfo.jpg" alt="نکته مالی ۲">
+        <img src="images/18-finaceinformation.jpg" alt="نکته مالی ۳">
+        <img src="images/19-finaceinformation.jpg" alt="نکته مالی ۴">
+        <img src="images/20-finaceinformation.jpg" alt="نکته مالی ۵">
+        <img src="images/21-finaceinformation.jpg" alt="نکته مالی ۶">
+        <img src="images/23-finaceinformation.jpg" alt="نکته مالی ۷">
       </div>
     </section>
   </main>
@@ -84,8 +85,8 @@
       const slider = document.querySelector('.exchange-photo-slider');
       if (!slider) return;
       const imgs = Array.from(slider.querySelectorAll('img'));
-      const prevBtn = slider.querySelector('.slider-btn.prev');
-      const nextBtn = slider.querySelector('.slider-btn.next');
+      const prevBtn = slider.querySelector('.finance-prev');
+      const nextBtn = slider.querySelector('.finance-next');
       const effects = ['effect-fade', 'effect-zoom', 'effect-slide'];
       let current = 0;
       let timer = null;
@@ -97,7 +98,7 @@
       }
       function show(idx, effect) {
         clearEffects();
-        imgs[current].classList.remove('active');
+        imgs.forEach(img => img.classList.remove('active')); // Always clear all actives
         current = (idx + imgs.length) % imgs.length;
         imgs[current].classList.add('active', effect);
       }

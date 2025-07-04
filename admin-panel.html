@@ -122,6 +122,36 @@
       <button type="submit" class="save-btn">افزودن خبر</button>
       <div id="newsMsg" class="info-msg"></div>
     </form>
+    <hr>
+    <h3>مدیریت اخبار</h3>
+    <div id="adminNewsMsg" class="info-msg"></div>
+    <table id="adminNewsTable" style="width:100%;margin-bottom:2em;border-collapse:collapse;">
+      <thead>
+        <tr style="background:#f7faff;">
+          <th>تصویر</th>
+          <th>عنوان</th>
+          <th>عملیات</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <!-- Edit Modal -->
+    <div id="editModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:#0008;z-index:1000;align-items:center;justify-content:center;">
+      <div style="background:#fff;padding:2em;border-radius:10px;max-width:400px;width:90%;">
+        <h4>ویرایش خبر</h4>
+        <form id="editNewsForm">
+          <input type="hidden" name="id">
+          <input type="text" name="title" placeholder="عنوان" required style="width:100%;margin-bottom:0.7em;">
+          <input type="url" name="image" placeholder="لینک تصویر" required style="width:100%;margin-bottom:0.7em;">
+          <textarea name="description" placeholder="توضیحات" required style="width:100%;margin-bottom:0.7em;"></textarea>
+          <input type="text" name="link" placeholder="لینک خبر" required style="width:100%;margin-bottom:0.7em;">
+          <button class="save-btn" id="saveBtn" type="button">ذخیره</button>
+          <div id="bgSaveMsg" class="info-msg"></div>
+          <button type="button" onclick="closeEditModal()" style="margin-right:1em;">انصراف</button>
+        </form>
+      </div>
+    </div>
       <style>
         /* Ekstra buton hover stilleri */
         #saveExchangeBtn:hover,
@@ -243,6 +273,91 @@
           msg.textContent = "خطا در افزودن خبر.";
         }
       };
+
+      async function loadAdminNews() {
+        const table = document.querySelector('#adminNewsTable tbody');
+        const msg = document.getElementById('adminNewsMsg');
+        table.innerHTML = '<tr><td colspan="3">در حال بارگذاری...</td></tr>';
+        try {
+          const res = await fetch('/api/news/index');
+          const data = await res.json();
+          if (!Array.isArray(data) || data.length === 0) {
+            table.innerHTML = '<tr><td colspan="3">هیچ خبری یافت نشد.</td></tr>';
+            return;
+          }
+          table.innerHTML = '';
+          data.forEach(news => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td><img src="${news.image}" alt="" style="width:60px;height:40px;object-fit:cover;border-radius:4px;"></td>
+              <td>${news.title}</td>
+              <td>
+                <button onclick="editNews('${news._id}')">ویرایش</button>
+                <button onclick="deleteNews('${news._id}')">حذف</button>
+              </td>
+            `;
+            table.appendChild(tr);
+          });
+        } catch (err) {
+          table.innerHTML = '<tr><td colspan="3">خطا در بارگذاری اخبار.</td></tr>';
+          msg.textContent = err.message;
+        }
+      }
+
+      window.editNews = function(id) {
+        fetch('/api/news/' + id)
+          .then(res => res.json())
+          .then(news => {
+            const form = document.getElementById('editNewsForm');
+            form.id.value = news._id;
+            form.title.value = news.title;
+            form.image.value = news.image;
+            form.description.value = news.description;
+            form.link.value = news.link;
+            document.getElementById('editModal').style.display = 'flex';
+          });
+      };
+
+      window.closeEditModal = function() {
+        document.getElementById('editModal').style.display = 'none';
+      };
+
+      document.getElementById('editNewsForm').onsubmit = async function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const id = form.id.value;
+        const body = {
+          title: form.title.value,
+          image: form.image.value,
+          description: form.description.value,
+          link: form.link.value
+        };
+        const res = await fetch('/api/news/' + id, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        if (res.ok) {
+          closeEditModal();
+          loadAdminNews();
+          alert('خبر با موفقیت ویرایش شد.');
+        } else {
+          alert('خطا در ویرایش خبر.');
+        }
+      };
+
+      window.deleteNews = async function(id) {
+        if (!confirm('آیا مطمئن هستید که می‌خواهید این خبر را حذف کنید؟')) return;
+        const res = await fetch('/api/news/' + id, { method: 'DELETE' });
+        if (res.ok) {
+          loadAdminNews();
+          alert('خبر حذف شد.');
+        } else {
+          alert('خطا در حذف خبر.');
+        }
+      };
+
+      loadAdminNews();
 
 </script>
 

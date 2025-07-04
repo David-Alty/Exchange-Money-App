@@ -106,22 +106,36 @@
       <div class="login-error" id="loginError">رمز عبور اشتباه است</div>
     </form>
   </div>
-  <script>
-    // Şifre: yaser94551!!
-    const ADMIN_PASSWORD = 'yaser94551!!';
-    document.querySelector('.admin-login').onsubmit = function(e) {
-      e.preventDefault();
-      const password = document.getElementById('admin-password').value;
-      if (password === ADMIN_PASSWORD) {
-        localStorage.setItem('adminAuth', 'true');
-        window.location.href = 'admin-panel.html'; // Doğru yönlendirme
-      } else {
-        document.getElementById('loginError').style.display = 'block';
-      }
-    };
-    document.getElementById('admin-password').oninput = function() {
-      document.getElementById('loginError').style.display = 'none';
-    };
-  </script>
+<script>
+document.querySelector('.admin-login').onsubmit = async function(e) {
+  e.preventDefault();
+  const password = document.getElementById('admin-password').value;
+  const errorDiv = document.getElementById('loginError');
+  errorDiv.style.display = 'none';
+
+  try {
+    const res = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password })
+    });
+    const data = await res.json();
+    if (res.ok && data.token) {
+      sessionStorage.setItem('admin-token', data.token);
+      window.location.href = 'admin-panel.html';
+    } else {
+      errorDiv.textContent = data.error || 'رمز عبور اشتباه است!';
+      errorDiv.style.display = 'block';
+    }
+  } catch (err) {
+    errorDiv.textContent = 'خطا در ارتباط با سرور!';
+    errorDiv.style.display = 'block';
+  }
+};
+
+document.getElementById('admin-password').oninput = function() {
+  document.getElementById('loginError').style.display = 'none';
+};
+</script>
 </body>
 </html>
