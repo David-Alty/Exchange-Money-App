@@ -1647,7 +1647,8 @@ header h1:hover {
 #exchangeRatesTable,
 #heratExchangeRatesTable,
 #afgBankExchangeRatesTable,
-#otherCurrenciesTable {
+#otherCurrenciesTable,
+#specialFirstRateTable {
   width: 100%;
   border-collapse: collapse;
   font-family: "Vazirmatn", sans-serif;
@@ -1658,14 +1659,16 @@ header h1:hover {
 #exchangeRatesTable thead tr,
 #heratExchangeRatesTable thead tr,
 #afgBankExchangeRatesTable thead tr,
-#otherCurrenciesTable thead tr {
+#otherCurrenciesTable thead tr,
+#specialFirstRateTable thead tr {
   background: #1976d2;
 }
 
 #exchangeRatesTable thead th,
 #heratExchangeRatesTable thead th,
 #afgBankExchangeRatesTable thead th,
-#otherCurrenciesTable thead th {
+#otherCurrenciesTable thead th,
+#specialFirstRateTable thead th {
   color: #fff;
   font-size: 1em;
   font-weight: 700;
@@ -1677,7 +1680,8 @@ header h1:hover {
 #exchangeRatesTable tbody tr,
 #heratExchangeRatesTable tbody tr,
 #afgBankExchangeRatesTable tbody tr,
-#otherCurrenciesTable tbody tr {
+#otherCurrenciesTable tbody tr,
+#specialFirstRateTable tbody tr {
   background: #f7fbff;
   border-bottom: 1px solid #e3e3e3;
   transition: background 0.2s;
@@ -1686,14 +1690,16 @@ header h1:hover {
 #exchangeRatesTable tbody tr:hover,
 #heratExchangeRatesTable tbody tr:hover,
 #afgBankExchangeRatesTable tbody tr:hover,
-#otherCurrenciesTable tbody tr:hover {
+#otherCurrenciesTable tbody tr:hover,
+#specialFirstRateTable tbody tr:hover {
   background: #e3f0ff;
 }
 
 #exchangeRatesTable td,
 #heratExchangeRatesTable td,
 #afgBankExchangeRatesTable td,
-#otherCurrenciesTable td {
+#otherCurrenciesTable td,
+#specialFirstRateTable td {
   font-size: 1em;
   color: #222;
   padding: 0.6em 0.3em;
@@ -1705,7 +1711,8 @@ header h1:hover {
 #exchangeRatesTable td:first-child,
 #heratExchangeRatesTable td:first-child,
 #afgBankExchangeRatesTable td:first-child,
-#otherCurrenciesTable td:first-child {
+#otherCurrenciesTable td:first-child,
+#specialFirstRateTable td:first-child {
   display: flex;
   align-items: center;
   gap: 0.5em;
@@ -1718,7 +1725,8 @@ header h1:hover {
 #exchangeRatesTable td:first-child img,
 #heratExchangeRatesTable td:first-child img,
 #afgBankExchangeRatesTable td:first-child img,
-#otherCurrenciesTable td:first-child img {
+#otherCurrenciesTable td:first-child img,
+#specialFirstRateTable td:first-child img {
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -1730,7 +1738,8 @@ header h1:hover {
 #exchangeRatesTable td:first-child span,
 #heratExchangeRatesTable td:first-child span,
 #afgBankExchangeRatesTable td:first-child span,
-#otherCurrenciesTable td:first-child span {
+#otherCurrenciesTable td:first-child span,
+#specialFirstRateTable td:first-child span {
   font-weight: 600;
   color: #1976d2;
   font-size: 1em;
@@ -1740,14 +1749,16 @@ header h1:hover {
   #exchangeRatesTable th, #exchangeRatesTable td,
   #heratExchangeRatesTable th, #heratExchangeRatesTable td,
   #afgBankExchangeRatesTable th, #afgBankExchangeRatesTable td,
-  #otherCurrenciesTable th, #otherCurrenciesTable td {
+  #otherCurrenciesTable th, #otherCurrenciesTable td,
+  #specialFirstRateTable th, #specialFirstRateTable td {
     font-size: 0.95em;
     padding: 0.4em 0.1em;
   }
   #exchangeRatesTable td:first-child img,
   #heratExchangeRatesTable td:first-child img,
   #afgBankExchangeRatesTable td:first-child img,
-  #otherCurrenciesTable td:first-child img {
+  #otherCurrenciesTable td:first-child img,
+  #specialFirstRateTable td:first-child img {
     width: 22px;
     height: 22px;
   }
@@ -1759,7 +1770,11 @@ header h1:hover {
 #heratExchangeRatesTable th:nth-child(2),
 #heratExchangeRatesTable th:nth-child(3),
 #afgBankExchangeRatesTable th:nth-child(2),
-#afgBankExchangeRatesTable th:nth-child(3) {
+#afgBankExchangeRatesTable th:nth-child(3),
+#otherCurrenciesTable th:nth-child(2),
+#otherCurrenciesTable th:nth-child(3),
+#specialFirstRateTable th:nth-child(2),
+#specialFirstRateTable th:nth-child(3) {
   background: #ff8c00 !important;
   color: #fff !important;
 }

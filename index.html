@@ -93,29 +93,40 @@
     </tbody>
   </table>
 </section>
-
 <!-- Herat tablosu eklendi -->
-<section id="herat-exchange-rates" style="margin-top:2.2rem;">
-  <h2>نرخ تبادله اسعار هرات</h2>
-  <table id="heratExchangeRatesTable">
-    <thead>
-      <tr>
-        <th>
-          <div>
-            <span>واحد پولی</span>
-            <span></span>
-          </div>
-        </th>
-        <th>خرید</th>
-        <th>فروش</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Satırlar JS ile eklenecek -->
-    </tbody>
-  </table>
-</section>
+        <section id="herat-exchange-rates" style="margin-top:2.2rem;">
+        <h2 style="margin-bottom: 30px;">نرخ تبادله اسعار هرات</h2>
+        <h3>نرخ های تومان بازار هرات</h3>
+        <table id="specialFirstRateTable">
+          <thead>
+            <tr>
+              <th>واحد پولی</th>
+              <th>خرید</th>
+              <th>فروش</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- the content from herat in first row -->
+          </tbody>
+        </table>
+        <h3>نرخ های افغانی بازار هرات</h3>
+        <table id="heratExchangeRatesTable">
+          <thead>
+            <tr>
+              <th>واحد پولی</th>
+              <th>خرید</th>
+              <th>فروش</th>
+            </tr>
+          </thead>
+          <tbody>
+            </tbody>
+        </table>
+      </section>
   </div>
+  <section id="ارسال-حواله" style="margin-top:2.2rem;">
+      <h2 style="text-align:center;margin-bottom:1rem;">اخبار</h2>
+      <div id="news-list" style="display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;"></div>
+  </section>
     <h2>ارسال حواله</h2>
 
   <p id="main-page" class="main-page-text">
@@ -314,7 +325,7 @@
         </p>
         <div class="phone-row">
           <a class="whatsapp-link" href="tel:+93774562597" target="_blank">
-            <img src="images/whatsapp-svgrepo-com (1).svg" alt="واتساپ">
+            <img src="images/whatsapp-svgrepo-com.svg" alt="واتساپ">
             <span class="phone-number">+93 77 456 2597</span>
           </a>
           <a class="whatsapp-link" href="tel:+93792090000" target="_blank">
@@ -335,11 +346,11 @@
         </p>
         <div class="phone-row">
           <a class="phone-link" href="https://wa.me/93774562597" target="_blank">
-            <img src="images/whatsapp-svgrepo-com (1).svg" alt="تماس">
+            <img src="images/whatsapp-svgrepo-com.svg" alt="تماس">
           +93 77 456 2597
           </a>
            <a class="phone-link" href="tel:+93794011000">
-            <img src="images/whatsapp-svgrepo-com (1).svg" alt="تماس">
+            <img src="images/whatsapp-svgrepo-com.svg" alt="تماس">
             +93 79 401 1000
           </a>
          <a class="whatsapp-link" href="tel:+93792090000" target="_blank/93792090000" target="_blank">
@@ -357,7 +368,7 @@
         </p>
         <div class="phone-row">
           <a class="phone-link" href="tel:+93774562597">
-            <img src="images/whatsapp-svgrepo-com (1).svg" alt="تماس">
+            <img src="images/whatsapp-svgrepo-com.svg" alt="تماس">
             +93 77 456 2597
           </a>
         </div>
@@ -370,13 +381,13 @@
         </p>
         <div class="phone-row">
           <a class="phone-link" href="https://wa.me/93799201908" target="_blank">
-            <img src="images/whatsapp-svgrepo-com (1).svg" alt="تماس">
+            <img src="images/whatsapp-svgrepo-com.svg" alt="تماس">
           +93 79 920 1908
           </a>
         </div>
         <div class="phone-row">
           <a class="phone-link" href="https://wa.me/93786614595" target="_blank">
-            <img src="images/whatsapp-svgrepo-com (1).svg" alt="تماس">
+            <img src="images/whatsapp-svgrepo-com.svg" alt="تماس">
            +93 78 661 4595
           </a>
         </div>
@@ -384,8 +395,6 @@
     </div>
   </div>
 </section>
-
-
   </main>
   <footer>
     <div class="footer-content">
@@ -465,12 +474,50 @@
         </div>
       </div>
     </div>
-    
     <div class="footer-bottom">
       <p>© تمامی حقوق محفوظ است | شرکت صرافی پروان ۲۰۲۴</p>
     </div>
   </footer>
     <script src="https://unpkg.com/jalaali-js/dist/jalaali.min.js"></script>
  <script src="app.js"></script>
+ <script>
+  window.addEventListener('DOMContentLoaded', async function() {
+      const newsList = document.getElementById('news-list');
+      if (!newsList) return;
+      newsList.innerHTML = 'در حال بارگذاری...';
+
+      try {
+        const res = await fetch('/api/news/index');
+        if (!res.ok) {
+          // If the server returns an error status
+          newsList.innerHTML = 'خطا در ارتباط با سرور. لطفاً بعداً تلاش کنید.';
+          console.error('Server error:', res.status, res.statusText);
+          return;
+        }
+        const data = await res.json();
+        if (!Array.isArray(data) || data.length === 0) {
+          newsList.innerHTML = 'هیچ خبری یافت نشد.';
+          return;
+        }
+        newsList.innerHTML = '';
+        data.forEach(news => {
+          const card = document.createElement('div');
+          card.className = 'news-card';
+          card.style = 'width:260px;background:#fff;border-radius:10px;box-shadow:0 2px 8px #1976d233;padding:1rem;cursor:pointer;transition:box-shadow .2s;';
+          card.innerHTML = `
+            <img src="${news.image}" alt="${news.title}" style="width:100%;height:150px;object-fit:cover;border-radius:8px 8px 0 0;">
+            <h3 style="font-size:1.1rem;margin:0.7em 0 0.5em 0;color:#1976d2;">${news.title}</h3>
+          `;
+          card.onclick = () => {
+            window.location.href = 'news-detail.html?id=' + news._id;
+          };
+          newsList.appendChild(card);
+        });
+      } catch (err) {
+        newsList.innerHTML = 'خطا در بارگذاری اخبار. لطفاً اتصال اینترنت خود را بررسی کنید.';
+        console.error('Fetch error:', err);
+      }
+    });
+ </script>
 </body>
 </html>
