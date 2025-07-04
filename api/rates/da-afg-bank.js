@@ -1,7 +1,7 @@
 // pages/api/exchange.js (or whatever route you're using)
+const axios = require('axios');
+const cheerio = require('cheerio');
 
-import axios from 'axios';
-import * as cheerio from 'cheerio';
 
 export default async function handler(req, res) {
   // Enable CORS
