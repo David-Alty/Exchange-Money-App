@@ -30,7 +30,7 @@ export default async function handler(req, res) {
         const sell = $(tds[2]).find("b").text().trim();
 
         if (currency === "INR - روپیه هند هزار") currency = "INR - هزار روپیه هند";
-        if (currency === "IRR - تومان ایران هزار") currency = "IRR - هزار تومان ایران هند";
+        if (currency === "IRR - تومان ایران هزار") currency = "IRR - هزار تومان ایران ";
         if (currency === "PKR - روپیه پاکستان هزار") currency = "PKR - هزار روپیه پاکستان";
         if (currency === "JPY - ین جاپان هزار") currency = "JPY - هزار ین جاپان";
 

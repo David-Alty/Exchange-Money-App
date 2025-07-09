@@ -29,7 +29,7 @@ export default async function handler(req, res) {
         const buy = $(tds[1]).find("b").text().trim();
         const sell = $(tds[2]).find("b").text().trim();
 
-        if (currency === "IRR - تومان ایران هزار") currency = "IRR - هزار تومان ایران هند";
+        if (currency === "IRR - تومان ایران هزار") currency = "IRR - هزار تومان ایران ";
         if (currency === "PKR - روپیه پاکستان هزار") currency = "PKR - هزار روپیه پاکستان";
 
         if (currency && buy && sell) {

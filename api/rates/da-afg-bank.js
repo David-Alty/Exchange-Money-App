@@ -33,7 +33,7 @@ export default async function handler(req, res) {
 
         // Fix currency names
         if (currency === "INR - روپیه هند هزار") currency = "INR - هزار روپیه هند";
-        if (currency === "IRR - تومان ایران هزار") currency = "IRR - هزار تومان ایران هند";
+        if (currency === "IRR - تومان ایران هزار") currency = "IRR - هزار تومان ایران ";
         if (currency === "PKR - روپیه پاکستان هزار") currency = "PKR - هزار روپیه پاکستان";
 
         if (
