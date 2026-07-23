@@ -2104,3 +2104,54 @@ footer {
   text-align: center;
   font-family: 'Vazirmatn', Arial, sans-serif;
 }
+/* ---- Add these styles near other mobile header rules (or at end of file) ---- */
+@media (max-width: 600px) {
+  /* header içindeki elemanların üstte sabit kalmasını sağlayıp trigger için yer hazırlıyoruz */
+  .header-inner {
+    position: relative; /* trigger absolute yerleşimi için */
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+  }
+
+  /* Hamburger solda (RTL sitenize göre ayarladım) */
+  .menu-btn {
+    left: 1rem;
+    right: auto;
+    top: 10px;
+  }
+
+  /* Yan menüye eklenecek link için uygun görünüm */
+  .side-menu a#openConverterSide {
+    display: block;
+    color: white;
+    padding: 0.9rem 1.2rem;
+    font-weight: 700;
+    border-radius: 12px;
+    margin: 0.25rem 1rem;
+    text-decoration: none;
+    transition: background .18s, transform .18s;
+  }
+  .side-menu a#openConverterSide:hover {
+    background: #ff8c00;
+    transform: translateX(-4px);
+  }
+}
+
+/* Masaüstü / tablet okunaklılığı: panel biraz daha geniş, içerik daha belirgin */
+@media (min-width: 601px) and (max-width: 1200px) {
+  .conv-panel {
+    width: min(680px, 92vw); /* tablet için daha geniş */
+    max-height: 90vh;
+  }
+  .conv-amount-input, .conv-amount-result {
+    font-size: 1.9rem;
+  }
+}
+@media (min-width: 1201px) {
+  .conv-panel {
+    width: min(720px, 80vw);
+  }
+  .conv-amount-input, .conv-amount-result {
+    font-size: 2rem;
+  }
+}
