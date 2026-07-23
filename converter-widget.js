@@ -196,9 +196,13 @@
     const $ = id => document.getElementById(id);
 
     // Open / close
-    document.getElementById('convTrigger').onclick = openWidget;
-    document.getElementById('convBackdrop').onclick = closeWidget;
-    $('convClose').onclick = closeWidget;
+    const triggerBtn = document.getElementById('convTrigger');
+    if (triggerBtn) triggerBtn.onclick = openWidget;
+    
+    const backdropEl = document.getElementById('convBackdrop');
+    if (backdropEl) backdropEl.onclick = closeWidget;
+    
+    if ($('convClose')) $('convClose').onclick = closeWidget;
 
     // ESC key
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeWidget(); });
@@ -211,7 +215,6 @@
         btn.classList.add('active');
         $('convMarketRow').style.display = mode === 'local' ? 'flex' : 'none';
 
-        // Reset currencies for global (more options)
         if (mode === 'global' && !globalLoaded) loadGlobalRates();
         calculate();
       });
@@ -230,43 +233,50 @@
     });
 
     // Currency selects
-    $('convFromSelect').onchange = function () {
-      fromCode = this.value;
-      const c = getCurrency(fromCode);
-      $('fromFlag').textContent = c.flag;
-      $('fromCode').textContent = c.code;
-      $('fromName').textContent = c.name;
-      calculate();
-    };
+    if ($('convFromSelect')) {
+      $('convFromSelect').onchange = function () {
+        fromCode = this.value;
+        const c = getCurrency(fromCode);
+        $('fromFlag').textContent = c.flag;
+        $('fromCode').textContent = c.code;
+        $('fromName').textContent = c.name;
+        calculate();
+      };
+    }
 
-    $('convToSelect').onchange = function () {
-      toCode = this.value;
-      const c = getCurrency(toCode);
-      $('toFlag').textContent = c.flag;
-      $('toCode').textContent = c.code;
-      $('toName').textContent = c.name;
-      calculate();
-    };
+    if ($('convToSelect')) {
+      $('convToSelect').onchange = function () {
+        toCode = this.value;
+        const c = getCurrency(toCode);
+        $('toFlag').textContent = c.flag;
+        $('toCode').textContent = c.code;
+        $('toName').textContent = c.name;
+        calculate();
+      };
+    }
 
     // Amount input
-    $('convAmount').oninput = function () {
-      amount = parseFloat(this.value) || 0;
-      calculate();
-    };
+    if ($('convAmount')) {
+      $('convAmount').oninput = function () {
+        amount = parseFloat(this.value) || 0;
+        calculate();
+      };
+    }
 
     // Swap
-    $('convSwap').onclick = () => {
-      [fromCode, toCode] = [toCode, fromCode];
-      // Update selects
-      $('convFromSelect').value = fromCode;
-      $('convToSelect').value   = toCode;
-      // Update display
-      let c = getCurrency(fromCode);
-      $('fromFlag').textContent = c.flag; $('fromCode').textContent = c.code; $('fromName').textContent = c.name;
-      c = getCurrency(toCode);
-      $('toFlag').textContent = c.flag; $('toCode').textContent = c.code; $('toName').textContent = c.name;
-      calculate();
-    };
+    if ($('convSwap')) {
+      $('convSwap').onclick = () => {
+        [fromCode, toCode] = [toCode, fromCode];
+        $('convFromSelect').value = fromCode;
+        $('convToSelect').value   = toCode;
+        
+        let c = getCurrency(fromCode);
+        $('fromFlag').textContent = c.flag; $('fromCode').textContent = c.code; $('fromName').textContent = c.name;
+        c = getCurrency(toCode);
+        $('toFlag').textContent = c.flag; $('toCode').textContent = c.code; $('toName').textContent = c.name;
+        calculate();
+      };
+    }
 
     // Quick amounts
     document.querySelectorAll('.conv-quick-btn').forEach(btn => {
@@ -278,32 +288,52 @@
     });
 
     // Popular pair cards
-    $('convPairsGrid').addEventListener('click', e => {
-      const card = e.target.closest('.conv-pair-card');
-      if (!card) return;
-      fromCode = card.dataset.from;
-      toCode   = card.dataset.to;
-      $('convFromSelect').value = fromCode;
-      $('convToSelect').value   = toCode;
-      let c = getCurrency(fromCode);
-      $('fromFlag').textContent = c.flag; $('fromCode').textContent = c.code; $('fromName').textContent = c.name;
-      c = getCurrency(toCode);
-      $('toFlag').textContent = c.flag; $('toCode').textContent = c.code; $('toName').textContent = c.name;
-      calculate();
-    });
+    if ($('convPairsGrid')) {
+      $('convPairsGrid').addEventListener('click', e => {
+        const card = e.target.closest('.conv-pair-card');
+        if (!card) return;
+        fromCode = card.dataset.from;
+        toCode   = card.dataset.to;
+        $('convFromSelect').value = fromCode;
+        $('convToSelect').value   = toCode;
+        let c = getCurrency(fromCode);
+        $('fromFlag').textContent = c.flag; $('fromCode').textContent = c.code; $('fromName').textContent = c.name;
+        c = getCurrency(toCode);
+        $('toFlag').textContent = c.flag; $('toCode').textContent = c.code; $('toName').textContent = c.name;
+        calculate();
+      });
+    }
+
+    // Side-menu trigger connection
+    const openSideLink = document.getElementById('openConverterSide');
+    if (openSideLink) {
+      openSideLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        const side = document.getElementById('sideMenu');
+        const ov = document.getElementById('menuOverlay');
+        if (side && side.classList.contains('open')) side.classList.remove('open');
+        if (ov && ov.classList.contains('show')) ov.classList.remove('show');
+        
+        openWidget();
+      });
+    }
   }
 
   /* ─── OPEN / CLOSE ──────────────────────── */
   function openWidget() {
-    document.getElementById('convBackdrop').classList.add('open');
-    document.getElementById('convPanel').classList.add('open');
+    const backdrop = document.getElementById('convBackdrop');
+    const panel = document.getElementById('convPanel');
+    if (backdrop) backdrop.classList.add('open');
+    if (panel) panel.classList.add('open');
     document.body.style.overflow = 'hidden';
     if (!localLoaded) loadLocalRates();
   }
 
   function closeWidget() {
-    document.getElementById('convBackdrop').classList.remove('open');
-    document.getElementById('convPanel').classList.remove('open');
+    const backdrop = document.getElementById('convBackdrop');
+    const panel = document.getElementById('convPanel');
+    if (backdrop) backdrop.classList.remove('open');
+    if (panel) panel.classList.remove('open');
     document.body.style.overflow = '';
   }
 
@@ -343,8 +373,10 @@
 
       localLoaded = true;
       localUpdateTime = new Date();
-      document.getElementById('convUpdateTime').textContent =
-        '🕐 بروزرسانی: ' + localUpdateTime.toLocaleTimeString('fa-IR');
+      const timeEl = document.getElementById('convUpdateTime');
+      if (timeEl) {
+        timeEl.textContent = '🕐 بروزرسانی: ' + localUpdateTime.toLocaleTimeString('fa-IR');
+      }
 
       calculate();
       updatePairRates();
@@ -362,8 +394,10 @@
       if (data.result !== 'success') throw new Error();
       globalRates = data.rates;
       globalLoaded = true;
-      document.getElementById('convUpdateTime').textContent =
-        '🕐 منبع: ExchangeRate-API';
+      const timeEl = document.getElementById('convUpdateTime');
+      if (timeEl) {
+        timeEl.textContent = '🕐 منبع: ExchangeRate-API';
+      }
       calculate();
       updatePairRates();
     } catch {
@@ -381,9 +415,18 @@
   function calculate() {
     const result = document.getElementById('convResult');
     const badge  = document.getElementById('convRateBadge');
+    if (!result || !badge) return;
 
-    if (!amount || amount <= 0) { result.textContent = '—'; badge.innerHTML = '<span style="color:#94a3b8;font-size:.8rem">مقدار را وارد کنید</span>'; return; }
-    if (fromCode === toCode) { result.textContent = fmtNum(amount); badge.innerHTML = `<span>ارز یکسان</span>`; return; }
+    if (!amount || amount <= 0) { 
+      result.textContent = '—'; 
+      badge.innerHTML = '<span style="color:#94a3b8;font-size:.8rem">مقدار را وارد کنید</span>'; 
+      return; 
+    }
+    if (fromCode === toCode) { 
+      result.textContent = fmtNum(amount); 
+      badge.innerHTML = `<span>ارز یکسان</span>`; 
+      return; 
+    }
 
     if (mode === 'local') {
       if (!localLoaded) { setBadgeLoading(); return; }
@@ -448,14 +491,17 @@
 
   /* ─── BADGE HELPERS ─────────────────────── */
   function setBadgeLoading() {
-    document.getElementById('convRateBadge').className = 'conv-rate-badge';
-    document.getElementById('convRateBadge').innerHTML =
-      '<div class="conv-rate-loading"><span class="conv-spinner"></span> در حال بارگذاری...</div>';
+    const badge = document.getElementById('convRateBadge');
+    if (!badge) return;
+    badge.className = 'conv-rate-badge';
+    badge.innerHTML = '<div class="conv-rate-loading"><span class="conv-spinner"></span> در حال بارگذاری...</div>';
   }
 
   function setBadgeError(msg) {
-    document.getElementById('convRateBadge').className = 'conv-rate-badge error';
-    document.getElementById('convRateBadge').innerHTML = `<span>⚠️ ${msg}</span>`;
+    const badge = document.getElementById('convRateBadge');
+    if (!badge) return;
+    badge.className = 'conv-rate-badge error';
+    badge.innerHTML = `<span>⚠️ ${msg}</span>`;
   }
 
   /* ─── INIT ───────────────────────────────── */
@@ -464,7 +510,10 @@
     attachEvents();
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 
 })();
