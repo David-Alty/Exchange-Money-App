@@ -2,6 +2,7 @@
    PARWAN EXCHANGE — CONVERTER WIDGET v1.0
    فارسی · RTL · نرخ محلی + جهانی
    ============================================= */
+
 (function () {
   'use strict';
 
@@ -466,4 +467,7 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 
-})();
+})(); 
+# Fix buildWidget function - wrap panel in conv-inner div
+sed -i "s/panel.innerHTML = buildPanelHTML();/panel.innerHTML = '<div class=\"conv-inner\">' + buildPanelHTML() + '<\/div>';/" /home/claude/repo/converter-widget.js
+grep "conv-inner" /home/claude/repo/converter-widget.js
